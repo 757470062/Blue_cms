@@ -1,0 +1,37 @@
+Database
+
+1、Article   文档模块
+               category_id title keys flag_id clicks user_id photo intro content code
+
+2、Category  分类
+               name module_id seo_title keys type sort intro
+
+3、Module   模块
+               name list article cover
+
+4、Question  问答模块
+   Answer    回答
+
+5、Friend    友情链接
+                name  link   photo  state  sort
+
+6、Download   资料下载
+                name src photo state  sort
+
+7、UserInfo 用户基本信息
+
+8、Comment 评论
+
+9、TagAll  总tag
+
+10、TagArticle 文档tag
+
+11、Form  表单
+title name type   min  max   text
+
+
+
+Cache
+
+module.all 所有
+category.all

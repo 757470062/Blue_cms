@@ -1,0 +1,1 @@
+jQuery(document).ready(function(){jQuery.fn.DataTable&&(jQuery("table.datatable").DataTable(),jQuery(".dataTables_wrapper .paginate_button").attr("href","#").on("click",function(a){return a.preventDefault(),a.stopPropagation(),!1}))});
