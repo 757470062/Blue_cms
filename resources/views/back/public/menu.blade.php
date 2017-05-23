@@ -82,7 +82,7 @@
             <li><a href="#"> <i class="ti-layout-grid3-alt"></i> <span>文档管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
                 <ul class="nav nav-submenu submenu-hidden">
                     <li><a href="{{ url('back/article') }}" >所有文档</a></li>
-                    <li><a href="{{ url('back/article/create') }}" class="active_submenu">新建文档</a></li>
+                    <li><a href="{{ url('back/article/create') }}" {{--class="active_submenu"--}}>新建文档</a></li>
                 </ul>
             </li>
             <li><a href="#"> <i class="ti-layout-cta-left"></i> <span>模块管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>

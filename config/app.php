@@ -170,6 +170,7 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         Nestable\NestableServiceProvider::class,
         Douyasi\Editor\EditorServiceProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
         /*
          * Application Service Providers...
          */

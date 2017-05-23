@@ -42,27 +42,26 @@
                         <h4 class="panel-title">新建文档</h4>
                     </header>
                     <div class="panel-body">
-                        <form action="{{ url('back/article/store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('back/article/update/'.$article->id) }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label class="col-md-2" >标题:</label>
-                                <input type="text" name="title" class="form-control">
+                                <input type="text" name="title" value="{{ $article->title }}" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2" >分类:</label>
-                                <select name="category_id" class="form-control col-md-8">
-                                    <option value="">请选择分类</option>
-                                </select>
+                                {!! $category !!}
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2" >关键词:</label>
                                 <input type="text" name="keys" value="{{ $article->keys }}" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label class="col-md-1" >Flag:</label>
-                                <input type="radio" name="flag" value="{{ $article->flag }}" class="checkbox-danger">当前：{{ $article->flag }}
-                                <input type="radio" name="flag" value="无" class="checkbox-danger">无
-                                <input type="radio" name="flag" value="推荐" class="checkbox-danger">推荐
+                                <label>Flag:</label>
+                                当前：<input type="radio" name="flag_id" value="{{ $article->flag_id }}" checked class="checkbox-danger">{{ $article->flag_id }}
+                                 | <input type="radio" name="flag_id" value="无" class="checkbox-danger">无
+                                    <input type="radio" name="flag_id" value="推荐" class="checkbox-danger">推荐
+                                    <input type="radio" name="flag_id" value="头条" class="checkbox-danger">头条
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2" >点击率:</label>
@@ -70,12 +69,12 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2" >作者:</label>
-                                <input type="text" name="write" value="{{ $article->write }}" class="form-control">
+                                <input type="text" name="user_id" value="{{ $article->user_id }}" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label class="col-md-1" >缩略图:</label>
+                                <label>缩略图:</label>
                                 <input type="file" name="photo" class="form-control">
-                                <img src="{{ $article->photo }}" width="500" height="300">
+                                <img src="{{ Storage::url($article->photo) }}" width="150" height="100">
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2" >简述:</label>
@@ -85,7 +84,7 @@
                                 <label class="col-md-2" >内容:</label>
                                 <div id="mdeditor">
                                     {!! editor_css() !!}
-                                    <textarea name="intro" class="form-control">{{ $article->content }}</textarea>
+                                    <textarea name="content" class="form-control">{{ $article->content }}</textarea>
                                     {!! editor_js() !!}
                                     {!! editor_config('mdeditor') !!}
                                 </div>

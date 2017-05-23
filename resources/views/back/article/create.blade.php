@@ -50,19 +50,17 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2" >分类:</label>
-                                <select name="category_id" class="form-control col-md-8">
-                                    <option value="">请选择分类</option>
-                                </select>
+                                {!! $category !!}
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2" >关键词:</label>
                                 <input type="text" name="keys" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label class="col-md-1" >Flag:</label>
-                                <input type="radio" name="flag" checked value="无" class="checkbox-danger">无
-                                <input type="radio" name="flag" value="推荐" class="checkbox-danger">推荐
-                                <input type="radio" name="flag" value="头条" class="checkbox-danger">头条
+                                <label>Flag:</label>
+                                <input type="radio" name="flag_id" checked value="无" class="checkbox-danger">无
+                                <input type="radio" name="flag_id" value="推荐" class="checkbox-danger">推荐
+                                <input type="radio" name="flag_id" value="头条" class="checkbox-danger">头条
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2" >点击率:</label>
@@ -70,10 +68,10 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2" >作者:</label>
-                                <input type="text" name="write" value="佚名" class="form-control">
+                                <input type="text" name="user_id" value="{{ Auth::guard('back')->user()->id }}" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label class="col-md-1" >缩略图:</label>
+                                <label>缩略图:</label>
                                 <input type="file" name="photo" class="form-control">
                             </div>
                             <div class="form-group">
@@ -84,13 +82,13 @@
                                 <label class="col-md-2" >内容:</label>
                                 <div id="mdeditor">
                                     {!! editor_css() !!}
-                                <textarea name="intro" class="form-control"></textarea>
+                                    <textarea name="content" class="form-control"></textarea>
                                     {!! editor_js() !!}
                                     {!! editor_config('mdeditor') !!}
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
-                            <button class="btn btn-danger">Cancel</button>
+                            <button type="submit" class="btn btn-default">提交</button>
+                            <button type="reset" class="btn btn-danger">重置</button>
                         </form>
                     </div>
                 </section>

@@ -11,14 +11,16 @@ namespace App\Repositories\ArticleRepository;
 
 use App\Models\Article;
 use App\Traits\DatatableTrait;
-use Illuminate\Contracts\Logging\Log;
+use App\Traits\MakedownTrait;
+use Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 
 class ArticleRepository
 {
-    use DatatableTrait;
+    use DatatableTrait ,MakedownTrait;
 
     /**
      * @param $id
@@ -42,22 +44,28 @@ class ArticleRepository
        return $article;
    }
 
+   public function getAllDataByCache(){
+       if (cache::has('article.all')){
+           $data=Cache::get('article.all');
+
+       }else{
+           $data=Cache::rememberForever('article.all',function (){
+               return Article::with('articleCategory','articleBackUser')->get();
+           });
+       }
+       return $data;
+   }
+
     /**
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function index(){
-         $data = Article::all();
-         if (cache::has('article.all')){
-             $data=Cache::get('article.all');
-         }else{
-             $data=Cache::forever('article.all',$data);
-         }
         $datatable=$this->getDataByBlade(
             'data-table',
-            $data,
-            ['id','articleCategory','title','keys','flag_id','clicks','user_id','photo','intro'],
-            ['id','category_id'],
-            ['#','所属分类','标题','关键词','Flag','点击率','作者','缩略图','简述','操作'],
+            $this->getAllDataByCache(),
+            ['id','articleCategory','articleBackUser','title','keys','flag_id','clicks','photo','intro'],
+            ['id','name','name'],
+            ['#','所属分类','作者','标题','关键词','Flag','点击率','缩略图','简述','操作'],
             'back/article',
             false
         );
@@ -82,11 +90,21 @@ class ArticleRepository
      * @param Request $request
      */
     public function store(Request $request){
-        $article=Article::create($request->all());
+        if(empty($request->file('photo'))){
+            $article = $request->toArray();
+        }else{
+            $photo = Storage::put('public',$request->file('photo'),'public');
+            $article = array_add(array_except($request->toArray() ,'photo') ,'photo' ,$photo);
+        }
+        $article = $this->getCodeByDell($article);
+        $article=Article::create($article);
         if (empty($article)) {
             abort(500,'添加失败');
+        }else{
+            Cache::forget('article.all.paginate');
+            Cache::forget('article.all');
+            Log::info('添加新文档');
         }
-        Log::info('添加新文档');
     }
 
     public function edit($id){
@@ -105,13 +123,23 @@ class ArticleRepository
      * @param $id
      */
     public function update(Request $request , $id){
-        $article=Article::update($request->all());
+        $model = Article::find($id);
+        if(empty($request->file('photo'))){
+            $article = $request->toArray();
+        }else{
+            $photo = Storage::put('public', $request->file('photo'));
+            Storage::delete($model->photo);
+            $article = array_add(array_except($request->toArray() ,'photo') ,'photo' ,$photo);
+        }
+        $article = $this->getCodeByDell($article);
+        $article = $model->update($article);
         if (empty($article)){
             abort(500,'修改失败');
         }else{
+            Cache::forget('article.all.paginate');
+            Cache::forget('article.all');
             Log::info('修改'.$id.'的文档');
         }
-
     }
 
     /**
@@ -122,6 +150,8 @@ class ArticleRepository
         if(empty($article)){
          abort(500,'删除失败');
         }else{
+            Cache::forget('article.all.paginate');
+            Cache::forget('article.all');
             Log::info('删除-'.$id.'的文档');
         }
 

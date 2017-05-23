@@ -36,6 +36,21 @@ class CategoryRepository
     /**
      * @return mixed
      */
+    public function getAllDataByCacheOption(){
+        if(Cache::has('category.all.option')){
+            $data=Cache::get('category.all.option');
+        }else{
+            $data=Cache::rememberForever('category.all.option',function (){
+                return Category::attr(['name' => 'category_id' ,'class' => 'form-control'])
+                          ->renderAsDropdown();
+            });
+        }
+        return $data;
+    }
+
+    /**
+     * @return mixed
+     */
     public function index(){
         return $this->getNestableByBlade($this->getAllDataByCache());
     }

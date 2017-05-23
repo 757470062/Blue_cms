@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Back;
 
 use App\Repositories\ArticleRepository\ArticleRepository;
+use App\Repositories\CategoryRepository\CategoryRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -31,9 +32,10 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(CategoryRepository $categoryRepository)
     {
-        return view('back.article.create');
+        $category = $categoryRepository->getAllDataByCacheOption();
+        return view('back.article.create' ,compact('category'));
     }
 
     /**
@@ -54,10 +56,11 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id ,CategoryRepository $categoryRepository)
     {
         $article=$this->articleRepository->edit($id);
-        return view('back.article.edit',compact('article'));
+        $category = $categoryRepository->getAllDataByCacheOption();
+        return view('back.article.edit',compact('article','category'));
     }
 
     /**
