@@ -3,22 +3,23 @@
 namespace App\Http\Controllers\Back;
 
 use App\Http\Requests\Back\CategoryRequest;
-use App\Repositories\CategoryRepository\CategoryRepository;
-use App\Repositories\ModuleRepository\ModuleRepository;
+use App\Service\CategoryService;
+use App\Service\ModuleService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
 
+
     /**
      * CategoryController constructor.
-     * @param CategoryRepository $categoryRepository
+     * @param CategoryService $categoryService
      */
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(CategoryService $categoryService)
     {
         $this->middleware('auth.back:back');
-        $this->categoryRepository = $categoryRepository;
+        $this->categoryService = $categoryService;
     }
 
     /**
@@ -28,7 +29,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = $this->categoryRepository->index();
+        $category = $this->categoryService->index();
         return view('back.category.index',compact('category'));
     }
 
@@ -37,9 +38,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(ModuleRepository $moduleRepository)
+    public function create(ModuleService $moduleService)
     {
-        $modules=$moduleRepository->getAllDataByCache();
+        $modules=$moduleService->getAllDataByCache();
         return view('back.category.create',compact('modules'));
     }
 
@@ -51,7 +52,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $this->categoryRepository->store($request);
+        $this->categoryService->store($request);
         return redirect('back/category');
     }
 
@@ -61,8 +62,8 @@ class CategoryController extends Controller
      * @param ModuleRepository $moduleRepository
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function createChild($id, ModuleRepository $moduleRepository){
-        $modules=$moduleRepository->getAllDataByCache();
+    public function createChild($id, ModuleService $moduleService){
+        $modules=$moduleService->getAllDataByCache();
         return view('back.category.create_child',compact('modules','id'));
     }
 
@@ -73,7 +74,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function storeChild(CategoryRequest $request , $id){
-        $this->categoryRepository->storeChild($request,$id);
+        $this->categoryService->storeChild($request,$id);
         return redirect('back/category');
     }
 
@@ -81,9 +82,9 @@ class CategoryController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id ,ModuleRepository $moduleRepository){
-        $modules=$moduleRepository->getAllDataByCache();
-        $category = $this->categoryRepository->edit($id);
+    public function edit($id ,ModuleService $moduleService){
+        $modules=$moduleService->getAllDataByCache();
+        $category = $this->categoryService->edit($id);
         return view('back.category.edit',compact('category','modules'));
     }
 
@@ -96,7 +97,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->categoryRepository->update($request ,$id);
+        $this->categoryService->update($request ,$id);
         return redirect('back/category');
     }
 
@@ -108,7 +109,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $this->categoryRepository->deleteById($id);
+        $this->categoryService->delete($id);
         return redirect()->back();
     }
 }

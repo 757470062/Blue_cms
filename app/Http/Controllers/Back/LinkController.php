@@ -2,20 +2,11 @@
 
 namespace App\Http\Controllers\Back;
 
-use App\Http\Requests\Back\ModuleRequest;
-use App\Service\ModuleService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ModuleController extends Controller
+class LinkController extends Controller
 {
-
-    public function __construct(ModuleService $moduleService)
-    {
-        $this->moduleService=$moduleService;
-        $this->middleware('auth.back:back');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -23,8 +14,7 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $datatable=$this->moduleService->index();
-        return view('back.module.index',compact('datatable'));
+        //
     }
 
     /**
@@ -34,7 +24,7 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        return view('back.module.create');
+        //
     }
 
     /**
@@ -43,10 +33,20 @@ class ModuleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ModuleRequest $request)
+    public function store(Request $request)
     {
-        $this->moduleService->store($request);
-        return redirect('back/module');
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
     }
 
     /**
@@ -57,8 +57,7 @@ class ModuleController extends Controller
      */
     public function edit($id)
     {
-        $module=$this->moduleService->edit($id);
-        return view('back.module.edit',compact('module'));
+        //
     }
 
     /**
@@ -70,8 +69,7 @@ class ModuleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->moduleService->update($request, $id);
-        return redirect('back/module');
+        //
     }
 
     /**
@@ -82,7 +80,6 @@ class ModuleController extends Controller
      */
     public function destroy($id)
     {
-        $this->moduleService->delete($id);
-        return redirect()->back();
+        //
     }
 }

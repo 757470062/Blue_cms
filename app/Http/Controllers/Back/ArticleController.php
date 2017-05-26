@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Back;
 
-use App\Repositories\ArticleRepository\ArticleRepository;
-use App\Repositories\CategoryRepository\CategoryRepository;
+use App\Service\ArticleService;
+use App\Service\CategoryService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ArticleController extends Controller
 {
 
-    public function __construct(ArticleRepository $articleRepository)
+    public function __construct(ArticleService $articleService)
     {
         $this->middleware('auth.back:back');
-        $this->articleRepository = $articleRepository;
+        $this->articleService = $articleService;
     }
 
     /**
@@ -23,7 +23,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $datatable = $this->articleRepository->index();
+        $datatable = $this->articleService->index();
         return view('back.article.index', compact('datatable'));
     }
 
@@ -32,9 +32,9 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(CategoryRepository $categoryRepository)
+    public function create(CategoryService $categoryService)
     {
-        $category = $categoryRepository->getAllDataByCacheOption();
+        $category = $categoryService->getAllDataByCacheOption();
         return view('back.article.create' ,compact('category'));
     }
 
@@ -46,7 +46,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-         $this->articleRepository->store($request);
+         $this->articleService->store($request);
          return redirect('back/article');
     }
 
@@ -56,10 +56,10 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id ,CategoryRepository $categoryRepository)
+    public function edit($id ,CategoryService $categoryService)
     {
-        $article=$this->articleRepository->edit($id);
-        $category = $categoryRepository->getAllDataByCacheOption();
+        $article=$this->articleService->getDataById($id);
+        $category = $categoryService->getAllDataByCacheOption();
         return view('back.article.edit',compact('article','category'));
     }
 
@@ -72,7 +72,7 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-          $this->articleRepository->update($request, $id);
+          $this->articleService->update($request, $id);
           return redirect('back/article');
     }
 
@@ -84,7 +84,12 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-          $this->articleRepository->deleteById($id);
+          $this->articleService->delete($id);
           return redirect()->back();
+    }
+
+
+    public function showPhoto($src){
+        return \Response::file(storage_path('app\\public\\'.$src));
     }
 }

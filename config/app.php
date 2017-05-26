@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'PRC',
 
     /*
     |--------------------------------------------------------------------------
@@ -229,17 +229,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         /*
-        * Package Service Providers...
+        * Package Facades...
         */
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
         'Nestable' => Nestable\Facades\NestableService::class,
-        /*
-        * 自定义Facade...
-        */
-       // 'EgRepository' =>\App\Facades\EgFacade\EgFacade::class,
-        'ArticleRepository' =>\App\Facades\ArticleFacade\ArticleFacade::class,
-        'ModuleRepository' =>\App\Facades\ModuleFacade\ModuleFacade::class,
-        'CategoryRepository' =>\App\Facades\CategoryFacade\CategoryFacade::class,
     ],
 
 ];

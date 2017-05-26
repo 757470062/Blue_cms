@@ -77,7 +77,7 @@ return [
 
         'backs' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Back\Back::class,
+            'model' => \App\Entities\Back\Back::class,
             'table' => 'backs',
         ],
 

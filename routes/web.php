@@ -14,19 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
 Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
 {
     $router->get('login', 'UserController@showLoginForm');
     $router->post('login', 'UserController@login');
     $router->post('logout', 'UserController@logout');
-
     $router->get('/', 'BackController@index');
-
     //文档
     $router->get('/article', 'ArticleController@index');
     $router->get('/article/create', 'ArticleController@create');
@@ -34,6 +29,7 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     $router->get('/article/edit/{id}', 'ArticleController@edit');
     $router->post('/article/update/{id}', 'ArticleController@update');
     $router->get('/article/destroy/{id}', 'ArticleController@destroy');
+    $router->get('/article/photo/{src}', 'ArticleController@showPhoto');
     //分类
     $router->get('/category', 'CategoryController@index');
     $router->get('/category/create', 'CategoryController@create');

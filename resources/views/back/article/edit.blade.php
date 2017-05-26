@@ -12,13 +12,9 @@
 
 <body class="">
 <div class="animsition">
-
     @include('back.public.menu')
-
     <main id="playground">
-
     @include('back.public.head')
-
     <!-- PAGE TITLE -->
         <section id="page-title" class="row">
 
@@ -74,7 +70,7 @@
                             <div class="form-group">
                                 <label>缩略图:</label>
                                 <input type="file" name="photo" class="form-control">
-                                <img src="{{ Storage::url($article->photo) }}" width="150" height="100">
+                                <img src="{{ url('back/article/photo/'.$article->photo) }}" width="150" height="100" style="border: 1px solid #ccc;">
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2" >简述:</label>
