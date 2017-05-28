@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'PRC',
+    'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -171,6 +171,7 @@ return [
         Nestable\NestableServiceProvider::class,
         Douyasi\Editor\EditorServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         /*
          * Application Service Providers...
          */

@@ -91,8 +91,13 @@
                     <li><a href="{{ url('back/module/create') }}" >新建模块</a></li>
                 </ul>
             </li>
-            <li><a href="charts.html"> <i class="ti-bar-chart"></i> <span>Charts</span></a></li>
-            <li><a href="styles.html"> <i class="ti-palette"></i> <span>Styles configuration</span></a></li>
+            <li><a href="#"> <i class="ti-bar-chart"></i> <span>合作管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
+                <ul class="nav nav-submenu submenu-hidden">
+                    <li><a href="{{ url('back/friend') }}" >所有合作信息</a></li>
+                    <li><a href="{{ url('back/friend/create') }}" >新建合作信息</a></li>
+                </ul>
+            </li>
+            <li><a href="{{ url('back/logs') }}"> <i class="ti-palette"></i> <span>系统日志</span></a></li>
 
             <li class="sidebar-title">
                 <h5 class="text-center margin-bottom-30 margin-top-15">Widgets</h5>

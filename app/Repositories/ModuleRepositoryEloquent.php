@@ -2,18 +2,24 @@
 
 namespace App\Repositories;
 
+use App\Presenters\ModulePresenter;
+use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\ModuleRepository;
 use App\Entities\Module;
 use App\Validators\ModuleValidator;
+use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class ModuleRepositoryEloquent
  * @package namespace App\Repositories;
  */
-class ModuleRepositoryEloquent extends BaseRepository implements ModuleRepository
+class ModuleRepositoryEloquent extends BaseRepository implements ModuleRepository,CacheableInterface
 {
+    use CacheableRepository;
+
+
     /**
      * Specify Model class name
      *
@@ -33,4 +39,6 @@ class ModuleRepositoryEloquent extends BaseRepository implements ModuleRepositor
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+
 }

@@ -24,7 +24,10 @@ class ModuleTransformer extends TransformerAbstract
             'id'         => (int) $model->id,
 
             /* place your other model properties here */
-
+            'names' => $model->name,
+            'lists' => $model->list,
+            'articles' => $model->article,
+            'covers' => $model->cover,
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at
         ];

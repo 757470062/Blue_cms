@@ -22,6 +22,8 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     $router->post('login', 'UserController@login');
     $router->post('logout', 'UserController@logout');
     $router->get('/', 'BackController@index');
+    //日志
+    Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->Middleware('auth.back:back');
     //文档
     $router->get('/article', 'ArticleController@index');
     $router->get('/article/create', 'ArticleController@create');
@@ -46,4 +48,11 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     $router->get('/module/edit/{id}', 'ModuleController@edit');
     $router->post('/module/update/{id}', 'ModuleController@update');
     $router->get('/module/destroy/{id}', 'ModuleController@destroy');
+    //友情链接
+    $router->get('/friend', 'FriendController@index');
+    $router->get('/friend/create', 'FriendController@create');
+    $router->post('/friend/store', 'FriendController@store');
+    $router->get('/friend/edit/{id}', 'FriendController@edit');
+    $router->post('/friend/update/{id}', 'FriendController@update');
+    $router->get('/friend/destroy/{id}', 'FriendController@destroy');
 });

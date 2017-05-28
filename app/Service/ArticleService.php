@@ -98,11 +98,11 @@ class ArticleService
      * @param Request $request
      */
     public function store(Request $request){
-        if(empty($request->file('photo'))){
-            $article = $request->toArray();
-        }else{
-            $photo = Storage::disk('public')->put('',$request->file('photo'));
-            $article = array_add(array_except($request->toArray() ,'photo') ,'photo' ,$photo);
+        $photo = $request->file('photo');
+        $article = $request->toArray();
+        if(!empty($photo)){
+            $photo = Storage::disk('public')->put('',$photo);
+            $article = array_add(array_except($article ,'photo') ,'photo' ,$photo);
         }
         $article = $this->getCodeByDell($article);
         $article=$this->articleRepository->create($article);

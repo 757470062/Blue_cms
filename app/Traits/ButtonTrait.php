@@ -35,7 +35,7 @@ trait ButtonTrait
      * @param string $template
      * @return mixed
      */
-    public function getButton($title, $ico, $route , $template = 'template.button.button'){
+    public function getButton($title, $ico, $route){
          return '<a href="'.url($route).'" title="'.$title.'" class="btn btn-sm '.$ico.'"></a>';
      }
 }
