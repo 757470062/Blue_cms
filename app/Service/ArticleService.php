@@ -8,7 +8,9 @@
 
 namespace App\Service;
 use App\Repositories\ArticleRepositoryEloquent;
+use App\Service\Cache\CacheService;
 use App\Traits\DatatableTrait;
+use App\Traits\FileSystem;
 use App\Traits\MakedownTrait;
 use Cache;
 use Illuminate\Http\Request;
@@ -17,7 +19,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ArticleService
 {
-    use DatatableTrait ,MakedownTrait;
+    use DatatableTrait, MakedownTrait, FileSystem;
 
     /**
      * ArticleService constructor.
@@ -26,19 +28,6 @@ class ArticleService
     public function __construct(ArticleRepositoryEloquent $articleRepository)
     {
         $this->articleRepository = $articleRepository;
-    }
-
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function getDataById($id){
-        $article = $this->articleRepository->find($id);
-        if (empty($article)){
-            abort(404);
-        }else{
-            return $article;
-        }
     }
 
     /**
@@ -98,14 +87,7 @@ class ArticleService
      * @param Request $request
      */
     public function store(Request $request){
-        $photo = $request->file('photo');
-        $article = $request->toArray();
-        if(!empty($photo)){
-            $photo = Storage::disk('public')->put('',$photo);
-            $article = array_add(array_except($article ,'photo') ,'photo' ,$photo);
-        }
-        $article = $this->getCodeByDell($article);
-        $article=$this->articleRepository->create($article);
+        $article=$this->articleRepository->create($this->getCodeByDell($this->putOneFile($request, 'photo')));
         if (empty($article)) {
             abort(500,'添加失败');
         }else{
@@ -115,18 +97,6 @@ class ArticleService
         }
     }
 
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function edit($id){
-        $article=$this->getDataById($id);
-        if (empty($article)){
-            abort(500,'未找到Id为：'.$id.'的文档');
-        }else{
-            return $article;
-        }
-    }
 
     /**
      * @param Request $request
@@ -134,15 +104,7 @@ class ArticleService
      */
     public function update(Request $request , $id){
         $model = $this->articleRepository->find($id);
-        if(empty($request->file('photo'))){
-            $article = $request->toArray();
-        }else{
-            $photo = Storage::disk('public')->put('', $request->file('photo'));
-            Storage::disk('public')->delete($model->photo);
-            $article = array_add(array_except($request->toArray() ,'photo') ,'photo' ,$photo);
-        }
-        $article = $this->getCodeByDell($article);
-        $article = $model->update($article);
+        $article = $model->update($this->getCodeByDell($this->putOneFile($request, 'photo')));
         if (empty($article)){
             abort(500,'修改失败');
         }else{

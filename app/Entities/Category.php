@@ -12,6 +12,8 @@ class Category extends Model implements Transformable
     use TransformableTrait;
     use NestableTrait;
 
+    public $table = 'categories';
+
     protected $fillable=[
         'parent_id','name','module_id','seo_title','keys','type','sort','intro'
     ];

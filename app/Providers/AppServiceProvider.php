@@ -24,6 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        //$this->app->bind(\App\Service\Cache\CacheServiceInterface::class, \App\Service\Cache\CacheService::class);
     }
 }

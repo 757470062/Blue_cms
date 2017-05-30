@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Entities\Article;
 use App\Service\ArticleService;
+use App\Service\Cache\CacheService;
 use App\Service\CategoryService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,8 +23,10 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CacheService $cacheService)
     {
+        $model = $this->articleService->articleRepository->makeModel();
+        dd($cacheService->all($model));
         $datatable = $this->articleService->index();
         return view('back.article.index', compact('datatable'));
     }
@@ -58,7 +62,7 @@ class ArticleController extends Controller
      */
     public function edit($id ,CategoryService $categoryService)
     {
-        $article=$this->articleService->getDataById($id);
+        $article=$this->articleService->articleRepository->find($id);
         $category = $categoryService->getAllDataByCacheOption();
         return view('back.article.edit',compact('article','category'));
     }
@@ -90,6 +94,6 @@ class ArticleController extends Controller
 
 
     public function showPhoto($src){
-        return \Response::file(storage_path('app\\public\\'.$src));
+        return $this->articleService->getOneFile($src);
     }
 }

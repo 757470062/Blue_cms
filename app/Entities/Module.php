@@ -10,6 +10,8 @@ class Module extends Model implements Transformable
 {
     use TransformableTrait;
 
+    public $table = 'modules';
+
     protected $fillable=[
         'name','list','article','cover',
     ];

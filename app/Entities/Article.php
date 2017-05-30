@@ -10,6 +10,8 @@ class Article extends Model implements Transformable
 {
     use TransformableTrait;
 
+    public $table = 'articles';
+
     protected $fillable=[
         'category_id','title','keys','flag_id','clicks','user_id','photo','intro','content','code',
     ];
