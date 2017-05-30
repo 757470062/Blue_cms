@@ -11,30 +11,35 @@ namespace App\Service\Cache;
 
 
 use Illuminate\Support\Facades\Cache;
-use League\Flysystem\Config;
+use Illuminate\Support\Facades\Config;
 
 class CacheService implements CacheServiceInterface
 {
-    protected $enable;
-    protected $minutes;
-    protected $clean;
-    protected $allowed;
+    private $enable;
+    private $minutes;
+    private $clean;
+    private $allowed;
 
-    public function __construct(Config $config)
-    {
-        $this->config = $config;
-        $this->enable = $this->config->get('Service.CacheService.enable');
-        $this->minutes = $this->config->get('Service.CacheService.minutes');
-        $this->clean = $this->config->get('Service.CacheService.clean');
-        $this->allowed = $this->config->get('Service.CacheService.allowed');
-    }
 
     /**
+     * CacheService constructor.
+     */
+    public function __construct()
+    {
+        $this->enable = Config::get('Service.CacheService.enable');
+        $this->minutes = Config::get('Service.CacheService.minutes');
+        $this->clean = Config::get('Service.CacheService.clean');
+        $this->allowed = Config::get('Service.CacheService.allowed');
+    }
+
+
+    /**
+     * 缓存所有内容
      * @param $model
-     * @param null $relation
+     * @param array $relation
      * @return mixed
      */
-    public function all($model, $relation = null)
+    public function all($model, $relation = array())
     {
         if (Cache::has($model->table.'.all')){
            $data = Cache::get($model->table.'.all');
@@ -51,19 +56,57 @@ class CacheService implements CacheServiceInterface
         return $data;
     }
 
-    public function paginate($model)
+    /**
+     * 缓存分页
+     * @param $model
+     * @param array $relation
+     * @return mixed
+     */
+    public function paginate($model, $relation = array())
     {
-        // TODO: Implement paginate() method.
+        if (Cache::has($model->table.'.all')){
+            $data = Cache::get($model->table.'.all');
+        }else{
+            if (empty($relation)){
+                $data = $model->all();
+            }else{
+                $data = $model->with($relation)->get();
+            }
+            Cache::rememberForever($model->table.'.all', function () use($data){
+                return $data;
+            });
+        }
+        return $data;
+    }
+
+
+    /**
+     * 清空该Model缓存
+     * @param $model
+     * @param array $add
+     */
+    public function forget($model, $add = array())
+    {
+       foreach ($this->allowed as $k => $v ){
+           if($v) {
+               Cache::forget($model->table . '.' . $k);
+           }
+       }
+       if (!empty($add)){
+           foreach ($add as $k => $v ){
+               if($v) {
+                   Cache::forget($model->table . '.' . $k);
+               }
+           }
+       }
     }
 
     /**
      * @param bool|mixed $enable
-     * @return CacheService
      */
     public function setEnable($enable)
     {
         $this->enable = $enable;
-        return $this;
     }
 
     /**
@@ -89,6 +132,7 @@ class CacheService implements CacheServiceInterface
     {
         $this->allowed = $allowed;
     }
+
 
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Events\ForgetCacheEvent;
 use App\Service\FriendService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,7 +27,8 @@ class FriendController extends Controller
      */
     public function index()
     {
-        dd('ok');
+        $datatable = $this->friendService->index();
+        return view('back.friend.index', compact('datatable'));
     }
 
     /**
@@ -59,7 +61,7 @@ class FriendController extends Controller
      */
     public function show($id)
     {
-        dd($this->friendService->friendRepository->find($id));
+        return $this->friendService->friendRepository->find($id);
     }
 
     /**
@@ -96,6 +98,9 @@ class FriendController extends Controller
     public function destroy($id)
     {
         $this->friendService->friendRepository->delete($id);
+        event(new ForgetCacheEvent(
+            $this->friendService->friendRepository->makeModel()
+        ));
         return redirect()->back();
     }
 }

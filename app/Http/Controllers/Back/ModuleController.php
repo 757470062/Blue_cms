@@ -57,7 +57,7 @@ class ModuleController extends Controller
      */
     public function edit($id)
     {
-        $module=$this->moduleService->edit($id);
+        $module=$this->moduleService->moduleRepository->find($id);
         return view('back.module.edit',compact('module'));
     }
 
@@ -82,7 +82,10 @@ class ModuleController extends Controller
      */
     public function destroy($id)
     {
-        $this->moduleService->delete($id);
+        $this->moduleService->moduleRepository->delete($id);
+        event(new ForgetCacheEvent(
+            $this->moduleService->moduleRepository->makeModel()
+        ));
         return redirect()->back();
     }
 }

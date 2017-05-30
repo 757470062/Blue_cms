@@ -50,11 +50,9 @@ return [
     |
     | methods cacheable : all, paginate
     |
-    | Ex:
-    |
-    | 'only'  =>['all','paginate'],
     |
     */
-        'only' => null,
+        'all' => true,
+        'paginate' => true,
     ],
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Events\ForgetCacheEvent;
 use App\Http\Requests\Back\CategoryRequest;
 use App\Service\CategoryService;
 use App\Service\ModuleService;
@@ -40,7 +41,9 @@ class CategoryController extends Controller
      */
     public function create(ModuleService $moduleService)
     {
-        $modules=$moduleService->getAllDataByCache();
+        $modules=$moduleService->cacheService->all(
+            $moduleService->moduleRepository->makeModel()
+        );
         return view('back.category.create',compact('modules'));
     }
 
@@ -63,7 +66,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function createChild($id, ModuleService $moduleService){
-        $modules=$moduleService->getAllDataByCache();
+        $modules=$moduleService->cacheService->all(
+            $moduleService->moduleRepository->makeModel()
+        );
         return view('back.category.create_child',compact('modules','id'));
     }
 
@@ -82,9 +87,11 @@ class CategoryController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id ,ModuleService $moduleService){
-        $modules=$moduleService->getAllDataByCache();
-        $category = $this->categoryService->edit($id);
+    public function edit($id, ModuleService $moduleService){
+        $modules=$moduleService->cacheService->all(
+            $moduleService->moduleRepository->makeModel()
+        );
+        $category = $this->categoryService->categoryRepository->find($id);
         return view('back.category.edit',compact('category','modules'));
     }
 
@@ -109,7 +116,11 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $this->categoryService->delete($id);
+        $this->categoryService->categoryRepository->delete($id);
+        event(new ForgetCacheEvent(
+            $this->categoryService->categoryRepository->makeModel(),
+            $this->categoryService->cacheService->getRelation()
+        ));
         return redirect()->back();
     }
 }

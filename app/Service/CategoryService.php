@@ -9,7 +9,9 @@
 namespace App\Service;
 
 
+use App\Events\ForgetCacheEvent;
 use App\Repositories\CategoryRepositoryEloquent;
+use App\Service\Cache\Extend\CategoryCacheService;
 use App\Traits\NestableTrait;
 use Illuminate\Http\Request;
 use Log;
@@ -19,24 +21,12 @@ class CategoryService
 {
     use NestableTrait;
 
-    public function __construct(CategoryRepositoryEloquent $categoryRepository)
+    public function __construct(CategoryRepositoryEloquent $categoryRepository, CategoryCacheService $cacheService)
     {
         $this->categoryRepository = $categoryRepository;
+        $this->cacheService = $cacheService;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAllDataByCache(){
-        if(Cache::has('category.all')){
-            $data=Cache::get('category.all');
-        }else{
-            $data=Cache::rememberForever('category.all',function (){
-                return $this->categoryRepository->makeModel()->nested()->get();
-            });
-        }
-        return $data;
-    }
 
     /**
      * @return mixed
@@ -57,7 +47,11 @@ class CategoryService
      * @return mixed
      */
     public function index(){
-        return $this->getNestableByBlade($this->getAllDataByCache());
+        return $this->getNestableByBlade(
+            $this->cacheService->allCacheByNestable(
+                $this->categoryRepository->makeModel()
+            )
+        );
     }
 
     /**
@@ -67,10 +61,11 @@ class CategoryService
         $category=$this->categoryRepository->create(array_add($request->toArray(),'parent_id',0));
         if (empty($category)){
             abort(500,'创建'.$request->name.'分类失败');
-        }else{
-            Cache::forget('category.all');
-            Log::info('创建'.$request->name.'分类成功');
         }
+        event(new ForgetCacheEvent(
+            $this->categoryRepository->makeModel(),
+            $this->cacheService->getRelation())
+        );
     }
 
     /**
@@ -81,10 +76,11 @@ class CategoryService
         $category=$this->categoryRepository->create(array_add($request->toArray(),'parent_id',$parent_id));
         if (empty($category)){
             abort(500,'为ID：'.$parent_id.'的分类创建子分类失败。');
-        }else{
-            Cache::forget('category.all');
-            Log::info('为ID：'.$parent_id.'的分类创建子分类');
         }
+        event(new ForgetCacheEvent(
+                $this->categoryRepository->makeModel(),
+                $this->cacheService->getRelation())
+        );
     }
 
     /**
@@ -107,22 +103,11 @@ class CategoryService
         $category=$this->categoryRepository->find($id)->update($request->all());
         if(empty($category)){
             abort(500,'修改ID：'.$id.'的分类失败');
-        }else{
-            Cache::forget('category.all');
-            Log::info('修改ID:'.$id.'的分类成功');
         }
+        event(new ForgetCacheEvent(
+                $this->categoryRepository->makeModel(),
+                $this->cacheService->getRelation())
+        );
     }
 
-    /**
-     * @param $id
-     */
-    public function delete($id){
-        $category=$this->categoryRepository->delete($id);
-        if (empty($category)){
-            abort(500,'删除ID：'.$id.'的分类失败');
-        }else{
-            Cache::forget('category.all');
-            Log::info('删除ID：'.$id.'的分类成功');
-        }
-    }
 }

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Back;
 
-use App\Entities\Article;
+use App\Events\ForgetCacheEvent;
 use App\Service\ArticleService;
-use App\Service\Cache\CacheService;
 use App\Service\CategoryService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 
 class ArticleController extends Controller
 {
@@ -23,10 +23,8 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(CacheService $cacheService)
+    public function index()
     {
-        $model = $this->articleService->articleRepository->makeModel();
-        dd($cacheService->all($model));
         $datatable = $this->articleService->index();
         return view('back.article.index', compact('datatable'));
     }
@@ -88,7 +86,10 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-          $this->articleService->delete($id);
+          $this->articleService->articleRepository->delete($id);
+          event(new ForgetCacheEvent(
+              $this->articleService->articleRepository->makeModel()
+          ));
           return redirect()->back();
     }
 

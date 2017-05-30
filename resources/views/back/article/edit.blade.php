@@ -35,7 +35,7 @@
             <div class="row">
                 <section class="panel panel-danger">
                     <header class="panel-heading">
-                        <h4 class="panel-title">新建文档</h4>
+                        <h4 class="panel-title">修改文档</h4>
                     </header>
                     <div class="panel-body">
                         <form action="{{ url('back/article/update/'.$article->id) }}" method="post" enctype="multipart/form-data">
@@ -85,8 +85,8 @@
                                     {!! editor_config('mdeditor') !!}
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
-                            <button class="btn btn-danger">Cancel</button>
+                            <button type="submit" class="btn btn-default">提交</button>
+                            <button type="reset" class="btn btn-danger">重置</button>
                         </form>
                     </div>
                 </section>

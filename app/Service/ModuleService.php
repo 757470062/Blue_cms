@@ -9,7 +9,9 @@
 namespace App\Service;
 
 
+use App\Events\ForgetCacheEvent;
 use App\Repositories\ModuleRepositoryEloquent;
+use App\Service\Cache\CacheService;
 use App\Traits\DatatableTrait;
 use Illuminate\Http\Request;
 use Cache;
@@ -19,30 +21,18 @@ class ModuleService
 {
     use DatatableTrait;
 
-    public function __construct(ModuleRepositoryEloquent $moduleRepository)
+    public function __construct(ModuleRepositoryEloquent $moduleRepository,CacheService $cacheService)
     {
         $this->moduleRepository = $moduleRepository;
+        $this->cacheService = $cacheService;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAllDataByCache(){
-        if (cache::has('module.all')){
-            $data=Cache::get('module.all');
-        }else{
-            $data=Cache::rememberForever('module.all',function (){
-                return $this->moduleRepository->all();
-            });
-        }
-        return $data;
-    }
 
     /**
      * @return \App\Traits\vista
      */
     public function index(){
-        $data = $this->getAllDataByCache();
+        $data = $this->cacheService->all($this->moduleRepository->makeModel());
         $datatable=$this->getDataByBlade(
             'data-table',
             $data,
@@ -62,24 +52,9 @@ class ModuleService
     public function store(Request $request){
         $module=$this->moduleRepository->create($request->all());
         if(empty($module)){
-            abort(500,'新建模块出错');
-        }else{
-            Cache::forget('module.all');
-            Log::info('新建'.$request->name.'模块成功');
+            abort(400,'新建模块出错');
         }
-    }
-
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function edit($id){
-        $module=$this->moduleRepository->find($id);
-        if(empty($module)){
-            abort(500,'为找打ID：'.$id.'的模块');
-        }else{
-            return $module;
-        }
+        event(new ForgetCacheEvent($this->moduleRepository->makeModel()));
     }
 
     /**
@@ -89,24 +64,10 @@ class ModuleService
     public function update(Request $request, $id){
         $module=$this->moduleRepository->find($id)->update($request->all());
         if(empty($module)){
-            abort(500,'修改ID：'.$id.'模块出错');
-        }else{
-            Cache::forget('module.all');
-            Log::info('修改ID：'.$id.'模块成功');
+            abort(400,'修改ID：'.$id.'模块出错');
         }
+        event(new ForgetCacheEvent($this->moduleRepository->makeModel()));
     }
 
-    /**
-     * @param $id
-     */
-    public function delete($id){
-        $module=$this->moduleRepository->delete($id);
-        if(empty($module)){
-            abort(500,'删除ID：'.$id.'模块出错');
-        }else{
-            Cache::forget('module.all');
-            Log::info('删除ID：'.$id.'模块成功');
-        }
-    }
 
 }
