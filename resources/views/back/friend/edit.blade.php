@@ -54,13 +54,8 @@
                             </div>
                             <div class="form-group">
                                 <label>显示状态:</label>
-                                @if(empty($friend->state))
-                                    <input type="radio" name="state" value="1" checked> 显示
-                                    <input type="radio" name="state" value="0"> 不显示
-                                @else
-                                    <input type="radio" name="state" value="1"> 显示
-                                    <input type="radio" name="state" value="0" checked> 不显示
-                                @endif
+                                    <input type="radio" name="state" value="1" @if($friend->state == 1) checked @endif> 显示
+                                    <input type="radio" name="state" value="0" @if($friend->state == 0)) checked @endif> 不显示
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2" >排序:</label>

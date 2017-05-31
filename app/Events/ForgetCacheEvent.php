@@ -18,12 +18,12 @@ class ForgetCacheEvent
     /**
      * ForgetCacheEvent constructor.
      * @param $model
-     * @param $relation
+     * @param $allowed_add
      */
-    public function __construct($model, $relation = array())
+    public function __construct($model, $allowed_add = array())
     {
         $this->model = $model;
-        $this->relation = $relation;
+        $this->allowed_add = $allowed_add;
     }
 
     /**

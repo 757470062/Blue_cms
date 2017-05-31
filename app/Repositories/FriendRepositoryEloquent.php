@@ -7,7 +7,6 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\FriendRepository;
 use App\Entities\Friend;
 use App\Validators\FriendValidator;
-use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class FriendRepositoryEloquent
@@ -15,7 +14,6 @@ use Prettus\Repository\Traits\CacheableRepository;
  */
 class FriendRepositoryEloquent extends BaseRepository implements FriendRepository
 {
-    use CacheableRepository;
 
     /**
      * Specify Model class name

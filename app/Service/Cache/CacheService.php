@@ -49,7 +49,7 @@ class CacheService implements CacheServiceInterface
             }else{
                 $data = $model->with($relation)->get();
             }
-            Cache::rememberForever($model->table.'.all', function () use($data){
+            Cache::remember($model->table.'.all', $this->minutes, function () use($data){
                 return $data;
             });
         }
@@ -72,7 +72,7 @@ class CacheService implements CacheServiceInterface
             }else{
                 $data = $model->with($relation)->get();
             }
-            Cache::rememberForever($model->table.'.all', function () use($data){
+            Cache::remember($model->table.'.all', $this->minutes, function () use($data){
                 return $data;
             });
         }
@@ -80,20 +80,19 @@ class CacheService implements CacheServiceInterface
     }
 
 
-    /**
-     * 清空该Model缓存
+    /**清空该Model缓存
      * @param $model
-     * @param array $add
+     * @param array $allowed_add
      */
-    public function forget($model, $add = array())
+    public function forget($model, $allowed_add = array())
     {
        foreach ($this->allowed as $k => $v ){
            if($v) {
                Cache::forget($model->table . '.' . $k);
            }
        }
-       if (!empty($add)){
-           foreach ($add as $k => $v ){
+       if (!empty($allowed_add)){
+           foreach ($allowed_add as $k => $v ){
                if($v) {
                    Cache::forget($model->table . '.' . $k);
                }
@@ -133,6 +132,37 @@ class CacheService implements CacheServiceInterface
         $this->allowed = $allowed;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getEnable()
+    {
+        return $this->enable;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMinutes()
+    {
+        return $this->minutes;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getClean()
+    {
+        return $this->clean;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAllowed()
+    {
+        return $this->allowed;
+    }
 
 
 }

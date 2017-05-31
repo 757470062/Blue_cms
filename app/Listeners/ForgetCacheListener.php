@@ -29,6 +29,6 @@ class ForgetCacheListener
      */
     public function handle(ForgetCacheEvent $event)
     {
-        $this->cacheService->forget($event->model, $event->relation);
+        $this->cacheService->forget($event->model, $event->allowed_add);
     }
 }

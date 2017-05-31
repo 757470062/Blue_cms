@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Cache;
 class CategoryCacheService extends CacheService
 {
 
-    private $relation = [
+    private $allowed_add = [
         'all.by.nestable' => true,
         'all.by.option' => true
     ];
@@ -30,7 +30,7 @@ class CategoryCacheService extends CacheService
             $data = Cache::get($model->table.'.all.by.nestable');
         }else{
             $data = $model->nested()->get();
-            Cache::rememberForever($model->table.'.all.by.nestable', function () use($data){
+            Cache::remember($model->table.'.all.by.nestable', $this->getMinutes(), function () use($data){
                 return $data;
             });
         }
@@ -50,7 +50,7 @@ class CategoryCacheService extends CacheService
             $data = $model
                 ->attr(['name' => 'category_id' ,'class' => 'form-control'])
                 ->renderAsDropdown();
-            Cache::rememberForever($model->table.'.all.by.option', function () use($data){
+            Cache::remember($model->table.'.all.by.option', $this->getMinutes(), function () use($data){
                 return $data;
             });
         }
@@ -60,8 +60,8 @@ class CategoryCacheService extends CacheService
     /**
      * @return array
      */
-    public function getRelation()
+    public function getAllowedAdd()
     {
-        return $this->relation;
+        return $this->allowed_add;
     }
 }

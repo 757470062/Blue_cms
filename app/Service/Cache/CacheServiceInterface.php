@@ -33,9 +33,9 @@ interface CacheServiceInterface
     /**
      * 清除导入Model的缓存
      * @param $model
-     * @param array $add
+     * @param array $allowed_add
      * @return mixed
      */
-    public function forget($model, $add = array());
+    public function forget($model, $allowed_add = array());
 
 }

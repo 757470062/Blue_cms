@@ -31,21 +31,6 @@ class CategoryService
     /**
      * @return mixed
      */
-    public function getAllDataByCacheOption(){
-        if(Cache::has('category.all.option')){
-            $data=Cache::get('category.all.option');
-        }else{
-            $data=Cache::rememberForever('category.all.option',function (){
-                return $this->categoryRepository->makeModel()->attr(['name' => 'category_id' ,'class' => 'form-control'])
-                    ->renderAsDropdown();
-            });
-        }
-        return $data;
-    }
-
-    /**
-     * @return mixed
-     */
     public function index(){
         return $this->getNestableByBlade(
             $this->cacheService->allCacheByNestable(
@@ -64,7 +49,7 @@ class CategoryService
         }
         event(new ForgetCacheEvent(
             $this->categoryRepository->makeModel(),
-            $this->cacheService->getRelation())
+            $this->cacheService->getAllowedAdd())
         );
     }
 
@@ -79,20 +64,8 @@ class CategoryService
         }
         event(new ForgetCacheEvent(
                 $this->categoryRepository->makeModel(),
-                $this->cacheService->getRelation())
+                $this->cacheService->getAllowedAdd())
         );
-    }
-
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function edit($id){
-        $category = $this->categoryRepository->find($id);
-        if (empty($category)){
-            abort(404);
-        }
-        return $category;
     }
 
     /**
@@ -106,7 +79,7 @@ class CategoryService
         }
         event(new ForgetCacheEvent(
                 $this->categoryRepository->makeModel(),
-                $this->cacheService->getRelation())
+                $this->cacheService->getAllowedAdd())
         );
     }
 

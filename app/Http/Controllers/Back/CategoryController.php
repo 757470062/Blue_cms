@@ -119,7 +119,7 @@ class CategoryController extends Controller
         $this->categoryService->categoryRepository->delete($id);
         event(new ForgetCacheEvent(
             $this->categoryService->categoryRepository->makeModel(),
-            $this->categoryService->cacheService->getRelation()
+            $this->categoryService->cacheService->getAllowedAdd()
         ));
         return redirect()->back();
     }

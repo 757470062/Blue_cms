@@ -51,7 +51,9 @@ class FriendService
     }
 
     public function store(Request $request){
-        $friend = $this->friendRepository->create($this->putOneFile($request, 'photo'));
+        $friend = $this->friendRepository->create(
+            $this->putOneFile($request, 'photo')
+        );
         if (empty($friend)){
             abort(404, '新建友情链接失败');
         }

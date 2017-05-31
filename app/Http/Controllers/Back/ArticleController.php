@@ -36,7 +36,9 @@ class ArticleController extends Controller
      */
     public function create(CategoryService $categoryService)
     {
-        $category = $categoryService->getAllDataByCacheOption();
+        $category = $categoryService->cacheService->allCacheByOption(
+            $categoryService->categoryRepository->makeModel()
+        );
         return view('back.article.create' ,compact('category'));
     }
 
@@ -61,7 +63,9 @@ class ArticleController extends Controller
     public function edit($id ,CategoryService $categoryService)
     {
         $article=$this->articleService->articleRepository->find($id);
-        $category = $categoryService->getAllDataByCacheOption();
+        $category = $categoryService->cacheService->allCacheByOption(
+            $categoryService->categoryRepository->makeModel()
+        );
         return view('back.article.edit',compact('article','category'));
     }
 
