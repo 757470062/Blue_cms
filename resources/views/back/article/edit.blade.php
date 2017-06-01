@@ -54,10 +54,9 @@
                             </div>
                             <div class="form-group">
                                 <label>Flag:</label>
-                                当前：<input type="radio" name="flag_id" value="{{ $article->flag_id }}" checked class="checkbox-danger">{{ $article->flag_id }}
-                                 | <input type="radio" name="flag_id" value="无" class="checkbox-danger">无
-                                    <input type="radio" name="flag_id" value="推荐" class="checkbox-danger">推荐
-                                    <input type="radio" name="flag_id" value="头条" class="checkbox-danger">头条
+                                    <input type="radio" name="flag_id" value="无" class="checkbox-danger" @if($article->flag_id == '无') checked @endif>无
+                                    <input type="radio" name="flag_id" value="推荐" class="checkbox-danger" @if($article->flag_id == '推荐') checked @endif>推荐
+                                    <input type="radio" name="flag_id" value="头条" class="checkbox-danger" @if($article->flag_id == '头条') checked @endif>头条
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2" >点击率:</label>

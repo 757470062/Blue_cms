@@ -10,8 +10,9 @@ namespace App\Service;
 
 
 use App\Events\ForgetCacheEvent;
-use App\Repositories\FriendRepositoryEloquent;
+use App\Repositories\FriendRepository;
 use App\Service\Cache\CacheService;
+use App\Service\Cache\CacheServiceInterface;
 use App\Traits\DatatableTrait;
 use App\Traits\FileSystem;
 use Illuminate\Http\Request;
@@ -22,18 +23,22 @@ class FriendService
 {
     use DatatableTrait, FileSystem;
 
+
     /**
      * FriendService constructor.
-     * @param FriendRepositoryEloquent $friendRepository
-     * @param CacheService $cacheService
+     * @param FriendRepository $friendRepository
+     * @param CacheServiceInterface $cacheService
      */
-    public function __construct(FriendRepositoryEloquent $friendRepository, CacheService $cacheService)
+    public function __construct(FriendRepository $friendRepository, CacheServiceInterface $cacheService)
     {
         $this->friendRepository = $friendRepository;
         $this->cacheService = $cacheService;
     }
 
 
+    /**
+     * @return \App\Traits\vista
+     */
     public function index(){
         $this->cacheService->all($this->friendRepository->makeModel());
         $datatable=$this->getDataByBlade(
@@ -50,6 +55,9 @@ class FriendService
         return $datatable;
     }
 
+    /**
+     * @param Request $request
+     */
     public function store(Request $request){
         $friend = $this->friendRepository->create(
             $this->putOneFile($request, 'photo')
@@ -61,6 +69,10 @@ class FriendService
     }
 
 
+    /**
+     * @param Request $request
+     * @param $id
+     */
     public function update(Request $request, $id){
         $friend = $this->friendRepository->find($id)->update(
             $this->putOneFile($request, 'photo')

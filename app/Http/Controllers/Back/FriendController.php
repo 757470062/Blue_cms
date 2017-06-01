@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Back;
 
 use App\Events\ForgetCacheEvent;
+use App\Http\Requests\Back\FriendRequest;
 use App\Service\FriendService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -47,7 +48,7 @@ class FriendController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FriendRequest $request)
     {
         $this->friendService->store($request);
         return redirect('back/friend');

@@ -67,9 +67,8 @@
                             </div>
                             <div class="form-group">
                                 <label  >类型:</label>
-                                <input type="radio" name="type" value="{{ $category->type }}" checked class="checkbox-danger">当前：-- @if($category->type == 'list') 列表 @else 封面 @endif--
-                                <input type="radio" name="type" value="list" class="checkbox-danger">列表
-                                <input type="radio" name="type" value="cover" class="checkbox-danger">封面
+                                <input type="radio" name="type" value="list" class="checkbox-danger" @if($category->type == 'list') checked @endif>列表
+                                <input type="radio" name="type" value="cover" class="checkbox-danger" @if($category->type == cover) checked @endif>封面
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2">排序：</label>

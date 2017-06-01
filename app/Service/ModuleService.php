@@ -10,8 +10,8 @@ namespace App\Service;
 
 
 use App\Events\ForgetCacheEvent;
-use App\Repositories\ModuleRepositoryEloquent;
-use App\Service\Cache\CacheService;
+use App\Repositories\ModuleRepository;
+use App\Service\Cache\CacheServiceInterface;
 use App\Traits\DatatableTrait;
 use Illuminate\Http\Request;
 use Cache;
@@ -21,7 +21,13 @@ class ModuleService
 {
     use DatatableTrait;
 
-    public function __construct(ModuleRepositoryEloquent $moduleRepository,CacheService $cacheService)
+
+    /**
+     * ModuleService constructor.
+     * @param ModuleRepository $moduleRepository
+     * @param CacheServiceInterface $cacheService
+     */
+    public function __construct(ModuleRepository $moduleRepository, CacheServiceInterface $cacheService)
     {
         $this->moduleRepository = $moduleRepository;
         $this->cacheService = $cacheService;

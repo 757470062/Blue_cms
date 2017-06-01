@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Events\ForgetCacheEvent;
 use App\Http\Requests\Back\ModuleRequest;
 use App\Service\ModuleService;
 use Illuminate\Http\Request;

@@ -21,7 +21,7 @@ class CreateArticlesTable extends Migration
             $table->string('flag_id');
             $table->string('clicks');
             $table->string('user_id');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->text('intro');
             $table->text('content');
             $table->text('code');

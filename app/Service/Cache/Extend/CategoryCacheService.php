@@ -10,15 +10,17 @@ namespace App\Service\Cache\Extend;
 
 
 use App\Service\Cache\CacheService;
+use App\Service\Cache\CacheServiceInterface;
 use Illuminate\Support\Facades\Cache;
 
-class CategoryCacheService extends CacheService
+class CategoryCacheService extends CacheService implements CategoryCacheServiceInterface
 {
 
     private $allowed_add = [
         'all.by.nestable' => true,
         'all.by.option' => true
     ];
+
 
     /**
      * 生成nestable的json

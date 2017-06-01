@@ -64,15 +64,15 @@ class CacheService implements CacheServiceInterface
      */
     public function paginate($model, $relation = array())
     {
-        if (Cache::has($model->table.'.all')){
-            $data = Cache::get($model->table.'.all');
+        if (Cache::has($model->table.'.paginate')){
+            $data = Cache::get($model->table.'.paginate');
         }else{
             if (empty($relation)){
                 $data = $model->all();
             }else{
-                $data = $model->with($relation)->get();
+                $data = $model->with($relation)->paginate(10);
             }
-            Cache::remember($model->table.'.all', $this->minutes, function () use($data){
+            Cache::remember($model->table.'.paginate', $this->minutes, function () use($data){
                 return $data;
             });
         }

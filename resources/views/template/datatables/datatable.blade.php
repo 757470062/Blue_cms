@@ -39,4 +39,5 @@
         @endfor
     </tr>
     </tfoot>
+
 </table>

@@ -10,8 +10,11 @@ namespace App\Service;
 
 
 use App\Events\ForgetCacheEvent;
+use App\Repositories\CategoryRepository;
 use App\Repositories\CategoryRepositoryEloquent;
+use App\Service\Cache\CacheServiceInterface;
 use App\Service\Cache\Extend\CategoryCacheService;
+use App\Service\Cache\Extend\CategoryCacheServiceInterface;
 use App\Traits\NestableTrait;
 use Illuminate\Http\Request;
 use Log;
@@ -21,7 +24,12 @@ class CategoryService
 {
     use NestableTrait;
 
-    public function __construct(CategoryRepositoryEloquent $categoryRepository, CategoryCacheService $cacheService)
+    /**
+     * CategoryService constructor.
+     * @param CategoryRepository $categoryRepository
+     * @param CategoryCacheServiceInterface $cacheService
+     */
+    public function __construct(CategoryRepository $categoryRepository, CategoryCacheServiceInterface $cacheService)
     {
         $this->categoryRepository = $categoryRepository;
         $this->cacheService = $cacheService;

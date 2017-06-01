@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Back;
 
 use App\Events\ForgetCacheEvent;
+use App\Http\Requests\Back\ArticleRequest;
 use App\Service\ArticleService;
 use App\Service\CategoryService;
 use Illuminate\Http\Request;
@@ -45,10 +46,10 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
          $this->articleService->store($request);
          return redirect('back/article');

@@ -8,8 +8,10 @@
 
 namespace App\Service;
 use App\Events\ForgetCacheEvent;
+use App\Repositories\ArticleRepository;
 use App\Repositories\ArticleRepositoryEloquent;
 use App\Service\Cache\CacheService;
+use App\Service\Cache\CacheServiceInterface;
 use App\Traits\DatatableTrait;
 use App\Traits\FileSystem;
 use App\Traits\MakedownTrait;
@@ -24,10 +26,10 @@ class ArticleService
 
     /**
      * ArticleService constructor.
-     * @param ArticleRepositoryEloquent $articleRepository
-     * @param ArticleService $articleService
+     * @param ArticleRepository $articleRepository
+     * @param CacheServiceInterface $cacheService
      */
-    public function __construct(ArticleRepositoryEloquent $articleRepository, CacheService $cacheService)
+    public function __construct(ArticleRepository $articleRepository, CacheServiceInterface $cacheService)
     {
         $this->articleRepository = $articleRepository;
         $this->cacheService = $cacheService;
@@ -61,6 +63,8 @@ class ArticleService
         );
         return $datatable;
     }
+
+
 
     /**
      * @param Request $request
