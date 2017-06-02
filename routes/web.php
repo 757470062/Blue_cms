@@ -55,4 +55,32 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     $router->get('/friend/edit/{id}', 'FriendController@edit');
     $router->post('/friend/update/{id}', 'FriendController@update');
     $router->get('/friend/destroy/{id}', 'FriendController@destroy');
+    //TAG all
+    $router->get('/tag', 'TagController@index');
+    $router->get('/tag/create', 'TagController@create');
+    $router->post('/tag/store', 'TagController@store');
+    $router->get('/tag/edit/{id}', 'TagController@edit');
+    $router->post('/tag/update/{id}', 'TagController@update');
+    $router->get('/tag/destroy/{id}', 'TagController@destroy');
+    //TAG Module
+    $router->get('/tag-module', 'TagModuleController@index');
+    $router->get('/tag-module/create', 'TagModuleController@create');
+    $router->post('/tag-module/store', 'TagModuleController@store');
+    $router->get('/tag-module/edit/{id}', 'TagModuleController@edit');
+    $router->post('/tag-module/update/{id}', 'TagModuleController@update');
+    $router->get('/tag-module/destroy/{id}', 'TagModuleController@destroy');
+    //图集
+    $router->get('/picture', 'PictureController@index');
+    $router->get('/picture/create', 'PictureController@create');
+    $router->post('/picture/store', 'PictureController@store');
+    $router->get('/picture/edit/{id}', 'PictureController@edit');
+    $router->post('/picture/update/{id}', 'PictureController@update');
+    $router->get('/picture/destroy/{id}', 'PictureController@destroy');
+    //图集内图片
+    $router->get('/picture-source', 'PictureSourceController@index');
+    $router->get('/picture-source/create', 'PictureSourceController@create');
+    $router->post('/picture-source/store', 'PictureSourceController@store');
+    $router->get('/picture-source/edit/{id}', 'PictureSourceController@edit');
+    $router->post('/picture-source/update/{id}', 'PictureSourceController@update');
+    $router->get('/picture-source/destroy/{id}', 'PictureSourceController@destroy');
 });

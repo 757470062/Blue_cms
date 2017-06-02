@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers\Back;
 
-use App\Events\ForgetCacheEvent;
-use App\Service\TagService;
+use App\Service\PictureService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TagController extends Controller
+class PictureController extends Controller
 {
-    /**
-     * TagController constructor.
-     * @param TagService $tagService
-     */
-    public function __construct(TagService $tagService)
+    public function __construct(PictureService $service)
     {
-        $this->tagService = $tagService;
+        $this->service = $service;
     }
 
     /**
@@ -25,8 +20,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        $datatable = $this->tagService->index();
-        return view('back.tag.index', compact('datatable'));
+        $datatable = $this->service->index();
+        return view('back.picture.index', compact('datatable'));
     }
 
     /**
@@ -36,7 +31,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('back.tag.create');
+        return view('back.picture.create');
     }
 
     /**
@@ -47,8 +42,8 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        $this->tagService->store($request);
-        return redirect('back.tag');
+        $this->service->store($request);
+        return redirect('back/picture');
     }
 
     /**
@@ -70,8 +65,8 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        $tag = $this->tagService->tagRepository->find($id);
-        return view('back.tag.edit', compact('tag'));
+        $picture = $this->service->pictureRepository->find($id);
+        return view('back.picture.edit',compact('picture'));
     }
 
     /**
@@ -83,8 +78,8 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->tagService->update($request, $id);
-        return redirect('back/tag');
+        $this->service->update($request, $id);
+        return redirect('back/picture');
     }
 
     /**
@@ -95,10 +90,7 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        $this->tagService->tagRepository->delete($id);
-        event(new ForgetCacheEvent(
-            $this->tagService->tagRepository->makeModel()
-        ));
+        $this->service->pictureRepository->delete($id);
         return redirect()->back();
     }
 }

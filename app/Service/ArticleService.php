@@ -9,8 +9,6 @@
 namespace App\Service;
 use App\Events\ForgetCacheEvent;
 use App\Repositories\ArticleRepository;
-use App\Repositories\ArticleRepositoryEloquent;
-use App\Service\Cache\CacheService;
 use App\Service\Cache\CacheServiceInterface;
 use App\Traits\DatatableTrait;
 use App\Traits\FileSystem;
@@ -22,7 +20,6 @@ use Log;
 class ArticleService
 {
     use DatatableTrait, MakedownTrait, FileSystem;
-
 
     /**
      * ArticleService constructor.
@@ -44,8 +41,6 @@ class ArticleService
         return $article;
     }
 
-
-
     /**
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -64,8 +59,6 @@ class ArticleService
         return $datatable;
     }
 
-
-
     /**
      * @param Request $request
      */
@@ -80,7 +73,6 @@ class ArticleService
         }
         event(new ForgetCacheEvent($this->articleRepository->makeModel()));
     }
-
 
     /**
      * @param Request $request

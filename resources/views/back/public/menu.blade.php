@@ -85,6 +85,13 @@
                     <li><a href="{{ url('back/article/create') }}" {{--class="active_submenu"--}}>新建文档</a></li>
                 </ul>
             </li>
+            <li><a href="#"> <i class="ti-layout-grid3-alt"></i> <span>图集管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
+                <ul class="nav nav-submenu submenu-hidden">
+                    <li><a href="{{ url('back/picture') }}" >所有图集</a></li>
+                    <li><a href="{{ url('back/picture/create') }}" {{--class="active_submenu"--}}>新建图集</a></li>
+                    <li><a href="{{ url('back/picture-source') }}" >所有图片</a></li>
+                </ul>
+            </li>
             <li><a href="#"> <i class="ti-layout-cta-left"></i> <span>模块管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
                 <ul class="nav nav-submenu submenu-hidden">
                     <li><a href="{{ url('back/module') }}" >所有模块</a></li>
@@ -95,6 +102,12 @@
                 <ul class="nav nav-submenu submenu-hidden">
                     <li><a href="{{ url('back/friend') }}" >所有合作信息</a></li>
                     <li><a href="{{ url('back/friend/create') }}" >新建合作信息</a></li>
+                </ul>
+            </li>
+            <li><a href="#"> <i class="ti-bar-chart"></i> <span>Tag管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
+                <ul class="nav nav-submenu submenu-hidden">
+                    <li><a href="{{ url('back/tag') }}" >所有TAG信息</a></li>
+                    <li><a href="{{ url('back/tag-module') }}" >信息</a></li>
                 </ul>
             </li>
             <li><a href="{{ url('back/logs') }}"> <i class="ti-palette"></i> <span>系统日志</span></a></li>

@@ -23,7 +23,7 @@ trait FileSystem
      * @param $field 所操作字段名称
      * @return array|Request
      */
-    public function putOneFile(Request $request, $field, $type = 'public'){
+    public function putOneFile(Request $request, $field = 'photo', $type = 'public'){
         $file = $request->file($field);
         $request = $request->toArray();
         if(!empty($file)){
@@ -44,8 +44,14 @@ trait FileSystem
         return \Response::file(storage_path($type.$src));
     }
 
-    public function putMoreFile($files, $type){
 
+    /**
+     * @param Request $request
+     * @param string $field
+     * @param string $type
+     */
+    public function putMoreFile(Request $request, $field = 'photo', $type = 'app\\Public\\'){
+        //TODO
     }
 
 }
