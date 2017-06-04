@@ -10,6 +10,7 @@ namespace App\Service;
 use App\Events\ForgetCacheEvent;
 use App\Repositories\ArticleRepository;
 use App\Service\Cache\CacheServiceInterface;
+use App\Traits\ButtonTrait;
 use App\Traits\DatatableTrait;
 use App\Traits\FileSystem;
 use App\Traits\MakedownTrait;
@@ -19,7 +20,7 @@ use Log;
 
 class ArticleService
 {
-    use DatatableTrait, MakedownTrait, FileSystem;
+    use DatatableTrait, MakedownTrait, FileSystem,ButtonTrait;
 
     /**
      * ArticleService constructor.
@@ -45,18 +46,14 @@ class ArticleService
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function index(){
-        $datatable=$this->getDataByBlade(
-            'data-table',
+        return $this->getDataByAjax(
             $this->cacheService->all(
-                $this->articleRepository->makeModel(), ['articleCategory', 'articleBackUser']
+                $this->articleRepository->makeModel(),
+                ['articleCategory' , 'articleBackUser']
             ),
-            ['id','articleCategory','articleBackUser','title','keys','flag_id','clicks','photo','intro'],
-            ['id','name','name'],
-            ['#','所属分类','作者','标题','关键词','Flag','点击率','缩略图','简述','操作'],
-            'back/article',
-            false
+            $this->getButton('修改', 'glyphicon glyphicon-edit btn-md', '/back/article/edit/{{ $id }}').
+            $this->getButton('删除', 'glyphicon glyphicon-trash btn-md', '/back/article/destroy/{{ $id }}')
         );
-        return $datatable;
     }
 
     /**

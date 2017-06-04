@@ -18,6 +18,7 @@ class CreatePictureSourcesTable extends Migration
             $table->integer('picture_id');
             $table->string('name');
             $table->string('src');
+            $table->text('content')->nullable();
             $table->timestamps();
 		});
 	}

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Service\Cache\CacheServiceInterface;
+use App\Service\Cache\Extend\CategoryCacheServiceInterface;
+use App\Service\CategoryService;
 use App\Service\PictureService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -20,8 +23,14 @@ class PictureController extends Controller
      */
     public function index()
     {
-        $datatable = $this->service->index();
-        return view('back.picture.index', compact('datatable'));
+        return view('back.picture.index');
+    }
+
+    /**
+     * @return \App\Traits\vista
+     */
+    public function indexData(){
+        return $this->service->index();
     }
 
     /**
@@ -29,9 +38,12 @@ class PictureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(CategoryService $categoryService)
     {
-        return view('back.picture.create');
+        $category = $categoryService->cacheService->allCacheByOption(
+            $categoryService->categoryRepository->makeModel()
+        );
+        return view('back.picture.create',compact('category'));
     }
 
     /**
@@ -63,10 +75,13 @@ class PictureController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, CategoryService $categoryService)
     {
+        $category = $categoryService->cacheService->allCacheByOption(
+            $categoryService->categoryRepository->makeModel()
+        );
         $picture = $this->service->pictureRepository->find($id);
-        return view('back.picture.edit',compact('picture'));
+        return view('back.picture.edit', compact('picture', 'category'));
     }
 
     /**

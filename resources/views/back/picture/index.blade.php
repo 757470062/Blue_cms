@@ -44,7 +44,31 @@
                     <div class="panel-body">
 
                         <div id="DataTables_Table_5_wrapper" class="dataTables_wrapper no-footer">
-                            {!! $datatable !!}
+                            <table id="back_picture_all" class="table datatable dataTable no-footer" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <td>#</td>
+                                    <td>图集名称</td>
+                                    <td>图集分类</td>
+                                    <td>TAG标签</td>
+                                    <td>缩略图</td>
+                                    <td>修改时间</td>
+                                    <td>操作</td>
+                                </tr>
+                                </thead>
+
+                                <tfoot>
+                                <tr>
+                                    <td>#</td>
+                                    <td>图集名称</td>
+                                    <td>图集分类</td>
+                                    <td>TAG标签</td>
+                                    <td>缩略图</td>
+                                    <td>修改时间</td>
+                                    <td>操作</td>
+                                </tr>
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
                 </section>

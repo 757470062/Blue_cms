@@ -26,6 +26,7 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->Middleware('auth.back:back');
     //文档
     $router->get('/article', 'ArticleController@index');
+    $router->post('/article/data', 'ArticleController@indexData');
     $router->get('/article/create', 'ArticleController@create');
     $router->post('/article/store', 'ArticleController@store');
     $router->get('/article/edit/{id}', 'ArticleController@edit');
@@ -43,6 +44,7 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     $router->get('/category/destroy/{id}', 'CategoryController@destroy');
     //模块
     $router->get('/module', 'ModuleController@index');
+    $router->post('/module/data', 'ModuleController@indexData');
     $router->get('/module/create', 'ModuleController@create');
     $router->post('/module/store', 'ModuleController@store');
     $router->get('/module/edit/{id}', 'ModuleController@edit');
@@ -50,6 +52,7 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     $router->get('/module/destroy/{id}', 'ModuleController@destroy');
     //友情链接
     $router->get('/friend', 'FriendController@index');
+    $router->post('/friend/data', 'FriendController@indexData');
     $router->get('/friend/create', 'FriendController@create');
     $router->post('/friend/store', 'FriendController@store');
     $router->get('/friend/edit/{id}', 'FriendController@edit');
@@ -71,6 +74,7 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     $router->get('/tag-module/destroy/{id}', 'TagModuleController@destroy');
     //图集
     $router->get('/picture', 'PictureController@index');
+    $router->post('/picture/data', 'PictureController@indexData');
     $router->get('/picture/create', 'PictureController@create');
     $router->post('/picture/store', 'PictureController@store');
     $router->get('/picture/edit/{id}', 'PictureController@edit');
@@ -78,8 +82,9 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     $router->get('/picture/destroy/{id}', 'PictureController@destroy');
     //图集内图片
     $router->get('/picture-source', 'PictureSourceController@index');
-    $router->get('/picture-source/create', 'PictureSourceController@create');
-    $router->post('/picture-source/store', 'PictureSourceController@store');
+    $router->post('/picture-source/data', 'PictureSourceController@indexData');
+    $router->get('/picture-source/create/{id}', 'PictureSourceController@create');
+    $router->post('/picture-source/store/{id}', 'PictureSourceController@store');
     $router->get('/picture-source/edit/{id}', 'PictureSourceController@edit');
     $router->post('/picture-source/update/{id}', 'PictureSourceController@update');
     $router->get('/picture-source/destroy/{id}', 'PictureSourceController@destroy');

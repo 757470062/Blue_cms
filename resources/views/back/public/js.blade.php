@@ -9,10 +9,7 @@
 
 <script src="/back/js/includes.js"></script>
 <script src="/back/js/sugarrush.js"></script>
-<script src="/back/js/sugarrush.tables.js"></script>
+{{--<script src="/back/js/sugarrush.tables.js"></script>--}}
 <script src="/back/js/jquery.nestable.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#nestable').nestable();
-    });
-</script>
+<script src="/back/datatables/datatables.js"></script>
+

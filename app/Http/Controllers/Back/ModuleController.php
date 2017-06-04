@@ -24,10 +24,15 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $datatable=$this->moduleService->index();
-        return view('back.module.index',compact('datatable'));
+        return view('back.module.index');
     }
 
+    /**
+     * @return \App\Traits\vista
+     */
+    public function indexData(){
+        return $this->moduleService->index();
+    }
     /**
      * Show the form for creating a new resource.
      *

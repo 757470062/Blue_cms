@@ -11,7 +11,10 @@ class Picture extends Model implements Transformable
     use TransformableTrait;
 
     protected $fillable = [
-        'name','picture_tag_id','content'
+        'name','category_id','picture_tag_id','photo','content'
     ];
 
+    public function pictureCategory(){
+        return $this->hasOne('App\Entities\Category', 'id', 'category_id');
+    }
 }

@@ -26,10 +26,15 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $datatable = $this->articleService->index();
-        return view('back.article.index', compact('datatable'));
+        return view('back.article.index');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function indexData(){
+        return $this->articleService->index();
+    }
     /**
      * Show the form for creating a new resource.
      *

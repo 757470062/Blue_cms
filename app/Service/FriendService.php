@@ -13,6 +13,7 @@ use App\Events\ForgetCacheEvent;
 use App\Repositories\FriendRepository;
 use App\Service\Cache\CacheService;
 use App\Service\Cache\CacheServiceInterface;
+use App\Traits\ButtonTrait;
 use App\Traits\DatatableTrait;
 use App\Traits\FileSystem;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ use Log;
 
 class FriendService
 {
-    use DatatableTrait, FileSystem;
+    use DatatableTrait, FileSystem, ButtonTrait;
 
 
     /**
@@ -40,19 +41,13 @@ class FriendService
      * @return \App\Traits\vista
      */
     public function index(){
-        $this->cacheService->all($this->friendRepository->makeModel());
-        $datatable=$this->getDataByBlade(
-            'data-table',
+        return $this->getDataByAjax(
             $this->cacheService->all(
                 $this->friendRepository->makeModel()
             ),
-            ['id','name','link','photo','state','sort'],
-            [],
-            ['#','合作商名称','网址','缩略图','显示状态','排序','操作'],
-            'back/friend',
-            false
+            $this->getButton('修改', 'glyphicon glyphicon-edit btn-md', '/back/friend/edit/{{ $id }}').
+            $this->getButton('删除', 'glyphicon glyphicon-trash btn-md', '/back/friend/destroy/{{ $id }}')
         );
-        return $datatable;
     }
 
     /**

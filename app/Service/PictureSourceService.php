@@ -14,11 +14,12 @@ use App\Repositories\PictureRepository;
 use App\Repositories\PictureSourceRepository;
 use App\Service\Cache\CacheServiceInterface;
 use App\Traits\DatatableTrait;
+use App\Traits\FileSystem;
 use Illuminate\Http\Request;
 
 class PictureSourceService
 {
-    use DatatableTrait;
+    use DatatableTrait, FileSystem;
 
     /**
      * PictureSourceService constructor.
@@ -46,8 +47,12 @@ class PictureSourceService
     /**
      * @param Request $request
      */
-    public function store(Request $request){
-        $pictureSource = $this->pictureSourceRepository->create($request->all());
+    public function store($id, Request $request){
+        $pictureSource = $this->pictureSourceRepository->create(
+            array_add(
+                $this->putOneFile($request, 'src'),
+                'picture_id', $id)
+        );
         if (empty($pictureSource)) abort(404, '图集图片添加失败');
         event(new ForgetCacheEvent($this->pictureSourceRepository->makeModel()));
     }
@@ -57,7 +62,7 @@ class PictureSourceService
      * @param $id
      */
     public function update(Request $request, $id){
-        $pictureSource = $this->pictureSourceRepository->find($id)->update($request->all());
+        $pictureSource = $this->pictureSourceRepository->find($id)->update($this->putOneFile($request));
         if (empty($pictureSource)) abort(404, '图集图片资源修改失败');
         event(new ForgetCacheEvent($this->pictureSourceRepository->makeModel()));
     }

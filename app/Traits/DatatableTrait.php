@@ -8,11 +8,20 @@
 
 namespace App\Traits;
 
+use Yajra\Datatables\Facades\Datatables;
 
 Trait DatatableTrait
 {
-    public function getDataByAjax(){
-        //TODO ...
+    /**
+     * ajax get data
+     * @param $data //数据
+     * @param $action //button
+     * @return mixed
+     */
+    public function getDataByAjax($data, $action){
+        return  Datatables::of($data)
+            ->addColumn('action', $action)
+            ->make(true);
     }
 
 

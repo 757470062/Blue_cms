@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="shortcut icon" href="src/img/favicon.ico">
     <title>Blue Cms - 系统后台</title>
     @include('back.public.css')
 </head>
@@ -44,7 +43,37 @@
                     <div class="panel-body">
 
                         <div id="DataTables_Table_5_wrapper" class="dataTables_wrapper no-footer">
-                         {!! $datatable !!}
+                            <table id="back_article_all" class="table datatable dataTable no-footer" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                <td>#</td>
+                                <td>分类</td>
+                                <td>标题</td>
+                                <td>作者</td>
+                                <td>关键词</td>
+                                <td>Flag</td>
+                                <td>点击率</td>
+                                <td>缩略图</td>
+                                <td>修改时间</td>
+                                <td>操作</td>
+                                </tr>
+                                </thead>
+
+                                <tfoot>
+                                <tr>
+                                    <td>#</td>
+                                    <td>分类</td>
+                                    <td>标题</td>
+                                    <td>作者</td>
+                                    <td>关键词</td>
+                                    <td>Flag</td>
+                                    <td>点击率</td>
+                                    <td>缩略图</td>
+                                    <td>修改时间</td>
+                                    <td>操作</td>
+                                </tr>
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
                 </section>

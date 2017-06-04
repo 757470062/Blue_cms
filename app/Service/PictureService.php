@@ -12,12 +12,14 @@ namespace App\Service;
 use App\Events\ForgetCacheEvent;
 use App\Repositories\PictureRepository;
 use App\Service\Cache\CacheServiceInterface;
+use App\Traits\ButtonTrait;
 use App\Traits\DatatableTrait;
+use App\Traits\FileSystem;
 use Illuminate\Http\Request;
 
 class PictureService
 {
-    use DatatableTrait;
+    use DatatableTrait, FileSystem, ButtonTrait;
 
     /**
      * PictureService constructor.
@@ -34,14 +36,14 @@ class PictureService
      * @return \App\Traits\vista
      */
     public function index(){
-        return  $this->getDataByBlade(
-            'data-table',
-            $this->cacheService->all($this->pictureRepository->makeModel(), ['pictureSourcePicture']),
-            ['id','name','picture_tag_id','src'],
-            [],
-            ['#','图集名称','图片标签','图集描述','操作'],
-            'back/picture',
-            false
+        return  $this->getDataByAjax(
+            $this->cacheService->all(
+                $this->pictureRepository->makeModel(),
+                ['pictureCategory']
+            ),
+            $this->getButton('添加图片', 'glyphicon glyphicon-edit btn-md', '/back/picture-source/create/{{ $id }}').
+            $this->getButton('修改', 'glyphicon glyphicon-edit btn-md', '/back/picture/edit/{{ $id }}').
+            $this->getButton('删除', 'glyphicon glyphicon-trash btn-md', '/back/picture/destroy/{{ $id }}')
         );
     }
 
@@ -49,7 +51,7 @@ class PictureService
      * @param Request $request
      */
     public function store(Request $request){
-        $picture = $this->pictureRepository->create($request->all());
+        $picture = $this->pictureRepository->create($this->putOneFile($request));
         if (empty($picture)) abort(404, '新建图集失败');
         event(new ForgetCacheEvent($this->pictureRepository->makeModel()));
     }
@@ -59,7 +61,7 @@ class PictureService
      * @param $id
      */
     public function update(Request $request, $id){
-        $picture = $this->pictureRepository->find($id)->update($request->all());
+        $picture = $this->pictureRepository->find($id)->update($this->putOneFile($request));
         if (empty($picture)) abort(404, '修改图集失败');
         event(new ForgetCacheEvent($this->pictureRepository->makeModel()));
     }

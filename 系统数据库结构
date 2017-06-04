@@ -33,8 +33,8 @@ Database
 title name type   min  max   text
 
 12、PictureSource   图集资源
-                    picture_id name  src
-    Picture         name  picture_tag_id content
+                    picture_id name  src content
+    Picture         name category_id picture_tag_id photo content
 
 13、VidioSource     视频模块
                     vidio_id name content definition size src

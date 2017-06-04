@@ -28,10 +28,15 @@ class FriendController extends Controller
      */
     public function index()
     {
-        $datatable = $this->friendService->index();
-        return view('back.friend.index', compact('datatable'));
+        return view('back.friend.index');
     }
 
+    /**
+     * @return \App\Traits\vista
+     */
+    public function indexData(){
+        return $this->friendService->index();
+    }
     /**
      * Show the form for creating a new resource.
      *

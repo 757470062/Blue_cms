@@ -12,6 +12,7 @@ namespace App\Service;
 use App\Events\ForgetCacheEvent;
 use App\Repositories\ModuleRepository;
 use App\Service\Cache\CacheServiceInterface;
+use App\Traits\ButtonTrait;
 use App\Traits\DatatableTrait;
 use Illuminate\Http\Request;
 use Cache;
@@ -19,7 +20,7 @@ use Log;
 
 class ModuleService
 {
-    use DatatableTrait;
+    use DatatableTrait, ButtonTrait;
 
 
     /**
@@ -38,17 +39,13 @@ class ModuleService
      * @return \App\Traits\vista
      */
     public function index(){
-        $data = $this->cacheService->all($this->moduleRepository->makeModel());
-        $datatable=$this->getDataByBlade(
-            'data-table',
-            $data,
-            ['id','name','list','article','cover'],
-            ['id','category_id'],
-            ['#','分类名称','列表模板','文档模板','封面模板','操作'],
-            'back/module',
-            false
-        );
-        return $datatable;
+       return $this->getDataByAjax(
+           $this->cacheService->all(
+               $this->moduleRepository->makeModel()
+           ),
+           $this->getButton('修改', 'glyphicon glyphicon-edit btn-md', '/back/module/edit/{{ $id }}').
+           $this->getButton('删除', 'glyphicon glyphicon-trash btn-md', '/back/module/destroy/{{ $id }}')
+       );
     }
 
 
