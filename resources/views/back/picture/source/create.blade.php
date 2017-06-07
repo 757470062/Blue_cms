@@ -49,11 +49,11 @@
                                 <input type="text" name="name" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label>缩略图:</label>
+                                <label>上传图片:</label>
                                 <input type="file" name="src" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label class="col-md-2" >简述:</label>
+                                <label class="col-md-2" >图片描述:</label>
                                 <textarea name="content" class="form-control"></textarea>
                             </div>
                             <button type="submit" class="btn btn-default">提交</button>

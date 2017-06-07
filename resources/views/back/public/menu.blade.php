@@ -92,6 +92,19 @@
                     <li><a href="{{ url('back/picture-source') }}" >所有图片</a></li>
                 </ul>
             </li>
+            <li><a href="#"> <i class="ti-layout-grid3-alt"></i> <span>视频管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
+                <ul class="nav nav-submenu submenu-hidden">
+                    <li><a href="{{ url('back/picture') }}" >所有视频</a></li>
+                    <li><a href="{{ url('back/picture/create') }}" {{--class="active_submenu"--}}>新建视频</a></li>
+                    <li><a href="{{ url('back/picture-source') }}" >视频列表</a></li>
+                </ul>
+            </li>
+            <li><a href="#"> <i class="ti-layout-grid3-alt"></i> <span>资料管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
+                <ul class="nav nav-submenu submenu-hidden">
+                    <li><a href="{{ url('back/download') }}" >所有资料</a></li>
+                    <li><a href="{{ url('back/download/create') }}" {{--class="active_submenu"--}}>上传资料</a></li>
+                </ul>
+            </li>
             <li><a href="#"> <i class="ti-layout-cta-left"></i> <span>模块管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
                 <ul class="nav nav-submenu submenu-hidden">
                     <li><a href="{{ url('back/module') }}" >所有模块</a></li>
@@ -104,6 +117,7 @@
                     <li><a href="{{ url('back/friend/create') }}" >新建合作信息</a></li>
                 </ul>
             </li>
+
             <li><a href="#"> <i class="ti-bar-chart"></i> <span>Tag管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
                 <ul class="nav nav-submenu submenu-hidden">
                     <li><a href="{{ url('back/tag') }}" >所有TAG信息</a></li>

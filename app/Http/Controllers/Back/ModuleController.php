@@ -11,6 +11,10 @@ use App\Http\Controllers\Controller;
 class ModuleController extends Controller
 {
 
+    /**
+     * ModuleController constructor.
+     * @param ModuleService $moduleService
+     */
     public function __construct(ModuleService $moduleService)
     {
         $this->moduleService=$moduleService;

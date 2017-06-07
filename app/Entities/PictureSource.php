@@ -10,8 +10,10 @@ class PictureSource extends Model implements Transformable
 {
     use TransformableTrait;
 
+    public $table = 'picture_sources';
+
     protected $fillable = [
-        'picture_id','name','src'
+        'picture_id','name','src','content'
     ];
 
     /**

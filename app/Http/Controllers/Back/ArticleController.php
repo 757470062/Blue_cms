@@ -103,8 +103,4 @@ class ArticleController extends Controller
           return redirect()->back();
     }
 
-
-    public function showPhoto($src){
-        return $this->articleService->getOneFile($src);
-    }
 }

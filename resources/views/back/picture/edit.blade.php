@@ -58,7 +58,7 @@
                             <div class="form-group">
                                 <label>缩略图:</label>
                                 <input type="file" name="photo"  class="form-control">
-                                <img src="{{ url('back/article/photo/'.$picture->photo) }}" width="150" height="100" style="border: 1px solid #ccc;">
+                                <img src="{{ url('back/photo/public/'.$picture->photo) }}" width="150" height="100" style="border: 1px solid #ccc;">
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2" >简述:</label>

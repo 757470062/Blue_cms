@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="src/img/favicon.ico">
     <title>Blue Cms - 系统后台</title>
     @include('back.public.css')
 </head>
@@ -41,28 +42,20 @@
                         <h4 class="panel-title">新建图集</h4>
                     </header>
                     <div class="panel-body">
-                        <form action="{{ url('back/picture/update/'.$picture->id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('back/picture-source/update/'.$pictureSource->id) }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label class="col-md-2" >图集名称:</label>
-                                <input type="text" name="name" value="{{ $picture->name }}" class="form-control">
+                                <label class="col-md-2" >图片名称:</label>
+                                <input type="text" name="name" value="{{ $pictureSource->name }}" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label class="col-md-2" >分类:</label>
-                                {!! $category !!}
+                                <label>上传图片:</label>
+                                <input type="file" name="src" class="form-control">
+                                <img src="{{ url('back/photo/public/'.$pictureSource->src) }}" width="150" height="100" style="border: 1px solid #ccc;">
                             </div>
                             <div class="form-group">
-                                <label class="col-md-2" >TAG标签:</label>
-                                <input type="text" name="picture_tag_id" value="{{ $picture->picture_tag_id }}" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>缩略图:</label>
-                                <input type="file" name="photo"  class="form-control">
-                                <img src="{{ url('back/article/photo/'.$picture->photo) }}" width="150" height="100" style="border: 1px solid #ccc;">
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2" >简述:</label>
-                                <textarea name="content" class="form-control">{{ $picture->content }}</textarea>
+                                <label class="col-md-2" >图片描述:</label>
+                                <textarea name="content" class="form-control">{{ $pictureSource->content }}</textarea>
                             </div>
                             <button type="submit" class="btn btn-default">提交</button>
                             <button type="reset" class="btn btn-danger">重置</button>

@@ -11,8 +11,13 @@ use App\Http\Controllers\Controller;
 
 class PictureController extends Controller
 {
+    /**
+     * PictureController constructor.
+     * @param PictureService $service
+     */
     public function __construct(PictureService $service)
     {
+        $this->middleware('auth.back:back');
         $this->service = $service;
     }
 

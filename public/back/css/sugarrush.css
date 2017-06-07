@@ -3464,9 +3464,14 @@ ol.icon-bolt li:before {
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  color: #ffffff;
-  background-color: #bd5151;
-  border-color: #bd5151;
+  color: #adb8ca;
+  background-color: #1a2a42;
+  border-color: #1a2a42;
+  /*
+    color: #ffffff;
+    background-color: #bd5151;
+    border-color: #bd5151;
+  */
 }
 .bordered-panel {
   border: none;

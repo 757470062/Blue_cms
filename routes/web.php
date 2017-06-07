@@ -22,6 +22,8 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     $router->post('login', 'UserController@login');
     $router->post('logout', 'UserController@logout');
     $router->get('/', 'BackController@index');
+    //public 图片获取
+    $router->get('/photo/public/{src}', 'PublicController@getPublicPhoto');
     //日志
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->Middleware('auth.back:back');
     //文档
@@ -32,7 +34,6 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     $router->get('/article/edit/{id}', 'ArticleController@edit');
     $router->post('/article/update/{id}', 'ArticleController@update');
     $router->get('/article/destroy/{id}', 'ArticleController@destroy');
-    $router->get('/article/photo/{src}', 'ArticleController@showPhoto');
     //分类
     $router->get('/category', 'CategoryController@index');
     $router->get('/category/create', 'CategoryController@create');
@@ -88,4 +89,12 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     $router->get('/picture-source/edit/{id}', 'PictureSourceController@edit');
     $router->post('/picture-source/update/{id}', 'PictureSourceController@update');
     $router->get('/picture-source/destroy/{id}', 'PictureSourceController@destroy');
+    //资料管理
+    $router->get('/download', 'DownloadController@index');
+    $router->post('/download/data', 'DownloadController@indexData');
+    $router->get('/download/create', 'DownloadController@create');
+    $router->post('/download/store', 'DownloadController@store');
+    $router->get('/download/edit/{id}', 'DownloadController@edit');
+    $router->post('/download/update/{id}', 'DownloadController@update');
+    $router->get('/download/destroy/{id}', 'DownloadController@destroy');
 });

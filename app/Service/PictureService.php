@@ -41,7 +41,8 @@ class PictureService
                 $this->pictureRepository->makeModel(),
                 ['pictureCategory']
             ),
-            $this->getButton('添加图片', 'glyphicon glyphicon-edit btn-md', '/back/picture-source/create/{{ $id }}').
+            $this->getButton('查看图集', 'glyphicon glyphicon-save btn-md', 'back/picture-source/{{ $id }}').
+            $this->getButton('添加图片', 'glyphicon glyphicon-open btn-md', '/back/picture-source/create/{{ $id }}').
             $this->getButton('修改', 'glyphicon glyphicon-edit btn-md', '/back/picture/edit/{{ $id }}').
             $this->getButton('删除', 'glyphicon glyphicon-trash btn-md', '/back/picture/destroy/{{ $id }}')
         );

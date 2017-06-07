@@ -27,7 +27,7 @@ var language = {
         "sSortDescending": ": 以降序排列此列"
     }
 };
-//
+//请求类型
 var type = 'post';
 //laravel csrf_token
 var headers = {
@@ -35,7 +35,13 @@ var headers = {
 };
 
 $(document).ready( function () {
+    //nestable
 
+    $('#nestable').nestable();
+
+    /*
+     * datatables
+     */
     //get all article
     $('#back_article_all').DataTable( {
         //语言设置
@@ -53,13 +59,13 @@ $(document).ready( function () {
         //设置列
         "columns": [
             {'data':'id'},
-            {'data':'article_category.name'},
-            {'data':'title'},
-            {'data':'article_back_user.name'},
-            {'data':'keys'},
-            {'data':'flag_id'},
+            {'data':'article_category.name', 'orderable': false},
+            {'data':'title', 'orderable': false},
+            {'data':'article_back_user.name', 'orderable': false},
+            {'data':'keys', 'orderable': false},
+            {'data':'flag_id', 'orderable': false},
             {'data':'clicks'},
-            {'data':'photo'},
+            {'data':'photo', 'orderable': false, 'searchable': false},
             {'data':'updated_at'},
             {'data': 'action', 'orderable': false, 'searchable': false}
         ],
@@ -121,7 +127,7 @@ $(document).ready( function () {
         //延迟处理数据
         "deferRender": true
     } );
-    //get all Module
+    //get all picture
     $('#back_picture_all').DataTable( {
         //语言设置
         "language": language,
@@ -142,6 +148,66 @@ $(document).ready( function () {
             {'data':'picture_category.name'},
             {'data':'picture_tag_id'},
             {'data':'photo'},
+            {'data':'updated_at'},
+            {'data': 'action', 'orderable': false, 'searchable': false}
+        ],
+        //延迟处理数据
+        "deferRender": true
+    } );
+    //get all picture source
+    $('#back_picture_source_all').DataTable( {
+        //语言设置
+        "language": language,
+        "processing": true,
+        //开启服务器模式
+        "serverSide": true,
+        //ajax数据
+        "ajax": {
+            "url":"/back/picture-source/data",
+            "type":type,
+            "dataSrc": "data",
+            "headers":headers
+        },
+        //设置列
+        "columns": [
+            {'data':'id'},
+            {'data':'picture_source_picture.name'},
+            {'data':'name'},
+            {'data':'src'},
+            {'data':'content'},
+            {'data':'updated_at'},
+            {'data': 'action', 'orderable': false, 'searchable': false}
+        ],
+        //延迟处理数据
+        "deferRender": true
+    } );
+
+    //get all download
+    $('#back_download_all').DataTable( {
+        //语言设置
+        "language": language,
+        "processing": true,
+        //开启服务器模式
+        "serverSide": true,
+        //ajax数据
+        "ajax": {
+            "url":"/back/download/data",
+            "type":type,
+            "dataSrc": "data",
+            "headers":headers
+        },
+        //设置列
+        "columns": [
+            {'data':'id'},
+            {'data':'name'},
+            {'data':'down_load_category.name'},
+            {'data':'download_tag_id'},
+            {'data':'photo','orderable': false},
+            {'data':'state'},
+            {'data':'sky_drive_name'},
+            {'data':'sky_drive_src','orderable': false},
+            {'data':'sky_drive_psw','orderable': false},
+            {'data':'src','orderable': false},
             {'data':'updated_at'},
             {'data': 'action', 'orderable': false, 'searchable': false}
         ],

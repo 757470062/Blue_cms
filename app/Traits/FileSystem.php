@@ -33,7 +33,6 @@ trait FileSystem
         return $request;
     }
 
-
     /**
      * 获取单个文件
      * @param $src
@@ -47,11 +46,24 @@ trait FileSystem
 
     /**
      * @param Request $request
-     * @param string $field
-     * @param string $type
+     * @param array $field  数据库字段
+     * @param string $type  配置文件夹
+     * @return array|Request
      */
-    public function putMoreFile(Request $request, $field = 'photo', $type = 'app\\Public\\'){
-        //TODO
+    public function putMoreFile(Request $request, $field = [], $type = 'public'){
+        $data = [];
+        for ($i=0; $i < count($field); $i++){
+            if (empty($request->file($field[$i]))){
+                $data[$field[$i]] = '';
+            }else {
+                $data[$field[$i]] = array_get($this->putOneFile($request, $field[$i], $type), $field[$i]);
+            }
+        }
+        $request = $request->toArray();
+        foreach ($data as $k => $v){
+            if (!empty($v)) $request = array_add(array_except($request, $k), $k, $v);
+        }
+        return $request;
     }
 
 }

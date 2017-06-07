@@ -13,13 +13,14 @@ use App\Events\ForgetCacheEvent;
 use App\Repositories\PictureRepository;
 use App\Repositories\PictureSourceRepository;
 use App\Service\Cache\CacheServiceInterface;
+use App\Traits\ButtonTrait;
 use App\Traits\DatatableTrait;
 use App\Traits\FileSystem;
 use Illuminate\Http\Request;
 
 class PictureSourceService
 {
-    use DatatableTrait, FileSystem;
+    use DatatableTrait, FileSystem, ButtonTrait;
 
     /**
      * PictureSourceService constructor.
@@ -33,14 +34,13 @@ class PictureSourceService
     }
 
     public function index(){
-        return $this->getDataByBlade(
-            'data-table',
-            $this->cacheService->all($this->pictureSourceRepository->makeModel(), ['pictureSourcePicture']),
-            ['id','pictureSourcePicture','name','src'],
-            ['id','name'],
-            ['#','所在图集','图片名称','图片地址','操作'],
-            'back/picture-source',
-            false
+        return $this->getDataByAjax(
+            $this->cacheService->all(
+                $this->pictureSourceRepository->makeModel(),
+                ['pictureSourcePicture']
+            ),
+            $this->getButton('修改', 'glyphicon glyphicon-edit btn-md', '/back/picture-source/edit/{{ $id }}').
+            $this->getButton('删除', 'glyphicon glyphicon-trash btn-md', '/back/picture-source/destroy/{{ $id }}')
         );
     }
 
@@ -62,7 +62,7 @@ class PictureSourceService
      * @param $id
      */
     public function update(Request $request, $id){
-        $pictureSource = $this->pictureSourceRepository->find($id)->update($this->putOneFile($request));
+        $pictureSource = $this->pictureSourceRepository->find($id)->update($this->putOneFile($request, 'src'));
         if (empty($pictureSource)) abort(404, '图集图片资源修改失败');
         event(new ForgetCacheEvent($this->pictureSourceRepository->makeModel()));
     }

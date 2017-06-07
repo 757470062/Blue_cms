@@ -15,6 +15,7 @@ class TagController extends Controller
      */
     public function __construct(TagService $tagService)
     {
+        $this->middleware('auth.back:back');
         $this->tagService = $tagService;
     }
 

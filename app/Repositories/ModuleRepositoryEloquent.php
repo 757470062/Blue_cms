@@ -9,16 +9,13 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\ModuleRepository;
 use App\Entities\Module;
 use App\Validators\ModuleValidator;
-use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class ModuleRepositoryEloquent
  * @package namespace App\Repositories;
  */
-class ModuleRepositoryEloquent extends BaseRepository implements ModuleRepository,CacheableInterface
+class ModuleRepositoryEloquent extends BaseRepository implements ModuleRepository
 {
-    use CacheableRepository;
-
 
     /**
      * Specify Model class name

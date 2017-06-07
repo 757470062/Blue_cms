@@ -28,7 +28,7 @@
     }
     .dd-handle:hover { color: #2ea8e5; background: #fff; }
 
-    .dd-item > button { display: block; position: relative; cursor: pointer; float: left; width: 25px; height: 20px; margin: 5px 0; padding: 0; text-indent: 100%; white-space: nowrap; overflow: hidden; border: 0; background: transparent; font-size: 12px; line-height: 1; text-align: center; font-weight: bold; }
+    .dd-item > button { display: block; position: relative; cursor: pointer; float: left; width: 25px; height: 20px; margin: 10px 0; padding: 0; text-indent: 100%; white-space: nowrap; overflow: hidden; border: 0; background: transparent; font-size: 12px; line-height: 1; text-align: center; font-weight: bold; }
     .dd-item > button:before { content: '+'; display: block; position: absolute; width: 100%; text-align: center; text-indent: 0; }
     .dd-item > button[data-action="collapse"]:before { content: '-'; }
 
@@ -124,7 +124,7 @@
      *Blue 右侧扩展菜单
      */
     .dd-handle .left{
-        width: 50%;float: left;
+        width: 50%;float: left;line-height: 30px;
     }
     .dd-handle .right{
         width: 20%;float: right;overflow: hidden;

@@ -52,9 +52,7 @@ class CategoryService
      */
     public function store(Request $request){
         $category=$this->categoryRepository->create(array_add($request->toArray(),'parent_id',0));
-        if (empty($category)){
-            abort(500,'创建'.$request->name.'分类失败');
-        }
+        if (empty($category)) abort(404,'创建'.$request->name.'分类失败');
         event(new ForgetCacheEvent(
             $this->categoryRepository->makeModel(),
             $this->cacheService->getAllowedAdd())
@@ -67,9 +65,7 @@ class CategoryService
      */
     public function storeChild(Request $request, $parent_id){
         $category=$this->categoryRepository->create(array_add($request->toArray(),'parent_id',$parent_id));
-        if (empty($category)){
-            abort(500,'为ID：'.$parent_id.'的分类创建子分类失败。');
-        }
+        if (empty($category)) abort(404,'为ID：'.$parent_id.'的分类创建子分类失败。');
         event(new ForgetCacheEvent(
                 $this->categoryRepository->makeModel(),
                 $this->cacheService->getAllowedAdd())

@@ -9,8 +9,13 @@ use App\Http\Controllers\Controller;
 
 class PictureSourceController extends Controller
 {
+    /**
+     * PictureSourceController constructor.
+     * @param PictureSourceService $service
+     */
     public function __construct(PictureSourceService $service)
     {
+        $this->middleware('auth.back:back');
         $this->service = $service;
     }
 
@@ -21,8 +26,14 @@ class PictureSourceController extends Controller
      */
     public function index()
     {
-        $datatable = $this->service->index();
-        return view('back.picture.source.index',compact('datatable'));
+        return view('back.picture.source.index');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function indexData(){
+        return $this->service->index();
     }
 
     /**
@@ -44,7 +55,7 @@ class PictureSourceController extends Controller
     public function store($id, Request $request)
     {
         $this->service->store($id,$request);
-        return redirect('back/picture-source');
+        return redirect('back/picture-source/$id');
     }
 
     /**

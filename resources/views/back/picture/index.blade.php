@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="shortcut icon" href="src/img/favicon.ico">
     <title>Blue Cms - 系统后台</title>
     @include('back.public.css')
 </head>
@@ -39,7 +38,7 @@
             <div class="row">
                 <section class="panel panel-danger">
                     <header class="panel-heading">
-                        <h4 class="panel-title">模块列表</h4>
+                        <h4 class="panel-title">所有图集</h4>
                     </header>
                     <div class="panel-body">
 

@@ -65,9 +65,7 @@ class ArticleService
                 $this->putOneFile($request, 'photo')
             )
         );
-        if (empty($article)) {
-            abort(400,'添加失败');
-        }
+        if (empty($article)) abort(404,'添加失败');
         event(new ForgetCacheEvent($this->articleRepository->makeModel()));
     }
 
@@ -82,9 +80,7 @@ class ArticleService
                 $this->putOneFile($request, 'photo')
             )
         );
-        if (empty($article)){
-            abort(400,'修改失败');
-        }
+        if (empty($article)) abort(404,'修改失败');
         event(new ForgetCacheEvent($this->articleRepository->makeModel()));
     }
 

@@ -57,9 +57,7 @@ class FriendService
         $friend = $this->friendRepository->create(
             $this->putOneFile($request, 'photo')
         );
-        if (empty($friend)){
-            abort(404, '新建友情链接失败');
-        }
+        if (empty($friend)) abort(404, '新建友情链接失败');
        event(new ForgetCacheEvent($this->friendRepository->makeModel()));
     }
 
@@ -72,9 +70,7 @@ class FriendService
         $friend = $this->friendRepository->find($id)->update(
             $this->putOneFile($request, 'photo')
         );
-        if (empty($friend)){
-            abort(404, '修改ID：'.$id.'的友情链接未成功');
-        }
+        if (empty($friend)) abort(404, '修改ID：'.$id.'的友情链接未成功');
         event(new ForgetCacheEvent($this->friendRepository->makeModel()));
     }
 

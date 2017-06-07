@@ -16,7 +16,7 @@ Database
                 name content link   photo  state  sort
 
 6、Download   资料共享下载
-                name download_tag_id type size from sky_drive_name sky_drive_src sky_drive_psw  content src photo state  sort
+                name category_id download_tag_id type size from sky_drive_name sky_drive_src sky_drive_psw  content src photo state  sort
 
 7、UserInfo 用户基本信息
 

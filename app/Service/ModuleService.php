@@ -54,9 +54,7 @@ class ModuleService
      */
     public function store(Request $request){
         $module=$this->moduleRepository->create($request->all());
-        if(empty($module)){
-            abort(400,'新建模块出错');
-        }
+        if(empty($module)) abort(404,'新建模块出错');
         event(new ForgetCacheEvent($this->moduleRepository->makeModel()));
     }
 
@@ -66,9 +64,7 @@ class ModuleService
      */
     public function update(Request $request, $id){
         $module=$this->moduleRepository->find($id)->update($request->all());
-        if(empty($module)){
-            abort(400,'修改ID：'.$id.'模块出错');
-        }
+        if(empty($module)) abort(404,'修改ID：'.$id.'模块出错');
         event(new ForgetCacheEvent($this->moduleRepository->makeModel()));
     }
 
