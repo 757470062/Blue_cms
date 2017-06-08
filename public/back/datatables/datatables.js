@@ -33,10 +33,11 @@ var type = 'post';
 var headers = {
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 };
+//默认排序
+var order = [[ 0, "desc" ]];
 
 $(document).ready( function () {
     //nestable
-
     $('#nestable').nestable();
 
     /*
@@ -70,7 +71,9 @@ $(document).ready( function () {
             {'data': 'action', 'orderable': false, 'searchable': false}
         ],
         //延迟处理数据
-        "deferRender": true
+        "deferRender": true,
+        //默认排序
+        "order": order
     } );
     //get all friend
     $('#back_friend_all').DataTable( {
@@ -98,7 +101,9 @@ $(document).ready( function () {
             {'data': 'action', 'orderable': false, 'searchable': false}
         ],
         //延迟处理数据
-        "deferRender": true
+        "deferRender": true,
+        //默认排序
+        "order": order
     } );
     //get all Module
     $('#back_module_all').DataTable( {
@@ -125,7 +130,9 @@ $(document).ready( function () {
             {'data': 'action', 'orderable': false, 'searchable': false}
         ],
         //延迟处理数据
-        "deferRender": true
+        "deferRender": true,
+        //默认排序
+        "order": order
     } );
     //get all picture
     $('#back_picture_all').DataTable( {
@@ -152,7 +159,9 @@ $(document).ready( function () {
             {'data': 'action', 'orderable': false, 'searchable': false}
         ],
         //延迟处理数据
-        "deferRender": true
+        "deferRender": true,
+        //默认排序
+        "order": order
     } );
     //get all picture source
     $('#back_picture_source_all').DataTable( {
@@ -179,7 +188,9 @@ $(document).ready( function () {
             {'data': 'action', 'orderable': false, 'searchable': false}
         ],
         //延迟处理数据
-        "deferRender": true
+        "deferRender": true,
+        //默认排序
+        "order": order
     } );
 
     //get all download
@@ -212,7 +223,72 @@ $(document).ready( function () {
             {'data': 'action', 'orderable': false, 'searchable': false}
         ],
         //延迟处理数据
-        "deferRender": true
+        "deferRender": true,
+        //默认排序
+        "order": order
+    } );
+
+    //get all vidio 视频集
+    $('#back_vidio_all').DataTable( {
+        //语言设置
+        "language": language,
+        "processing": true,
+        //开启服务器模式
+        "serverSide": true,
+        //ajax数据
+        "ajax": {
+            "url":"/back/vidio/data",
+            "type":type,
+            "dataSrc": "data",
+            "headers":headers
+        },
+        //设置列
+        "columns": [
+            {'data':'id'},
+            {'data':'name'},
+            {'data':'vidio_category.name'},
+            {'data':'vidio_tag_id'},
+            {'data':'photo','orderable': false},
+            {'data':'intro','orderable': false},
+            {'data':'updated_at','orderable': false},
+            {'data': 'action', 'orderable': false, 'searchable': false}
+        ],
+        //延迟处理数据
+        "deferRender": true,
+        //默认排序
+        "order": order
+    } );
+    //get all vidio_source 视频集
+    $('#back_vidio_source_all').DataTable( {
+        //语言设置
+        "language": language,
+        "processing": true,
+        //开启服务器模式
+        "serverSide": true,
+        //ajax数据
+        "ajax": {
+            "url":"/back/vidio-source/data",
+            "type":type,
+            "dataSrc": "data",
+            "headers":headers
+        },
+        //设置列
+        "columns": [
+            {'data':'id'},
+            {'data':'name'},
+            {'data':'vidio_source_vidio.name'},
+            {'data':'definition'},
+            {'data':'size'},
+            {'data':'photo','orderable': false},
+            {'data':'src','orderable': false},
+            {'data':'intro','orderable': false},
+            {'data':'updated_at','orderable': false},
+            {'data': 'action', 'orderable': false, 'searchable': false}
+        ],
+        //延迟处理数据
+        "deferRender": true,
+        //默认排序
+        "order": order
     } );
 
 

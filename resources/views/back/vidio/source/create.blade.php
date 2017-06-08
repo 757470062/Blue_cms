@@ -23,7 +23,7 @@
         <section id="page-title" class="row">
 
             <div class="col-md-8">
-                <h1>图集管理</h1>
+                <h1>视频管理</h1>
             </div>
 
             <div class="col-md-4">
@@ -39,22 +39,50 @@
             <div class="row">
                 <section class="panel panel-danger">
                     <header class="panel-heading">
-                        <h4 class="panel-title">新建图集</h4>
+                        <h4 class="panel-title">添加视频</h4>
                     </header>
                     <div class="panel-body">
-                        <form action="{{ url('back/picture-source/store/'.$id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('back/vidio-source/store/'.$id) }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label class="col-md-2" >图片名称:</label>
+                                <label class="col-md-2" >视频名称:</label>
                                 <input type="text" name="name" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label>上传图片:</label>
+                                <label class="col-md-2" >清晰度:</label>
+                                <select name="definition" class="form-control">
+                                    <option value="">请选择视频清晰度</option>
+                                    <option value="4K">4K</option>
+                                    <option value="1080P">1080P</option>
+                                    <option value="720P">720P</option>
+                                    <option value="480P">480P</option>
+                                    <option value="360P">360P</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2" >大小:</label>
+                                <input type="text" name="size" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>缩略图:</label>
+                                <input type="file" name="photo" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>上传视频:</label>
                                 <input type="file" name="src" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label class="col-md-2" >图片描述:</label>
-                                <textarea name="content" class="form-control"></textarea>
+                                <label class="col-md-2" >视频描述:</label>
+                                <textarea name="intro" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2" >内容:</label>
+                                <div id="mdeditor">
+                                    {!! editor_css() !!}
+                                    <textarea name="content" class="form-control"></textarea>
+                                    {!! editor_js() !!}
+                                    {!! editor_config('mdeditor') !!}
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-default">提交</button>
                             <button type="reset" class="btn btn-danger">重置</button>

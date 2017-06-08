@@ -37,8 +37,8 @@ title name type   min  max   text
     Picture         name category_id picture_tag_id photo content
 
 13、VidioSource     视频模块
-                    vidio_id name content definition size src
-    vidio           name vidio_tag_id content
+                    vidio_id name definition size src photo intro  content code
+    vidio           name category_id vidio_tag_id photo intro content code
 
 Cache
 

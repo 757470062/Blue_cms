@@ -89,6 +89,22 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     $router->get('/picture-source/edit/{id}', 'PictureSourceController@edit');
     $router->post('/picture-source/update/{id}', 'PictureSourceController@update');
     $router->get('/picture-source/destroy/{id}', 'PictureSourceController@destroy');
+    //视频集
+    $router->get('/vidio', 'VidioController@index');
+    $router->post('/vidio/data', 'VidioController@indexData');
+    $router->get('/vidio/create', 'VidioController@create');
+    $router->post('/vidio/store', 'VidioController@store');
+    $router->get('/vidio/edit/{id}', 'VidioController@edit');
+    $router->post('/vidio/update/{id}', 'VidioController@update');
+    $router->get('/vidio/destroy/{id}', 'VidioController@destroy');
+    //视频集内视频
+    $router->get('/vidio-source', 'VidioSourceController@index');
+    $router->post('/vidio-source/data', 'VidioSourceController@indexData');
+    $router->get('/vidio-source/create/{id}', 'VidioSourceController@create');
+    $router->post('/vidio-source/store/{id}', 'VidioSourceController@store');
+    $router->get('/vidio-source/edit/{id}', 'VidioSourceController@edit');
+    $router->post('/vidio-source/update/{id}', 'VidioSourceController@update');
+    $router->get('/vidio-source/destroy/{id}', 'VidioSourceController@destroy');
     //资料管理
     $router->get('/download', 'DownloadController@index');
     $router->post('/download/data', 'DownloadController@indexData');

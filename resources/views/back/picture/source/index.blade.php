@@ -23,7 +23,7 @@
         <section id="page-title" class="row">
 
             <div class="col-md-8">
-                <h1>模块管理</h1>
+                <h1>图集管理</h1>
             </div>
 
             <div class="col-md-4">

@@ -94,9 +94,9 @@
             </li>
             <li><a href="#"> <i class="ti-layout-grid3-alt"></i> <span>视频管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
                 <ul class="nav nav-submenu submenu-hidden">
-                    <li><a href="{{ url('back/picture') }}" >所有视频</a></li>
-                    <li><a href="{{ url('back/picture/create') }}" {{--class="active_submenu"--}}>新建视频</a></li>
-                    <li><a href="{{ url('back/picture-source') }}" >视频列表</a></li>
+                    <li><a href="{{ url('back/vidio') }}" >所有视频</a></li>
+                    <li><a href="{{ url('back/vidio/create') }}" {{--class="active_submenu"--}}>新建视频</a></li>
+                    <li><a href="{{ url('back/vidio-source') }}" >视频列表</a></li>
                 </ul>
             </li>
             <li><a href="#"> <i class="ti-layout-grid3-alt"></i> <span>资料管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>

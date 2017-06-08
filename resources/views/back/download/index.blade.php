@@ -45,7 +45,7 @@
                             <thead>
                             <tr>
                                 <th colspan="6"><h3>基本资料</h3></th>
-                                <th colspan="3"><h3>网盘上传</h3></th>
+                                <th colspan="3"><h3>网盘上传</></th>
                                 <th colspan="1"><h3>本地上传</h3></th>
                             </tr>
                             <tr>

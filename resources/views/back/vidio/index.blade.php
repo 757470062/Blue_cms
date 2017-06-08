@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +22,7 @@
         <section id="page-title" class="row">
 
             <div class="col-md-8">
-                <h1>图集管理</h1>
+                <h1>文档管理</h1>
             </div>
 
             <div class="col-md-4">
@@ -39,37 +38,53 @@
             <div class="row">
                 <section class="panel panel-danger">
                     <header class="panel-heading">
-                        <h4 class="panel-title">新建图集</h4>
+                        <h4 class="panel-title">文档列表</h4>
                     </header>
                     <div class="panel-body">
-                        <form action="{{ url('back/picture-source/store/'.$id) }}" method="post" enctype="multipart/form-data">
-                            {{ csrf_field() }}
-                            <div class="form-group">
-                                <label class="col-md-2" >图片名称:</label>
-                                <input type="text" name="name" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>上传图片:</label>
-                                <input type="file" name="src" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-2" >图片描述:</label>
-                                <textarea name="content" class="form-control"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-default">提交</button>
-                            <button type="reset" class="btn btn-danger">重置</button>
-                        </form>
+                        <table id="back_vidio_all" class="table datatable dataTable no-footer" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>视频名称</th>
+                                <th>视频分类</th>
+                                <th>TAG标签</th>
+                                <th>缩略图</th>
+                                <th>简述</th>
+                                <th>修改时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+
+                            <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th>视频名称</th>
+                                <th>视频分类</th>
+                                <th>TAG标签</th>
+                                <th>缩略图</th>
+                                <th>简述</th>
+                                <th>修改时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </section>
             </div>
         </div> <!-- / container-fluid -->
+
+
         @include('back.public.footer')
+
+
     </main> <!-- /playground -->
+
     @include('back.public.message')
     <div class="scroll-top">
         <i class="ti-angle-up"></i>
     </div>
 </div> <!-- /animsition -->
+
 @include('back.public.js')
 </body>
 </html>

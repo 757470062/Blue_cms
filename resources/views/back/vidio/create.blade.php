@@ -23,7 +23,7 @@
         <section id="page-title" class="row">
 
             <div class="col-md-8">
-                <h1>图集管理</h1>
+                <h1>文档管理</h1>
             </div>
 
             <div class="col-md-4">
@@ -39,22 +39,39 @@
             <div class="row">
                 <section class="panel panel-danger">
                     <header class="panel-heading">
-                        <h4 class="panel-title">新建图集</h4>
+                        <h4 class="panel-title">新建视频集</h4>
                     </header>
                     <div class="panel-body">
-                        <form action="{{ url('back/picture-source/store/'.$id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ url('back/vidio/store') }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label class="col-md-2" >图片名称:</label>
+                                <label class="col-md-2" >视频名称:</label>
                                 <input type="text" name="name" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label>上传图片:</label>
-                                <input type="file" name="src" class="form-control">
+                                <label class="col-md-2" >分类:</label>
+                                {!! $category !!}
                             </div>
                             <div class="form-group">
-                                <label class="col-md-2" >图片描述:</label>
-                                <textarea name="content" class="form-control"></textarea>
+                                <label class="col-md-2" >TAG标签:</label>
+                                <input type="text" name="vidio_tag_id" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>缩略图:</label>
+                                <input type="file" name="photo" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2" >简述:</label>
+                                <textarea name="intro" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2" >内容:</label>
+                                <div id="mdeditor">
+                                    {!! editor_css() !!}
+                                    <textarea name="content" class="form-control"></textarea>
+                                    {!! editor_js() !!}
+                                    {!! editor_config('mdeditor') !!}
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-default">提交</button>
                             <button type="reset" class="btn btn-danger">重置</button>
