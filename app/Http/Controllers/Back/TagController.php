@@ -52,7 +52,7 @@ class TagController extends Controller
     public function store(Request $request)
     {
         $this->tagService->store($request);
-        return redirect('back.tag');
+        return redirect('back/tag');
     }
 
     /**

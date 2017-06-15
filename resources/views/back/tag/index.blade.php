@@ -36,7 +36,7 @@
 
         <div class="container-fluid">
             <div class="row">
-                <section class="panel panel-danger">
+                <section class="panel panel-danger col-md-8">
                     <header class="panel-heading">
                         <h4 class="panel-title">TAG列表</h4>
                     </header>
@@ -61,11 +61,21 @@
                             </tfoot>
                         </table>
                     </div>
-                    <div class="panel-footer">
-                        <div class="form-group">
-                            <label>搜索</label>
-                            <select name="" class="form-control"></select>
-                        </div>
+                </section>
+                <section class="panel panel-danger col-md-4">
+                    <header class="panel-heading">
+                        <h4 class="panel-title">TAG列表</h4>
+                    </header>
+                    <div class="panel-body">
+                        <form action="{{ url('back/tag/store') }}" method="post" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <label class="col-md-2" >TAG名称:</label>
+                                <input type="text" name="name" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-default">提交</button>
+                            <button type="reset" class="btn btn-danger">重置</button>
+                        </form>
                     </div>
                 </section>
             </div>

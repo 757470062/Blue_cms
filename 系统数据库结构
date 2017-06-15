@@ -16,29 +16,26 @@ Database
                 name content link   photo  state  sort
 
 6、Download   资料共享下载
-                name category_id download_tag_id type size from sky_drive_name sky_drive_src sky_drive_psw  content src photo state  sort
+                name category_id  type size from sky_drive_name sky_drive_src sky_drive_psw  content src photo state  sort
 
 7、UserInfo 用户基本信息
 
 8、Comment 评论
              user_id  parent_user_id  module_id content_id
 
-9、TagAll  总tag
+9、Tag  总tag
             name
-
-10、TagModule 文档tag
-              article_id tag_id
 
 11、Form  表单
 title name type   min  max   text
 
 12、PictureSource   图集资源
                     picture_id name  src content
-    Picture         name category_id picture_tag_id photo content
+    Picture         name category_id  photo content
 
 13、VidioSource     视频模块
                     vidio_id name definition size src photo intro  content code
-    vidio           name category_id vidio_tag_id photo intro content code
+    vidio           name category_id  photo intro content code
 
 Cache
 

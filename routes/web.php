@@ -67,14 +67,7 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     $router->get('/tag/edit/{id}', 'TagController@edit');
     $router->post('/tag/update/{id}', 'TagController@update');
     $router->get('/tag/destroy/{id}', 'TagController@destroy');
-    //TAG Module
-    $router->get('/tag-module', 'TagModuleController@index');
-    $router->get('/tag-module/create', 'TagModuleController@create');
-    $router->post('/tag-module/store', 'TagModuleController@store');
-    $router->get('/tag-module/edit/{id}', 'TagModuleController@edit');
-    $router->post('/tag-module/update/{id}', 'TagModuleController@update');
-    $router->get('/tag-module/destroy/{id}', 'TagModuleController@destroy');
-    //图集
+   //图集
     $router->get('/picture', 'PictureController@index');
     $router->post('/picture/data', 'PictureController@indexData');
     $router->get('/picture/create', 'PictureController@create');

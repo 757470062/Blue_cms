@@ -1,1 +1,1 @@
-500
+500，{{$exception->getMessage()}}

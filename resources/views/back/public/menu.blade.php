@@ -120,8 +120,8 @@
 
             <li><a href="#"> <i class="ti-bar-chart"></i> <span>Tag管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
                 <ul class="nav nav-submenu submenu-hidden">
-                    <li><a href="{{ url('back/tag') }}" >所有TAG信息</a></li>
-                    <li><a href="{{ url('back/tag-module') }}" >信息</a></li>
+                    <li><a href="{{ url('back/tag') }}" >所有TAG</a></li>
+                    <li><a href="{{ url('back/create') }}" >新建TAG</a></li>
                 </ul>
             </li>
             <li><a href="{{ url('back/logs') }}"> <i class="ti-palette"></i> <span>系统日志</span></a></li>

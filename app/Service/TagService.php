@@ -44,7 +44,7 @@ class TagService
     public function store(Request $request){
         $tag = $this->tagRepository->create($request->all());
         if (empty($tag)) abort(404,'Tag标签添加失败');
-        event(new ForgetCacheEvent($this->tagRepository));
+        event(new ForgetCacheEvent($this->tagRepository->makeModel()));
     }
 
     /**
@@ -54,7 +54,7 @@ class TagService
     public function update(Request $request, $id){
        $tag = $this->tagRepository->find($id)->update($request->all());
        if (empty($tag)) abort(404,'Tag标签修改失败');
-       event(new ForgetCacheEvent($this->tagRepository));
+       event(new ForgetCacheEvent($this->tagRepository->makeModel()));
    }
 
 }

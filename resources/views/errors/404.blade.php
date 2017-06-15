@@ -1,1 +1,1 @@
-404
+404，{{$exception->getMessage()}}
