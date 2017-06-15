@@ -61,6 +61,7 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     $router->get('/friend/destroy/{id}', 'FriendController@destroy');
     //TAG all
     $router->get('/tag', 'TagController@index');
+    $router->post('/tag/data', 'TagController@indexData');
     $router->get('/tag/create', 'TagController@create');
     $router->post('/tag/store', 'TagController@store');
     $router->get('/tag/edit/{id}', 'TagController@edit');

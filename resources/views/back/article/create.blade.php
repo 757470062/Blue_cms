@@ -57,6 +57,10 @@
                                 <input type="text" name="keys" class="form-control">
                             </div>
                             <div class="form-group">
+                                <label class="col-md-2" >TAG标签:</label>
+                                {!! $tags !!}
+                            </div>
+                            <div class="form-group">
                                 <label>Flag:</label>
                                 <input type="radio" name="flag_id" checked value="无" class="checkbox-danger">无
                                 <input type="radio" name="flag_id" value="推荐" class="checkbox-danger">推荐

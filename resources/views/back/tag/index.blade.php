@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +22,7 @@
         <section id="page-title" class="row">
 
             <div class="col-md-8">
-                <h1>模块管理</h1>
+                <h1>TAG管理</h1>
             </div>
 
             <div class="col-md-4">
@@ -39,12 +38,33 @@
             <div class="row">
                 <section class="panel panel-danger">
                     <header class="panel-heading">
-                        <h4 class="panel-title">模块列表</h4>
+                        <h4 class="panel-title">TAG列表</h4>
                     </header>
                     <div class="panel-body">
+                        <table id="back_tag_all" class="table datatable dataTable no-footer" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>TAG名称</th>
+                                <th>修改时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
 
-                        <div id="DataTables_Table_5_wrapper" class="dataTables_wrapper no-footer">
-                            {!! $datatable !!}
+                            <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th>TAG名称</th>
+                                <th>修改时间</th>
+                                <th>操作</th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="form-group">
+                            <label>搜索</label>
+                            <select name="" class="form-control"></select>
                         </div>
                     </div>
                 </section>

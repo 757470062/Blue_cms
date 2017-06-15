@@ -5,18 +5,23 @@ namespace App\Http\Controllers\Back;
 use App\Events\ForgetCacheEvent;
 use App\Http\Requests\Back\ArticleRequest;
 use App\Service\ArticleService;
+use App\Service\ArticleTagService;
 use App\Service\CategoryService;
+use App\Service\TagService;
+use App\Traits\SelectTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
 class ArticleController extends Controller
 {
+    use SelectTrait;
 
-    public function __construct(ArticleService $articleService)
+    public function __construct(ArticleService $articleService,TagService $tagService)
     {
         $this->middleware('auth.back:back');
         $this->articleService = $articleService;
+        $this->tagService = $tagService;
     }
 
     /**
@@ -45,7 +50,9 @@ class ArticleController extends Controller
         $category = $categoryService->cacheService->allCacheByOption(
             $categoryService->categoryRepository->makeModel()
         );
-        return view('back.article.create' ,compact('category'));
+
+        $tags = $this->select2View($this->tagService->tagRepository->all());
+        return view('back.article.create', compact('category', 'tags'));
     }
 
     /**
@@ -72,7 +79,11 @@ class ArticleController extends Controller
         $category = $categoryService->cacheService->allCacheByOption(
             $categoryService->categoryRepository->makeModel()
         );
-        return view('back.article.edit',compact('article','category'));
+        $tags = $this->select2View(
+            $this->tagService->tagRepository->all(),
+            $this->articleService->articleTagService->repository->findWhere(['article_id' => $id])->toArray()
+            );
+        return view('back.article.edit', compact('article', 'category', 'tags'));
     }
 
     /**

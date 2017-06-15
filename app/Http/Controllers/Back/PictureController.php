@@ -6,19 +6,24 @@ use App\Service\Cache\CacheServiceInterface;
 use App\Service\Cache\Extend\CategoryCacheServiceInterface;
 use App\Service\CategoryService;
 use App\Service\PictureService;
+use App\Service\TagService;
+use App\Traits\SelectTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class PictureController extends Controller
 {
+    use SelectTrait;
+
     /**
      * PictureController constructor.
      * @param PictureService $service
      */
-    public function __construct(PictureService $service)
+    public function __construct(PictureService $service, TagService $tagService)
     {
         $this->middleware('auth.back:back');
         $this->service = $service;
+        $this->tagService = $tagService;
     }
 
     /**
@@ -48,7 +53,8 @@ class PictureController extends Controller
         $category = $categoryService->cacheService->allCacheByOption(
             $categoryService->categoryRepository->makeModel()
         );
-        return view('back.picture.create',compact('category'));
+        $tags = $this->select2View($this->tagService->tagRepository->all());
+        return view('back.picture.create',compact('category', 'tags'));
     }
 
     /**
@@ -86,7 +92,11 @@ class PictureController extends Controller
             $categoryService->categoryRepository->makeModel()
         );
         $picture = $this->service->pictureRepository->find($id);
-        return view('back.picture.edit', compact('picture', 'category'));
+        $tags = $this->select2View(
+            $this->tagService->tagRepository->all(),
+            $this->service->pictureTagService->repository->findWhere(['picture_id' => $id])->toArray()
+            );
+        return view('back.picture.edit', compact('picture', 'category', 'tags'));
     }
 
     /**

@@ -49,7 +49,6 @@
                                     <td>#</td>
                                     <td>图集名称</td>
                                     <td>图集分类</td>
-                                    <td>TAG标签</td>
                                     <td>缩略图</td>
                                     <td>修改时间</td>
                                     <td>操作</td>
@@ -61,7 +60,6 @@
                                     <td>#</td>
                                     <td>图集名称</td>
                                     <td>图集分类</td>
-                                    <td>TAG标签</td>
                                     <td>缩略图</td>
                                     <td>修改时间</td>
                                     <td>操作</td>

@@ -12,12 +12,13 @@ namespace App\Service;
 use App\Events\ForgetCacheEvent;
 use App\Repositories\TagRepository;
 use App\Service\Cache\CacheServiceInterface;
+use App\Traits\ButtonTrait;
 use App\Traits\DatatableTrait;
 use Illuminate\Http\Request;
 
 class TagService
 {
-    use DatatableTrait;
+    use DatatableTrait, ButtonTrait;
 
     public function __construct(TagRepository $tagRepository,CacheServiceInterface $cacheService)
     {
@@ -29,16 +30,12 @@ class TagService
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function index(){
-        $datatable=$this->getDataByBlade(
-            'data-table',
-            $this->cacheService->all($this->tagRepository->makeModel()),
-            ['id','name'],
-            [],
-            ['#','TAG名称','操作'],
-            'back/tag',
-            false
-        );
-        return $datatable;
+       return $this->getDataByAjax(
+           $this->cacheService->all(
+               $this->tagRepository->makeModel()),
+           $this->getButton('修改', 'glyphicon glyphicon-edit btn-md', '/back/tag/edit/{{ $id }}').
+           $this->getButton('删除', 'glyphicon glyphicon-trash btn-md', '/back/tag/destroy/{{ $id }}')
+       );
     }
 
     /**

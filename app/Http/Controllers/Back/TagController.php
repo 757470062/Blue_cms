@@ -26,8 +26,11 @@ class TagController extends Controller
      */
     public function index()
     {
-        $datatable = $this->tagService->index();
-        return view('back.tag.index', compact('datatable'));
+        return view('back.tag.index');
+    }
+
+    public function indexData(){
+        return $this->tagService->index();
     }
 
     /**

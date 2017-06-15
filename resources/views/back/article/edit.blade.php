@@ -53,6 +53,10 @@
                                 <input type="text" name="keys" value="{{ $article->keys }}" class="form-control">
                             </div>
                             <div class="form-group">
+                                <label class="col-md-2" >TAG标签:</label>
+                                {!! $tags !!}
+                            </div>
+                            <div class="form-group">
                                 <label>Flag:</label>
                                     <input type="radio" name="flag_id" value="无" class="checkbox-danger" @if($article->flag_id == '无') checked @endif>无
                                     <input type="radio" name="flag_id" value="推荐" class="checkbox-danger" @if($article->flag_id == '推荐') checked @endif>推荐

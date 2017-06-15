@@ -47,7 +47,6 @@
                                 <th>#</th>
                                 <th>视频名称</th>
                                 <th>视频分类</th>
-                                <th>TAG标签</th>
                                 <th>缩略图</th>
                                 <th>简述</th>
                                 <th>修改时间</th>
@@ -60,7 +59,6 @@
                                 <th>#</th>
                                 <th>视频名称</th>
                                 <th>视频分类</th>
-                                <th>TAG标签</th>
                                 <th>缩略图</th>
                                 <th>简述</th>
                                 <th>修改时间</th>

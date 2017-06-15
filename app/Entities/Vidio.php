@@ -13,7 +13,7 @@ class Vidio extends Model implements Transformable
     public $table = 'vidios';
 
     protected $fillable = [
-        'name','category_id','vidio_tag_id','photo','intro','content','code'
+        'name','category_id','photo','intro','content','code'
     ];
 
     /**

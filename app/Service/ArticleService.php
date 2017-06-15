@@ -9,6 +9,7 @@
 namespace App\Service;
 use App\Events\ForgetCacheEvent;
 use App\Repositories\ArticleRepository;
+use App\Traits\TagTrait;
 use App\Service\Cache\CacheServiceInterface;
 use App\Traits\ButtonTrait;
 use App\Traits\DatatableTrait;
@@ -20,17 +21,18 @@ use Log;
 
 class ArticleService
 {
-    use DatatableTrait, MakedownTrait, FileSystem,ButtonTrait;
+    use DatatableTrait, MakedownTrait, FileSystem,ButtonTrait,TagTrait;
 
     /**
      * ArticleService constructor.
      * @param ArticleRepository $articleRepository
      * @param CacheServiceInterface $cacheService
      */
-    public function __construct(ArticleRepository $articleRepository, CacheServiceInterface $cacheService)
+    public function __construct(ArticleRepository $articleRepository, CacheServiceInterface $cacheService,  ArticleTagService $articleTagService)
     {
         $this->articleRepository = $articleRepository;
         $this->cacheService = $cacheService;
+        $this->articleTagService = $articleTagService;
     }
 
     /**
@@ -66,6 +68,13 @@ class ArticleService
             )
         );
         if (empty($article)) abort(404,'添加失败');
+
+        $this->createTags(
+            $request->all()['tag_id'],
+            $this->articleTagService->repository->makeModel(),
+            'article_id',
+            $article->getAttribute('id'));
+
         event(new ForgetCacheEvent($this->articleRepository->makeModel()));
     }
 
@@ -81,6 +90,15 @@ class ArticleService
             )
         );
         if (empty($article)) abort(404,'修改失败');
+/*        //删除tag
+        $this->articleTagService->repository->deleteWhere(['article_id' => $id]);*/
+        //添加tag
+        $this->createTags(
+            $request->all()['tag_id'],
+            $this->articleTagService->repository->makeModel(),
+            'article_id',
+            $id);
+        //清除缓存
         event(new ForgetCacheEvent($this->articleRepository->makeModel()));
     }
 

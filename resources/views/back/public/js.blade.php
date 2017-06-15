@@ -12,4 +12,5 @@
 {{--<script src="/back/js/sugarrush.tables.js"></script>--}}
 <script src="/back/js/jquery.nestable.js"></script>
 <script src="/back/datatables/datatables.js"></script>
+<script src="/back/js/select2.full.min.js"></script>
 

@@ -17,7 +17,6 @@ class CreatePicturesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('category_id');
-            $table->integer('picture_tag_id')->nullable();
             $table->string('photo')->nullable();
             $table->text('content')->nullable();
             $table->timestamps();

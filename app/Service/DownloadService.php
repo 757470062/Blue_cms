@@ -11,25 +11,28 @@ namespace App\Service;
 
 use App\Events\ForgetCacheEvent;
 use App\Repositories\DownloadRepository;
+use App\Repositories\DownloadTagRepository;
 use App\Service\Cache\CacheServiceInterface;
 use App\Traits\ButtonTrait;
 use App\Traits\DatatableTrait;
 use App\Traits\FileSystem;
+use App\Traits\TagTrait;
 use Illuminate\Http\Request;
 
 class DownloadService
 {
-    use FileSystem, DatatableTrait, ButtonTrait;
+    use FileSystem, DatatableTrait, ButtonTrait, TagTrait;
 
     /**
      * DownloadService constructor.
      * @param DownloadRepository $repository
      * @param CacheServiceInterface $cacheService
      */
-    public function __construct(DownloadRepository $repository, CacheServiceInterface $cacheService)
+    public function __construct(DownloadRepository $repository, CacheServiceInterface $cacheService, DownloadTagRepository $downloadTagRepository)
     {
         $this->repository = $repository;
         $this->cacheService = $cacheService;
+        $this->downloadTagRepository = $downloadTagRepository;
     }
 
     /**
@@ -47,10 +50,19 @@ class DownloadService
      * @param Request $request
      */
     public function store(Request $request){
+
         $download = $this->repository->create(
-            $this->putMoreFile($request, ['photo','src'] )
+            $this->putMoreFile($request, ['photo','src'])
         );
+
         if (empty($download)) abort(404, '上传资料失败');
+
+        $this->createTags(
+            $request->all()['tag_id'],
+            $this->downloadTagRepository->makeModel(),
+            'download_id',
+            $download->getAttribute('id'));
+
         event(new ForgetCacheEvent($this->repository->makeModel()));
     }
 
@@ -62,7 +74,18 @@ class DownloadService
         $download = $this->repository->find($id)->update(
                 $this->putMoreFile($request, ['photo','src'])
         );
+
         if (empty($download)) abort(404, '修改资料失败');
+   /*     //删除tag
+        $this->downloadTagRepository->deleteWhere(['download_id' => $id]);*/
+        //添加tag
+        $this->createTags(
+            $request->all()['tag_id'],
+            $this->downloadTagRepository->makeModel(),
+            'download_id',
+            $id
+        );
+
         event(new ForgetCacheEvent($this->repository->makeModel()));
     }
 

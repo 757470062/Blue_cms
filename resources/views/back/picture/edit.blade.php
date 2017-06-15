@@ -53,7 +53,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2" >TAG标签:</label>
-                                <input type="text" name="picture_tag_id" value="{{ $picture->picture_tag_id }}" class="form-control">
+                                {!! $tags !!}
                             </div>
                             <div class="form-group">
                                 <label>缩略图:</label>

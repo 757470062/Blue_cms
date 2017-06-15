@@ -13,7 +13,7 @@ class Download extends Model implements Transformable
     public $table = 'downloads';
 
     protected $fillable = [
-        'name','category_id','download_tag_id','type','size','from','sky_drive_name','sky_drive_src','sky_drive_psw','content','src','photo','state','sort'
+        'name','category_id','type','size','from','sky_drive_name','sky_drive_src','sky_drive_psw','content','src','photo','state','sort'
     ];
 
     /**

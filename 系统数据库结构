@@ -27,7 +27,7 @@ Database
             name
 
 10、TagModule 文档tag
-              module_id article_id tag_id
+              article_id tag_id
 
 11、Form  表单
 title name type   min  max   text

@@ -17,7 +17,6 @@ class CreateDownloadsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('category_id')->nullable();
-            $table->integer('download_tag_id')->nullable();
             $table->string('type')->nullable();
             $table->string('size')->nullable();
             $table->string('form')->nullable();

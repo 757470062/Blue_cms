@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Repositories\TagRepository;
 use App\Service\CategoryService;
 use App\Service\DownloadService;
+use App\Service\DownloadTagService;
+use App\Service\TagService;
+use App\Traits\SelectTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class DownloadController extends Controller
 {
+    use SelectTrait;
+
     /**
      * DownloadController constructor.
      * @param DownloadService $service
@@ -41,12 +47,13 @@ class DownloadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(CategoryService $categoryService)
+    public function create(CategoryService $categoryService, TagService $tagService)
     {
         $category = $categoryService->cacheService->allCacheByOption(
             $categoryService->categoryRepository->makeModel()
         );
-        return view('back.download.create', compact('category'));
+        $tags = $this->select2View($tagService->tagRepository->all());
+        return view('back.download.create', compact('category', 'tags'));
     }
 
     /**
@@ -78,13 +85,17 @@ class DownloadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, CategoryService $categoryService)
+    public function edit($id, CategoryService $categoryService, TagService $tagService, DownloadTagService $downloadTagService)
     {
         $download = $this->service->repository->find($id);
         $category = $categoryService->cacheService->allCacheByOption(
             $categoryService->categoryRepository->makeModel()
         );
-        return view('back.download.edit', compact('download', 'category'));
+       $tags = $this->select2View(
+            $tagService->tagRepository->all(),
+            $downloadTagService->repository->findWhere(['download_id' => $id])->toArray()
+        );
+        return view('back.download.edit', compact('download', 'category', 'tags'));
     }
 
     /**

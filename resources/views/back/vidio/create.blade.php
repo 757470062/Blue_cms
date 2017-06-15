@@ -54,7 +54,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2" >TAG标签:</label>
-                                <input type="text" name="vidio_tag_id" class="form-control">
+                                {!! $tags !!}
                             </div>
                             <div class="form-group">
                                 <label>缩略图:</label>

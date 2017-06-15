@@ -23,7 +23,7 @@
         <section id="page-title" class="row">
 
             <div class="col-md-8">
-                <h1>文档管理</h1>
+                <h1>资料管理</h1>
             </div>
 
             <div class="col-md-4">
@@ -47,7 +47,7 @@
                             <h3>资料基本信息</h3>
                             <hr style="height: 1px;background-color:#1a2a42 ">
                             <div class="form-group">
-                                <label class="col-md-2" >图集名称:</label>
+                                <label class="col-md-2" >资料名称:</label>
                                 <input type="text" name="name" value="{{ $download->name }}" class="form-control">
                             </div>
                             <div class="form-group">
@@ -56,7 +56,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-md-2" >TAG标签:</label>
-                                <input type="text" name="picture_tag_id" value="{{ $download->download_tag_id }}" class="form-control">
+                                {!! $tags !!}
                             </div>
                             <div class="form-group">
                                 <label>缩略图:</label>

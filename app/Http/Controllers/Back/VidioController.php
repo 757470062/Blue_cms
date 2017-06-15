@@ -4,16 +4,27 @@ namespace App\Http\Controllers\Back;
 
 use App\Events\ForgetCacheEvent;
 use App\Service\CategoryService;
+use App\Service\TagService;
 use App\Service\VidioService;
+use App\Traits\SelectTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class VidioController extends Controller
 {
-    public function __construct(VidioService $service)
+
+    use SelectTrait;
+
+    /**
+     * VidioController constructor.
+     * @param VidioService $service
+     * @param TagService $tagService
+     */
+    public function __construct(VidioService $service, TagService $tagService)
     {
         $this->middleware('auth.back:back');
         $this->service = $service;
+        $this->tagService = $tagService;
     }
 
     /**
@@ -43,7 +54,8 @@ class VidioController extends Controller
         $category = $categoryService->cacheService->allCacheByOption(
             $categoryService->categoryRepository->makeModel()
         );
-        return view('back.vidio.create', compact('category'));
+        $tags = $this->select2View($this->tagService->tagRepository->all());
+        return view('back.vidio.create', compact('category', 'tags'));
     }
 
     /**
@@ -81,7 +93,11 @@ class VidioController extends Controller
             $categoryService->categoryRepository->makeModel()
         );
         $vidio = $this->service->repository->find($id);
-        return view('back.vidio.edit', compact('category', 'vidio'));
+        $tags = $this->select2View(
+            $this->tagService->tagRepository->all(),
+            $this->service->vidioTagService->repository->findWhere(['vidio_id' => $id])->toArray()
+        );
+        return view('back.vidio.edit', compact('category', 'vidio', 'tags'));
     }
 
     /**

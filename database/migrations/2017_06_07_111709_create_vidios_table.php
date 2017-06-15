@@ -17,7 +17,6 @@ class CreateVidiosTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('category_id');
-            $table->integer('vidio_tag_id')->nullable();
             $table->string('photo')->nullable();
             $table->text('intro');
             $table->text('content')->nullable();

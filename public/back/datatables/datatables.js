@@ -40,6 +40,11 @@ $(document).ready( function () {
     //nestable
     $('#nestable').nestable();
 
+    //select2
+    $("#select2").select2({
+        placeholder: "添加标签"
+    });
+
     /*
      * datatables
      */
@@ -153,7 +158,6 @@ $(document).ready( function () {
             {'data':'id'},
             {'data':'name'},
             {'data':'picture_category.name'},
-            {'data':'picture_tag_id'},
             {'data':'photo'},
             {'data':'updated_at'},
             {'data': 'action', 'orderable': false, 'searchable': false}
@@ -212,7 +216,6 @@ $(document).ready( function () {
             {'data':'id'},
             {'data':'name'},
             {'data':'down_load_category.name'},
-            {'data':'download_tag_id'},
             {'data':'photo','orderable': false},
             {'data':'state'},
             {'data':'sky_drive_name'},
@@ -247,7 +250,6 @@ $(document).ready( function () {
             {'data':'id'},
             {'data':'name'},
             {'data':'vidio_category.name'},
-            {'data':'vidio_tag_id'},
             {'data':'photo','orderable': false},
             {'data':'intro','orderable': false},
             {'data':'updated_at','orderable': false},
@@ -290,7 +292,32 @@ $(document).ready( function () {
         //默认排序
         "order": order
     } );
-
+    //get all tag
+    $('#back_tag_all').DataTable( {
+        //语言设置
+        "language": language,
+        "processing": true,
+        //开启服务器模式
+        "serverSide": true,
+        //ajax数据
+        "ajax": {
+            "url":"/back/tag/data",
+            "type":type,
+            "dataSrc": "data",
+            "headers":headers
+        },
+        //设置列
+        "columns": [
+            {'data':'id'},
+            {'data':'name'},
+            {'data':'updated_at','orderable': false},
+            {'data': 'action', 'orderable': false, 'searchable': false}
+        ],
+        //延迟处理数据
+        "deferRender": true,
+        //默认排序
+        "order": order
+    } );
 
 } );
 

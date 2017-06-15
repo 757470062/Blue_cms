@@ -52,7 +52,6 @@
                                 <th>#</th>
                                 <th>资料名称</th>
                                 <th>资料分类</th>
-                                <th>TAG标签</th>
                                 <th>缩略图</th>
                                 <th>状态</th>
                                 <th>网盘名称</th>
@@ -69,7 +68,6 @@
                                 <th>#</th>
                                 <th>资料名称</th>
                                 <th>资料分类</th>
-                                <th>TAG标签</th>
                                 <th>缩略图</th>
                                 <th>状态</th>
                                 <th>网盘名称</th>

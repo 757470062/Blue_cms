@@ -13,7 +13,7 @@ class Picture extends Model implements Transformable
     public $table = 'pictures';
 
     protected $fillable = [
-        'name','category_id','picture_tag_id','photo','content'
+        'name','category_id','photo','content'
     ];
 
     public function pictureCategory(){

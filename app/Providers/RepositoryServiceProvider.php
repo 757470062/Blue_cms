@@ -35,6 +35,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\DownloadRepository::class, \App\Repositories\DownloadRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\VidioRepository::class, \App\Repositories\VidioRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\VidioSourceRepository::class, \App\Repositories\VidioSourceRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\DownloadTagRepository::class, \App\Repositories\DownloadTagRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\ArticleTagRepository::class, \App\Repositories\ArticleTagRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\PictureTagRepository::class, \App\Repositories\PictureTagRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\VidioTagRepository::class, \App\Repositories\VidioTagRepositoryEloquent::class);
         //:end-bindings:
     }
 }

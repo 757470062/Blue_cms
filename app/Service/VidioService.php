@@ -16,20 +16,22 @@ use App\Traits\ButtonTrait;
 use App\Traits\DatatableTrait;
 use App\Traits\FileSystem;
 use App\Traits\MakedownTrait;
+use App\Traits\TagTrait;
 use Illuminate\Http\Request;
 
 class VidioService
 {
-    use DatatableTrait, ButtonTrait, FileSystem, MakedownTrait;
+    use DatatableTrait, ButtonTrait, FileSystem, MakedownTrait, TagTrait;
     /**
      * VidioService constructor.
      * @param VidioRepository $repository
      * @param CacheServiceInterface $cacheService
      */
-    public function __construct(VidioRepository $repository, CacheServiceInterface $cacheService)
+    public function __construct(VidioRepository $repository, CacheServiceInterface $cacheService, VidioTagService $vidioTagService)
     {
         $this->repository = $repository;
         $this->cacheService = $cacheService;
+        $this->vidioTagService = $vidioTagService;
     }
 
     /**
@@ -53,6 +55,14 @@ class VidioService
     public function store(Request $request){
         $vidio = $this->repository->create($this->getCodeByDell($this->putOneFile($request)));
         if (empty($vidio)) abort(404, '新建视频集失败');
+        //添加tag
+        $this->createTags(
+            $request->all()['tag_id'],
+            $this->vidioTagService->repository->makeModel(),
+            'vidio_id',
+            $vidio->getAttribute('id')
+        );
+        //清除缓存
         event(new ForgetCacheEvent($this->repository->makeModel()));
     }
 
@@ -63,6 +73,16 @@ class VidioService
     public function update(Request $request, $id){
         $vidio = $this->repository->find($id)->update($this->getCodeByDell($this->putOneFile($request)));
         if (empty($vidio)) abort(404, '修改视频集失败');
+/*        //删除tag
+        $this->vidioTagService->repository->deleteWhere('vidio_id',$id);*/
+        //添加tag
+        $this->createTags(
+            $request->all()['tag_id'],
+            $this->vidioTagService->repository->makeModel(),
+            'vidio_id',
+            $id
+         );
+        //清除缓存
         event(new ForgetCacheEvent($this->repository->makeModel()));
     }
 }
