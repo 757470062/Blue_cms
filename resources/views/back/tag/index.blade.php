@@ -67,6 +67,7 @@
                         <h4 class="panel-title">TAG列表</h4>
                     </header>
                     <div class="panel-body">
+                        @include('back.public.form_request')
                         <form action="{{ url('back/tag/store') }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">

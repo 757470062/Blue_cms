@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Back;
 
 use App\Events\ForgetCacheEvent;
+use App\Http\Requests\Back\TagRequest;
 use App\Service\TagService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -49,7 +50,7 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TagRequest $request)
     {
         $this->tagService->store($request);
         return redirect('back/tag');
@@ -85,7 +86,7 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TagRequest $request, $id)
     {
         $this->tagService->update($request, $id);
         return redirect('back/tag');

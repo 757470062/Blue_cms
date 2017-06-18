@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Http\Requests\Back\PictureRequest;
 use App\Service\Cache\CacheServiceInterface;
 use App\Service\Cache\Extend\CategoryCacheServiceInterface;
 use App\Service\CategoryService;
@@ -63,7 +64,7 @@ class PictureController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PictureRequest $request)
     {
         $this->service->store($request);
         return redirect('back/picture');

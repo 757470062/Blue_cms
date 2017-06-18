@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Http\Requests\Back\DownloadRequest;
 use App\Repositories\TagRepository;
 use App\Service\CategoryService;
 use App\Service\DownloadService;
@@ -62,7 +63,7 @@ class DownloadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DownloadRequest $request)
     {
         $this->service->store($request);
         return redirect('back/download');

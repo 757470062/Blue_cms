@@ -42,6 +42,7 @@
                         <h4 class="panel-title">新建顶级分类</h4>
                     </header>
                     <div class="panel-body">
+                        @include('back.public.form_request')
                         <form action="{{ url('back/category/update/'.$category->id) }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">

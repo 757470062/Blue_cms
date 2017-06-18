@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Http\Requests\Back\PictureSourceRequest;
 use App\Service\PictureService;
 use App\Service\PictureSourceService;
 use Illuminate\Http\Request;
@@ -52,7 +53,7 @@ class PictureSourceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id, Request $request)
+    public function store($id, PictureSourceRequest $request)
     {
         $this->service->store($id,$request);
         return redirect('back/picture-source/$id');

@@ -42,6 +42,7 @@
                         <h4 class="panel-title">修改视频</h4>
                     </header>
                     <div class="panel-body">
+                        @include('back.public.form_request')
                         <form action="{{ url('back/vidio-source/update/'.$vidioSource->id) }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">

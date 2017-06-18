@@ -42,6 +42,7 @@
                         <h4 class="panel-title">新建资料</h4>
                     </header>
                     <div class="panel-body">
+                        @include('back.public.form_request')
                         <form action="{{ url('back/download/store') }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <h3>资料基本信息</h3>

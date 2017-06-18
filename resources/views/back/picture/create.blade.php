@@ -42,6 +42,7 @@
                         <h4 class="panel-title">新建图集</h4>
                     </header>
                     <div class="panel-body">
+                        @include('back.public.form_request')
                         <form action="{{ url('back/picture/store') }}" method="post" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">

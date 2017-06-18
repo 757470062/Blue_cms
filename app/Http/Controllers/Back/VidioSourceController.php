@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Back;
 
 use App\Events\ForgetCacheEvent;
+use App\Http\Requests\Back\VidioSourceRequest;
 use App\Service\VidioSourceService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -53,7 +54,7 @@ class VidioSourceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(VidioSourceRequest $request, $id)
     {
         $this->service->store($request, $id);
         return redirect('back/vidio');

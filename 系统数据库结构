@@ -19,6 +19,8 @@ Database
                 name category_id  type size from sky_drive_name sky_drive_src sky_drive_psw  content src photo state  sort
 
 7、UserInfo 用户基本信息
+           avatar  age sex score login_ip login_zone phone intro
+
 
 8、Comment 评论
              user_id  parent_user_id  module_id content_id
@@ -36,6 +38,9 @@ title name type   min  max   text
 13、VidioSource     视频模块
                     vidio_id name definition size src photo intro  content code
     vidio           name category_id  photo intro content code
+
+14、专题 Special
+
 
 Cache
 
