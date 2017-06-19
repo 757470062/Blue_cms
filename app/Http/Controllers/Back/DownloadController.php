@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Events\ForgetCacheEvent;
 use App\Http\Requests\Back\DownloadRequest;
 use App\Repositories\TagRepository;
 use App\Service\CategoryService;
@@ -123,6 +124,7 @@ class DownloadController extends Controller
     public function destroy($id)
     {
         $this->service->repository->delete($id);
+        event(new ForgetCacheEvent($this->service->repository->makeModel()));
         return redirect()->back();
     }
 }
