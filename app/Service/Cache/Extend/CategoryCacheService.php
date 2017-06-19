@@ -39,6 +39,31 @@ class CategoryCacheService extends CacheService implements CategoryCacheServiceI
         return $data;
     }
 
+
+    /**
+     * 利用nestable生成select和option 添加id进行选中
+     * @param $model
+     * @param array $id   int or array
+     * @return mixed
+     */
+    public function allCacheByOptionSelected($model, $id = array())
+    {
+        if (Cache::has($model->table.'.all.by.option.'.$id)){
+            $data = Cache::get($model->table.'.all.by.option.'.$id);
+        }else{
+            $data = $model
+                ->attr(['name' => 'category_id' ,'class' => 'form-control'])
+                ->selected($id)
+                ->renderAsDropdown();
+            Cache::remember($model->table.'.all.by.option.'.$id, $this->getMinutes(), function () use($data){
+                return $data;
+            });
+        }
+        return $data;
+    }
+
+
+
     /**
      * 利用nestable生成select和option
      * @param $model

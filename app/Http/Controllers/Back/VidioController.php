@@ -90,10 +90,13 @@ class VidioController extends Controller
      */
     public function edit($id, CategoryService $categoryService)
     {
-        $category = $categoryService->cacheService->allCacheByOption(
-            $categoryService->categoryRepository->makeModel()
-        );
         $vidio = $this->service->repository->find($id);
+
+        $category = $categoryService->cacheService->allCacheByOptionSelected(
+            $categoryService->categoryRepository->makeModel(),
+            $vidio->category_id
+        );
+
         $tags = $this->select2View(
             $this->tagService->tagRepository->all(),
             $this->service->vidioTagService->repository->findWhere(['vidio_id' => $id])->toArray()

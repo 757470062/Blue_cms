@@ -26,4 +26,12 @@ interface CategoryCacheServiceInterface extends CacheServiceInterface
      * @return mixed
      */
     public function allCacheByOption($model);
+
+    /**
+     * nestable option风格缓存
+     * @param $model
+     * @param array $id
+     * @return mixed
+     */
+    public function allCacheByOptionSelected($model, $id = array());
 }

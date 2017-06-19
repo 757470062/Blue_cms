@@ -76,8 +76,9 @@ class ArticleController extends Controller
     public function edit($id ,CategoryService $categoryService)
     {
         $article=$this->articleService->articleRepository->find($id);
-        $category = $categoryService->cacheService->allCacheByOption(
-            $categoryService->categoryRepository->makeModel()
+        $category = $categoryService->cacheService->allCacheByOptionSelected(
+            $categoryService->categoryRepository->makeModel(),
+            $article->category_id
         );
         $tags = $this->select2View(
             $this->tagService->tagRepository->all(),

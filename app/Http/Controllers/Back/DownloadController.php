@@ -89,8 +89,10 @@ class DownloadController extends Controller
     public function edit($id, CategoryService $categoryService, TagService $tagService, DownloadTagService $downloadTagService)
     {
         $download = $this->service->repository->find($id);
-        $category = $categoryService->cacheService->allCacheByOption(
-            $categoryService->categoryRepository->makeModel()
+
+        $category = $categoryService->cacheService->allCacheByOptionSelected(
+            $categoryService->categoryRepository->makeModel(),
+            $download->category_id
         );
        $tags = $this->select2View(
             $tagService->tagRepository->all(),

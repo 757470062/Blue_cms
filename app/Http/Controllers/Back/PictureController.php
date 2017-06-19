@@ -89,10 +89,13 @@ class PictureController extends Controller
      */
     public function edit($id, CategoryService $categoryService)
     {
-        $category = $categoryService->cacheService->allCacheByOption(
-            $categoryService->categoryRepository->makeModel()
-        );
         $picture = $this->service->pictureRepository->find($id);
+
+        $category = $categoryService->cacheService->allCacheByOptionSelected(
+            $categoryService->categoryRepository->makeModel(),
+            $picture->category_id
+        );
+
         $tags = $this->select2View(
             $this->tagService->tagRepository->all(),
             $this->service->pictureTagService->repository->findWhere(['picture_id' => $id])->toArray()
