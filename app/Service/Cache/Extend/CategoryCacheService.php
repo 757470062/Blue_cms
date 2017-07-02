@@ -55,7 +55,7 @@ class CategoryCacheService extends CacheService implements CategoryCacheServiceI
                 ->attr(['name' => 'category_id' ,'class' => 'form-control'])
                 ->selected($id)
                 ->renderAsDropdown();
-            Cache::remember($model->table.'.all.by.option.'.$id, $this->getMinutes(), function () use($data){
+                Cache::remember($model->table.'.all.by.option.'.$id, $this->getMinutes(), function () use($data){
                 return $data;
             });
         }

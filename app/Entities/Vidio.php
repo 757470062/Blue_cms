@@ -22,4 +22,18 @@ class Vidio extends Model implements Transformable
     public function vidioCategory(){
         return $this->hasOne('App\Entities\Category', 'id', 'category_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function vidioVidioTag(){
+        return $this->hasMany('App\Entities\VidioTag', 'vidio_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function vidioVidioSource(){
+        return $this->hasMany('App\Entities\VidioSource', 'vidio_id', 'id');
+    }
 }

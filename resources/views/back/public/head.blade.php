@@ -201,7 +201,7 @@
                         <div class="user-img-container">
                             <img src="/back/img/demoimage.gif" alt="">
                         </div>
-                        Jon Snow <span class="chat-status success"></span>
+                        {{ Auth('back')->user()->name }} <span class="chat-status success"></span>
                     </a>
 
                     <ul class="dropdown-menu" role="menu">
@@ -209,7 +209,10 @@
                         <li><a href="#">Settings</a></li>
                         <li class="divider"></li>
                         <li><a href="lockscreen.html">Lock</a></li>
-                        <li><a href="login.html">Logout</a></li>
+                        <li>
+                            <form action="{{ url('back/logout') }}" method="post">
+                                {{ csrf_field() }}
+                            <button type="submit" href="">登出</button></form></li>
                     </ul>
                 </li>
                 <!-- end of USER MENU -->

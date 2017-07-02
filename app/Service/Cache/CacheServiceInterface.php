@@ -22,13 +22,14 @@ interface CacheServiceInterface
      */
     public function all($model, $relation = array());
 
-    /**
-     * 缓存所有数据到分页
-     * @param $model
-     * @param array $relation
+    /**缓存分页
+     * @param $data
+     * @param string $key
+     * @param string $page
      * @return mixed
      */
-    public function paginate($model, $relation = array());
+    public function paginate($data, $key, $page = '1');
+
 
     /**
      * 清除导入Model的缓存

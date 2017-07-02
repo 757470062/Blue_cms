@@ -29,4 +29,12 @@ class Article extends Model implements Transformable
     public function articleBackUser(){
         return $this->hasOne('App\Entities\Back\Back' ,'id' ,'user_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function articleArticleTag(){
+        return $this->hasMany('App\Entities\ArticleTag', 'article_id', 'id');
+    }
+
 }

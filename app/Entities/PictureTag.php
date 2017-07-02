@@ -16,4 +16,14 @@ class PictureTag extends Model implements Transformable
         'tag_id','picture_id'
     ];
 
+    public function pictureTagTag(){
+        return $this->hasOne('App\Entities\Tag', 'id', 'tag_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pictureTagPicture(){
+        return $this->hasMany('App\Entities\Picture', 'id', 'picture_id');
+    }
 }

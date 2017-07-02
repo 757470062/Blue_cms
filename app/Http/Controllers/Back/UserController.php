@@ -26,7 +26,7 @@ class UserController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/back';
+    protected $redirectTo = '/back/category';
     protected $username;
 
     /**

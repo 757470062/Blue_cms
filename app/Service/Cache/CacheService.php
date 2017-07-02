@@ -56,23 +56,21 @@ class CacheService implements CacheServiceInterface
         return $data;
     }
 
-    /**
-     * 缓存分页
-     * @param $model
-     * @param array $relation
+
+    /**缓存分页
+     * @param $data
+     * @param string $key
+     * @param string $page
      * @return mixed
      */
-    public function paginate($model, $relation = array())
+    public function paginate($data, $key, $page = '1')
     {
-        if (Cache::has($model->table.'.paginate')){
-            $data = Cache::get($model->table.'.paginate');
+        $key = $key.'.page.'.$page;
+
+        if (Cache::has($key)){
+            $data = Cache::get($key);
         }else{
-            if (empty($relation)){
-                $data = $model->all();
-            }else{
-                $data = $model->with($relation)->paginate(10);
-            }
-            Cache::remember($model->table.'.paginate', $this->minutes, function () use($data){
+            Cache::remember($key, $this->minutes, function () use($data){
                 return $data;
             });
         }

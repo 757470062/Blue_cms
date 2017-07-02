@@ -1,0 +1,42 @@
+*{font-family: "MicroSoft YaHei";color: #34495e;}
+body{background-color: #eff3f5;}
+img{width: 100%;}
+a{color: #34495e;}
+a:hover{color: #3097D1;}
+
+.navbar{background-color: #fff;}
+.panel{border: 0;box-shadow: none;}
+.panel .panel-body{background-color: #eff3f5;padding:10px 0;box-shadow: 0;}
+.panel .date{border: 1px solid #eff3f5;}
+.panel .panel-footer{background-color: #eff3f5;padding: 0;margin: 10px 0;}
+.panel-content .panel-heading{background-color: #eff3f5;border: 0;padding: 0;}
+.panel .panel-heading{background-color: #eff3f5;border: 0;color: #34495e;}
+.list-group-item{overflow: hidden;}
+.list-group-item .col-md-11,.list-group-item{border-left:0;border-right: 0;background-color: #eff3f5;}
+.list-group-item .col-md-11,.list-group-item .col-md-12{padding: 0; }
+.list-group-item .col-md-11,.list-group-item .col-md-1{padding-top: 10px;}
+.list-group-item .col-md-11 a{font-size: 1em;}
+.list-group-item .col-md-1 i{color: #fff;}
+.list-group-item .col-md-12 span{font-size: .8em;padding-left: 10px;}
+.list-group-item .col-md-12 p{font-size: .8em;padding-top: 5px;}
+.list-group-item .label{font-size: .6em;font-weight: 100;}
+
+.content h1{font-size: 1.5em;}
+.content .info{font-size: .6em;padding: 0}
+.content p{text-indent: 2em;font-size: .8em;padding-top: 10px;margin: 0;}
+.content .panel-body{padding: 5px 0;}
+.content .panel-footer{margin: 0;}
+
+
+.hot-tags{}
+.hot-tags .panel-heading{background-color: #eff3f5;border: 0;padding: 0;}
+.hot-tags .panel-body{padding: 0px;overflow: hidden;}
+.hot-tags .panel-body a,.hot-tags .panel-body a:hover{display:block;line-height:25px;border: 1px solid #d3e0e9;color: #888;background-color: #eff3f5;padding: 3px 10px;float: left;margin: 5px 5px 0 0; font-weight:300; }
+.hot-tags .panel-body a:hover{color: #3097D1;background-color: #eff3f5;}
+
+.grid{padding: 0px 2px;}
+.grid-item{ width: 24%;float: left;margin: .4%;}
+.grid-item :hover{}
+.grid-item--width2 { width: 400px; }
+.img-list-head{text-align: center;}
+.img-list-head img{width: 95%;}

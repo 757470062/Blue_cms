@@ -56,7 +56,7 @@ class PictureSourceController extends Controller
     public function store($id, PictureSourceRequest $request)
     {
         $this->service->store($id,$request);
-        return redirect('back/picture-source/$id');
+        return redirect('back/picture-source');
     }
 
     /**

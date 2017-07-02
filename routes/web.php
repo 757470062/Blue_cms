@@ -108,3 +108,11 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     $router->post('/download/update/{id}', 'DownloadController@update');
     $router->get('/download/destroy/{id}', 'DownloadController@destroy');
 });
+
+Route::group(['namespace' => 'Web'],function ($router)
+{
+    $router->get('menu','WebController@makeMenu');
+    $router->get('cate/{id}','WebController@makeList');
+    $router->get('content/{cate_id}/{id}','WebController@makeContent');
+    $router->get('tags','WebController@makeTags');
+});
