@@ -112,6 +112,12 @@ class Theme implements ThemeService
         );
     }
 
+    /**
+     * 获取模块内容
+     * @param $cate_id
+     * @param $id
+     * @return mixed
+     */
     public function getContent($cate_id, $id){
 
         //模块对应的数据库模型

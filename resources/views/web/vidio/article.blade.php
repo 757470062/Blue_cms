@@ -32,10 +32,16 @@
                 <ul class="list-group">
                     @foreach($content->vidioVidioSource as $k => $v)
                     <li class="list-group-item">
-                        {{ $v }}
+                        {{ $v->vidioSourceVidio->name }}
                     </li>
-                    @endforeach
+                            <div class="col-md-12">
+                                <video class="video-js" preload="auto" poster="{{ url('back/photo/public/'.$v->photo) }}" data-setup="{}">
+                                    <source src="{{ url('back/photo/public/'.$v->src) }}" type="video/mp4">
+                                </video>
+                            </div>
+                        @endforeach
                 </ul>
+
             </div>
         </div>
     </div>

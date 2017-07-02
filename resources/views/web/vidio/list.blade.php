@@ -25,6 +25,10 @@
                 </div>
             @endforeach
         </div>
+        <!-- PAGINATION  -->
+        <nav aria-label="pagination pagination-sm">
+            {!! $lists->links() !!}
+        </nav>
     </div>
 </div>
 @include('web.public.footer')

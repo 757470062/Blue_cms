@@ -25,6 +25,12 @@
                 </div>
             @endforeach
         </div>
+        <div class="col-md-12 page">
+        <!-- PAGINATION  -->
+        <nav aria-label="pagination pagination-minimal">
+            {!! $lists->links() !!}
+        </nav>
+        </div>
     </div>
 </div>
 @include('web.public.footer')
