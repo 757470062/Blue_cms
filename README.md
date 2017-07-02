@@ -1,5 +1,5 @@
 # Blue_cms
-基于laravel5.4的cms系统
+基于laravel5.4的web系统
 
 ### 安装
 
