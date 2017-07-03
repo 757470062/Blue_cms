@@ -92,7 +92,7 @@ class Theme implements ThemeService
         //模块对应的数据库模型
         $moduleModel = $this->getModuleModel($this->categoryService->categoryRepository->makeModel(), $id);
 
-        $data = $moduleModel['model']->with($moduleModel['relation'])->where('category_id', $id)->paginate($perPage);
+        $data = $moduleModel['model']->with($moduleModel['relation'])->where('category_id', $id)->orderBy('id', 'desc')->paginate($perPage);
         //缓存的key
         $key = $moduleModel['model']->table.'.category_id.'.$id;
 

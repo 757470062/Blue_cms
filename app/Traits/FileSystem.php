@@ -17,7 +17,7 @@ trait FileSystem
 
 
     /**
-     * 将图片上传至系统，并将上传后的链接放入Request中
+     * 将文件上传至系统，并将上传后的链接放入Request中
      * @param Request $request
      * @param $type  文件类型，与配置文件对应文件夹(默认public)
      * @param $field 所操作字段名称
@@ -45,6 +45,7 @@ trait FileSystem
 
 
     /**
+     * 上传多个文件
      * @param Request $request
      * @param array $field  数据库字段
      * @param string $type  配置文件夹

@@ -1,6 +1,5 @@
 *{font-family: "MicroSoft YaHei";color: #34495e;}
 body{background-color: #eff3f5;}
-img{width: 100%;}
 a{color: #34495e;}
 a:hover{color: #3097D1;}
 
@@ -35,8 +34,15 @@ a:hover{color: #3097D1;}
 .hot-tags .panel-body a:hover{color: #3097D1;background-color: #eff3f5;}
 
 .grid{padding: 0px 2px;}
-.grid-item{ width: 24%;float: left;margin: .4%;}
+.grid-item{ /*width: 24%;float: left;*/padding: 5px;}
+.grid-item img{width: 100%;}
 .grid-item :hover{}
 .grid-item--width2 { width: 400px; }
 .img-list-head{text-align: center;}
 .img-list-head img{width: 95%;}
+
+.picture-search{margin-top: 30px;vertical-align: middle;}
+.picture-search p{font-size: .8em;line-height: 40px;margin-bottom: 10px;}
+.picture-search img{width:260px ;height: 87px;}
+.picture-search .col-md-6{margin-top: 15px;}
+

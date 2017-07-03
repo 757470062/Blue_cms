@@ -45,9 +45,9 @@ class CacheService implements CacheServiceInterface
            $data = Cache::get($model->table.'.all');
         }else{
             if (empty($relation)){
-                $data = $model->all();
+                $data = $model->orderBy('id', 'desc')->all();
             }else{
-                $data = $model->with($relation)->get();
+                $data = $model->with($relation)->orderBy('id', 'desc')->get();
             }
             Cache::remember($model->table.'.all', $this->minutes, function () use($data){
                 return $data;

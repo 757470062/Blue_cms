@@ -13,12 +13,43 @@
 <body>
 @include('web.public.head')
 <div class="container">
-    <div class="col-md-2"></div>
-    <div class="col-md-10" style="overflow: hidden">
-        <div class="well">{{ $category->name }}</div>
+    <div class="picture-search">
+    <div class="col-md-4">
+        <img src="/dist/img/logo.png">
+    </div>
+    <div class="col-md-6">
+        <form action="" method="post">
+        <div class="input-group">
+
+                {{ csrf_field() }}
+            <input type="text" class="form-control" placeholder="输入关键字">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">  搜 索  </button>
+              </span>
+        </div><!-- /input-group -->
+        </form>
+        <p>热门关键词：
+            <a href="">相结合多少度</a>
+            <a href="">相结合多少度</a>
+            <a href="">相结合多少度</a>
+            <a href="">相结合多少度</a>
+            <a href="">相结合多少度</a>
+        </p>
+    </div>
+    </div>
+    <hr>
+    <ol class="col-md-12 breadcrumb">
+        <li><a href="#">{{ $category->name }}</a></li>
+        <li class="active">共搜索到18条</li>
+    </ol>
+    <div class="col-md-12" style="overflow: hidden">
+        {{--<div class="well" style="overflow: hidden">
+            {{ $category->name }}
+
+        </div>--}}
         <div class="grid">
             @foreach($lists as $k => $v)
-                <div class="grid-item">
+                <div class="col-xs-6 col-md-3 grid-item">
                         <a href="{{ url('content/'.$category->id.'/'.$v->id) }}">
                             <img src="{{ url('back/photo/public/'.$v->photo) }}" alt="{{ $v->name }}" title="{{ $v->name }}"/>
                         </a>

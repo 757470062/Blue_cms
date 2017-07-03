@@ -33,7 +33,7 @@ class WebController extends Controller
         //模块对应的数据库模型
         $page = Input::get('page');
         if (empty($page)) $page = 1;
-        $lists = $this->themeService->getList($id, 15, $page);
+        $lists = $this->themeService->getList($id, 16, $page);
 
         return view('web.'.$category->categoryModule->list,compact('lists','category'));
     }
@@ -53,12 +53,16 @@ class WebController extends Controller
         foreach ($content as $value){
             $content = $value;
         }
-       // dd($content);
+        //dd($content);
         return view('web.'.$category->categoryModule->article, compact('content', 'category'));
     }
 
     public function makeTags(){
         return $this->themeService->getAllTag();
+    }
+
+    public function filterTag(){
+
     }
 
     public function makeSearch(){

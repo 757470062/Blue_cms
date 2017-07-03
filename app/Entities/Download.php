@@ -22,4 +22,12 @@ class Download extends Model implements Transformable
     public function downloadCategory(){
         return $this->hasOne('App\Entities\Category', 'id', 'category_id');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function downloadDownloadTag(){
+        return $this->hasMany('App\Entities\DownloadTag', 'download_id', 'id');
+    }
+
 }
