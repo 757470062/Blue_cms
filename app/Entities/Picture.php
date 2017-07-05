@@ -16,6 +16,7 @@ class Picture extends Model implements Transformable
         'name','category_id','photo','content'
     ];
 
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -30,7 +31,20 @@ class Picture extends Model implements Transformable
         return $this->hasMany('App\Entities\PictureTag', 'picture_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function picturePictureSource(){
         return $this->hasMany('App\Entities\PictureSource', 'picture_id', 'id');
+    }
+
+    /**
+     * 关键词检索数据
+     * @param $key
+     * @return mixed
+     */
+    public function search($key){
+        return Picture::where('name', 'like', '%'.$key.'%')
+            ->orWhere('content', 'like', '%'.$key.'%');
     }
 }

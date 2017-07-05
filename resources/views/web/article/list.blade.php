@@ -12,14 +12,18 @@
 
 <body>
 @include('web.public.head')
+@include('web.article.ban')
+<section class="container nav-zone">
+    <ol class="col-md-12 breadcrumb">
+        <li><i class="fa fa-map-marker">&nbsp;&nbsp;</i>
+            <a href="#"><strong>{{ $category->name }}</strong></a></li>
+        <li class="active">共{{ $lists->toArray()['total'] }}条数据</li>
+    </ol>
+</section>
 <div class="container">
-    <div class="col-md-9">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                {{ $category->name }}
-            </div>
-            <div class="panel-body">
 
+        <div class="panel panel-primary">
+            <div class="panel-body">
                 <ul class="list-group">
                     @foreach($lists as $k => $v)
                     <li class="list-group-item">
@@ -47,23 +51,6 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="panel panel-primary hot-tags">
-            <div class="panel-heading">
-                热门标签
-            </div>
-            <div class="panel-body">
-                <a href="" class="label label-default">fsfsfsfsdsds</a>
-                <a href="" class="label label-default">fsfsfsf</a>
-                <a href="" class="label label-default">fsfsfsfs</a>
-                <a href="" class="label label-default">fsfsfsf</a>
-                <a href="" class="label label-default">fsfsfsf</a>
-                <a href="" class="label label-default">fsfsfsf</a>
-                <a href="" class="label label-default">fsfsfsf</a>
-            </div>
-        </div>
-    </div>
-</div>
     @include('web.public.footer')
 </body>
 @include('web.public.js')

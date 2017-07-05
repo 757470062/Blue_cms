@@ -8,6 +8,7 @@ use App\Service\Cache\CacheServiceInterface;
 use App\Service\CategoryService;
 use App\Service\Theme\ThemeService;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class WebController extends Controller
@@ -33,7 +34,7 @@ class WebController extends Controller
         //模块对应的数据库模型
         $page = Input::get('page');
         if (empty($page)) $page = 1;
-        $lists = $this->themeService->getList($id, 16, $page);
+        $lists = $this->themeService->getList($id, 15, $page);
 
         return view('web.'.$category->categoryModule->list,compact('lists','category'));
     }
@@ -65,8 +66,13 @@ class WebController extends Controller
 
     }
 
-    public function makeSearch(){
-
+    public function search(Request $request, $cate_id){
+        $key = $request->key;
+        //分类
+        $category = $this->themeService->getTheme($this->categoryService->categoryRepository->makeMOdel(), 'categoryModule', $cate_id);
+        //搜索结果
+        $lists = $this->themeService->searchByModule($cate_id, $key)->paginate(15);
+        return view('web.'.$category->categoryModule->list, compact('lists', 'category' ,'key'));
     }
 
 

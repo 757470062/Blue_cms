@@ -140,4 +140,15 @@ class Theme implements ThemeService
         dd($tags);
     }
 
+    /**
+     * 单个模块数据关键词检索数据
+     * @param $cate_id
+     * @param null $key
+     * @return mixed
+     */
+    public function searchByModule($cate_id, $key = null){
+        $moduleModel = $this->getModuleModel($this->categoryService->categoryRepository->makeModel(), $cate_id);
+        return $moduleModel['model']->search($key);
+    }
+
 }

@@ -14,57 +14,90 @@
 @include('web.public.head')
 <div class="container">
     <div class="picture-search">
-    <div class="col-md-4">
+    <div class="col-md-3 logo">
         <img src="/dist/img/logo.png">
     </div>
-    <div class="col-md-6">
-        <form action="" method="post">
+    <div class="col-md-5 col-md-offset-1">
+        <form action="{{ url('search/'.$category->id) }}" method="post">
+            {{ csrf_field() }}
         <div class="input-group">
-
-                {{ csrf_field() }}
-            <input type="text" class="form-control" placeholder="输入关键字">
+            <input type="text" name="key"  @if(!empty($key)) value="{{ $key }}" @endif class="form-control" placeholder="输入关键字" >
             <span class="input-group-btn">
-                <button class="btn btn-default" type="button">  搜 索  </button>
+                <button class="btn btn-default" type="submit">  搜 索  </button>
               </span>
         </div><!-- /input-group -->
         </form>
-        <p>热门关键词：
-            <a href="">相结合多少度</a>
-            <a href="">相结合多少度</a>
-            <a href="">相结合多少度</a>
-            <a href="">相结合多少度</a>
-            <a href="">相结合多少度</a>
-        </p>
     </div>
     </div>
+    <div class="col-md-12 search-key"><p><strong>热搜关键词：</strong>
+            <a href="">实践活动</a>
+            <a href="">实践活动</a>
+            <a href="">实践活动</a>
+            <a href="">实践活动</a>
+            <a href="">实践活动</a>
+        </p></div>
     <hr>
     <ol class="col-md-12 breadcrumb">
-        <li><a href="#">{{ $category->name }}</a></li>
-        <li class="active">共搜索到18条</li>
+        <li><i class="fa fa-map-marker">&nbsp;&nbsp;</i><a href="#">{{ $category->name }}</a></li>
+        <li class="active">共{{ $lists->toArray()['total'] }}条数据</li>
     </ol>
-    <div class="col-md-12" style="overflow: hidden">
-        {{--<div class="well" style="overflow: hidden">
-            {{ $category->name }}
-
-        </div>--}}
-        <div class="grid">
-            @foreach($lists as $k => $v)
-                <div class="col-xs-6 col-md-3 grid-item">
-                        <a href="{{ url('content/'.$category->id.'/'.$v->id) }}">
-                            <img src="{{ url('back/photo/public/'.$v->photo) }}" alt="{{ $v->name }}" title="{{ $v->name }}"/>
+    <hr>
+</div>
+<div class="container">
+            <div class="row active-with-click">
+                @foreach($lists as $k => $v)
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <article class="material-card Pink">
+                        <h2>
+                            <span><a href="{{ url('content/'.$category->id.'/'.$v->id) }}" >{{ $v->name }}</a></span>
+                            <strong>
+                                <i class="fa fa-tags">&nbsp;</i>Tag:
+                                @foreach($v->picturePictureTag as $key => $value)
+                                <a href="" class="lable lable-info">{{ $value->pictureTagTag->name }}</a>
+                                @endforeach
+                            </strong>
+                        </h2>
+                        <div class="mc-content">
+                            <div class="img-container">
+                                <a href="{{ url('content/'.$category->id.'/'.$v->id) }}" >
+                                    <img class="img-responsive" src="{{ url('back/photo/public/'.$v->photo) }}">
+                                </a>
+                            </div>
+                            <div class="mc-description">
+                                {{ $v->content }}
+                            </div>
+                        </div>
+                        <a class="mc-btn-action">
+                            <i class="fa fa-bars"></i>
                         </a>
+                       {{-- <div class="mc-footer">
+                            <h4>
+                                Social
+                            </h4>
+                            <a class="fa fa-fw fa-facebook"></a>
+                            <a class="fa fa-fw fa-twitter"></a>
+                            <a class="fa fa-fw fa-linkedin"></a>
+                            <a class="fa fa-fw fa-google-plus"></a>
+                        </div>--}}
+                    </article>
                 </div>
-            @endforeach
-        </div>
-        <div class="col-md-12 page">
+                @endforeach
+            </div>
+    <div class="col-md-12 page text-center">
         <!-- PAGINATION  -->
         <nav aria-label="pagination pagination-minimal">
             {!! $lists->links() !!}
         </nav>
-        </div>
     </div>
+
 </div>
+
+
 @include('web.public.footer')
+
+
+
+
 </body>
 @include('web.public.js')
 </html>

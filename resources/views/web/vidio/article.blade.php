@@ -12,40 +12,40 @@
 
 <body>
 @include('web.public.head')
+@include('web.article.ban')
+<section class="container nav-zone">
+    <ol class="col-md-12 breadcrumb">
+        <li><i class="fa fa-map-marker">&nbsp;&nbsp;</i>
+            <a href="#"><strong>{{ $category->name }}</strong></a></li>
+        <li class="active">共{{ $content->name }}条数据</li>
+    </ol>
+</section>
 <div class="container content">
-    <div class="col-md-12">
-        <div class="panel panel-primary panel-content">
-            <div class="panel-heading">
-                {{ $content->name }}
-            </div>
-            <div class="panel-body">
-               <div class="col-md-1 info"><i class="fa fa-calendar-check-o"></i> {{ $content->created_at->format('Y-m-d') }}</div>
-                <div class="col-md-7 info">
-                    TAG:
-                    @foreach($content->vidioVidioTag as $k => $v)
-                        <a href="" >{{ $v->vidioTagTag->name }}</a> &nbsp;|&nbsp;
-                    @endforeach
-                </div>
-            </div>
-            <div class="panel-footer content-body">
-                {{ $content->content }}
-                <ul class="list-group">
-                    @foreach($content->vidioVidioSource as $k => $v)
-                    <li class="list-group-item">
-                        {{ $v->vidioSourceVidio->name }}
-                    </li>
-                            <div class="col-md-12">
-                                <video class="video-js" preload="auto" poster="{{ url('back/photo/public/'.$v->photo) }}" data-setup="{}">
-                                    <source src="{{ url('back/photo/public/'.$v->src) }}" type="video/mp4">
-                                </video>
-                            </div>
-                        @endforeach
-                </ul>
-
-            </div>
-        </div>
+    <div class="well well-sm">
+        <h1>{{ $content->name }}</h1>
+        <p><strong><i class="fa fa-calendar-check-o">&nbsp;</i>上传时间：</strong>{{ $content->created_at->format('Y-m-d') }}</p>
+        <p><i class="fa fa-calendar-check-o">&nbsp;</i><strong>标签：</strong>
+            @foreach($content->vidioVidioTag as $k => $v)
+                <a href="" >{{ $v->vidioTagTag->name }}</a> &nbsp;|&nbsp;
+            @endforeach
+        </p>
+        <p><i class="fa fa-calendar-check-o">&nbsp;</i><strong>简介：</strong>
+            {!! $content->content !!}
+        </p>
+    </div>
+    <div class="content-body">
+        <ul class="list-group">
+            @foreach($content->vidioVidioSource as $k => $v)
+                <li class="list-group-item">
+                    <video class="video-js" preload="auto" poster="{{ url('back/photo/public/'.$v->photo) }}" data-setup="{}">
+                        <source src="{{ url('back/photo/public/'.$v->src) }}" type="video/mp4">
+                    </video>
+                </li>
+            @endforeach
+        </ul>
     </div>
 </div>
+
 @include('web.public.footer')
 </body>
 @include('web.public.js')

@@ -12,42 +12,27 @@
 
 <body>
 @include('web.public.head')
+@include('web.article.ban')
+<section class="container nav-zone">
+    <ol class="col-md-12 breadcrumb">
+        <li><i class="fa fa-map-marker">&nbsp;&nbsp;</i>
+            <a href="#"><strong>{{ $category->name }}</strong></a></li>
+        <li class="active">{{ $content->title }}</li>
+    </ol>
+</section>
 <div class="container content">
-    <div class="col-md-9">
-        <div class="panel panel-primary panel-content">
-            <div class="panel-heading">
-                {{ $content->title }}
-            </div>
-            <div class="panel-body">
-                <div class="col-md-2 info"><i class="fa fa-address-book-o"></i> {{ $content->ArticleBackUser->name }}</div>
-                <div class="col-md-3 info"><i class="fa fa-calendar-check-o"></i> {{ $content->created_at->format('Y-m-d') }}</div>
-                <div class="col-md-7 info">
-                    TAG:
-                @foreach($content->articleArticleTag as $k => $v)
-                    <a href="" >{{ $v->articleTagTag->name }}</a> &nbsp;|&nbsp;
-                @endforeach
-                </div>
-            </div>
-            <div class="panel-footer content-body">
-                    {!! $content->code !!}
-            </div>
-        </div>
+    <div class="well well-sm">
+        <h1>{{ $content->title }}</h1>
+        <p><strong><i class="fa fa-address-book-o">&nbsp;</i>作者：{{ $content->ArticleBackUser->name }}</strong></p>
+        <p><strong><i class="fa fa-calendar-check-o">&nbsp;</i>上传时间：{{ $content->created_at->format('Y-m-d') }}</strong></p>
+        <p><i class="fa fa-calendar-check-o">&nbsp;</i><strong>标签：</strong>
+            @foreach($content->articleArticleTag as $k => $v)
+                <a href="" >{{ $v->articleTagTag->name }}</a> &nbsp;|&nbsp;
+            @endforeach
+        </p>
     </div>
-    <div class="col-md-3">
-     <div class="panel panel-primary hot-tags">
-         <div class="panel-heading">
-             热门TAG
-         </div>
-         <div class="panel-body">
-             <a href="" class="label label-default">fsfsfsfsdsds</a>
-             <a href="" class="label label-default">fsfsfsf</a>
-             <a href="" class="label label-default">fsfsfsfs</a>
-             <a href="" class="label label-default">fsfsfsf</a>
-             <a href="" class="label label-default">fsfsfsf</a>
-             <a href="" class="label label-default">fsfsfsf</a>
-             <a href="" class="label label-default">fsfsfsf</a>
-         </div>
-     </div>
+    <div class="content-body">
+            {!! $content->code !!}
     </div>
 </div>
 @include('web.public.footer')

@@ -12,10 +12,15 @@
 
 <body>
 @include('web.public.head')
+@include('web.article.ban')
+<section class="container nav-zone">
+    <ol class="col-md-12 breadcrumb">
+        <li><i class="fa fa-map-marker">&nbsp;&nbsp;</i>
+            <a href="#"><strong>{{ $category->name }}</strong></a></li>
+        <li class="active">共{{ $lists->toArray()['total'] }}条数据</li>
+    </ol>
+</section>
 <div class="container">
-    <div class="col-md-2"></div>
-    <div class="col-md-10" style="overflow: hidden">
-        <div class="well">{{ $category->name }}</div>
         <div class="grid">
             @foreach($lists as $k => $v)
                 <div class="grid-item">
@@ -30,7 +35,6 @@
             {!! $lists->links() !!}
         </nav>
     </div>
-</div>
 @include('web.public.footer')
 </body>
 @include('web.public.js')

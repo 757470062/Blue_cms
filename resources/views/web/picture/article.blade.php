@@ -12,36 +12,37 @@
 
 <body>
 @include('web.public.head')
-<div class="container content">
-    <div class="col-md-12">
-        <div class="panel panel-primary panel-content">
-            <div class="panel-heading">
-                {{ $content->name }}
-            </div>
-            <div class="panel-body">
-               <div class="col-md-1 info"><i class="fa fa-calendar-check-o"></i> {{ $content->created_at->format('Y-m-d') }}</div>
-                <div class="col-md-7 info">
-                    TAG:
-                    @foreach($content->picturePictureTag as $k => $v)
-                        <a href="" >{{ $v->pictureTagTag->name }}</a> &nbsp;|&nbsp;
-                    @endforeach
-                </div>
-            </div>
-            <div class="panel-footer content-body">
-                {{ $content->content }}
-                <ul class="list-group">
-                    @foreach($content->picturePictureSource as $k => $v)
-                    <li class="list-group-item">
-                        {{ $v }}
-                    </li>
-                    @endforeach
-                </ul>
-            </div>
+
+<div class="container">
+    <hr>
+    <ol class="col-md-12 breadcrumb">
+        <li><a href="#">{{ $category->name }}</a></li>
+        <li class="active">{{ $content->name }}</li>
+    </ol>
+    <hr>
+</div>
+<div class="container ">
+<div class="well well-sm picture-content-body">
+    <p><strong><i class="fa fa-telegram">&nbsp;</i>名称：</strong>{{ $content->name }}</p>
+    <p><strong><i class="fa fa-bookmark">&nbsp;</i>简述：</strong>{{ $content->content }}</p>
+    <p>
+        <strong><i class="fa fa-tags">&nbsp;</i>标签：</strong>
+        @foreach($content->picturePictureTag as $k => $v)
+            <a href="">{{ $v->pictureTagTag->name }}</a>
+            @endforeach
+    </p>
+</div>
+</div>
+<article class="jq22-container container">
+    <div class="contents">
+        <div class="chroma-gallery mygallery">
+            @foreach($content->picturePictureSource as $k => $v)
+                <img  src="{{ url('back/photo/public/'.$v->src) }}"
+                     alt="{{ $v->name }}" data-largesrc="{{ url('back/photo/public/'.$v->src) }}">
+            @endforeach
         </div>
     </div>
-</div>
-
-
+</article>
 
 
 @include('web.public.footer')

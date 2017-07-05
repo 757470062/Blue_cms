@@ -172,12 +172,14 @@ return [
         Douyasi\Editor\EditorServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
+        Mmanos\Search\SearchServiceProvider::class,
         /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        Yajra\Datatables\DatatablesServiceProvider::class,
+
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
@@ -237,6 +239,7 @@ return [
         */
         'Entrust' => Zizaco\Entrust\EntrustFacade::class,
         'Nestable' => Nestable\Facades\NestableService::class,
+        'Search' => Mmanos\Search\Facade::class,
     ],
 
 ];

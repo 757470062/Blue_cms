@@ -115,4 +115,5 @@ Route::group(['namespace' => 'Web'],function ($router)
     $router->get('cate/{id}','WebController@makeList');
     $router->get('content/{cate_id}/{id}','WebController@makeContent');
     $router->get('tags','WebController@makeTags');
+    $router->post('search/{cate_id}','WebController@search');
 });

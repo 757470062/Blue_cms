@@ -57,4 +57,11 @@ interface ThemeService
      */
     public function getAllTag();
 
+    /**
+     * 单个模块关键词检索数据
+     * @param $cate_id
+     * @param null $key
+     * @return mixed
+     */
+    public function searchByModule($cate_id, $key = null);
 }

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -14,14 +14,14 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">首页<span class="sr-only">(current)</span></a></li>
+                <li><a href="/">首页<span class="sr-only">(current)</span></a></li>
 
                 @for($i = 0; $i < count($menus); $i++)
                         @if(count($menus[$i]['child']) > 0)
                         <li class="dropdown">
                             <a href="{{ url('cate/'.$menus[$i]['id']) }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                 {{ $menus[$i]['name'] }}
-                               {{-- <span class="caret"></span>--}}
+                                <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 @for($j = 0; $j < count($menus[$i]['child']); $j++)
@@ -32,9 +32,7 @@
                         @else
                         <li><a href="{{ url('cate/'.$menus[$i]['id']) }}">{{ $menus[$i]['name'] }}</a></li>
                         @endif
-
                 @endfor
-
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
