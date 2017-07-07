@@ -99,6 +99,7 @@
     -ms-transition: all 0.3s;
     -o-transition: all 0.3s;
     transition: all 0.3s;
+	box-shadow: 1px 1px 1px 1px  rgba(189,195,199,0.8);
 }
 .material-card .mc-btn-action {
     position: absolute;
@@ -414,7 +415,8 @@
     background-color: #880e4f;
 }
 .material-card.Pink.mc-active .mc-content {
-    background-color: #fce4ec;
+    background-color: #fff;
+    box-shadow: 1px 1px 1px 1px  rgba(189,195,199,0.8);
 }
 .material-card.Pink.mc-active .mc-footer {
     background-color: #f8bbd0;

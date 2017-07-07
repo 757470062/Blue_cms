@@ -11,11 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+/*Route::get('/home', 'HomeController@index')->name('home');*/
 Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
 {
     $router->get('login', 'UserController@showLoginForm');
@@ -111,6 +109,7 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
 
 Route::group(['namespace' => 'Web'],function ($router)
 {
+    $router->get('/','webController@makeIndex');
     $router->get('menu','WebController@makeMenu');
     $router->get('cate/{id}','WebController@makeList');
     $router->get('content/{cate_id}/{id}','WebController@makeContent');

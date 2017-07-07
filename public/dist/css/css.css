@@ -31,7 +31,7 @@ a:hover{color: #3097D1;}
 .content h1{font-size: 1.1em;line-height:30px;padding-bottom:10px;margin: 0;}
 .content p{font-size: .8em;margin: 0;}
 .content .content-body{font-size: .9em;padding: 5px;}
-.content .content-body p{padding-top: 10px;line-height:25px;text-indent: 2em;}
+.content .content-body p{padding-top: 10px;line-height:25px;}
 
 .hot-tags{}
 .hot-tags .panel-heading{background-color: #eff3f5;border: 0;padding: 0;}
@@ -70,3 +70,32 @@ a:hover{color: #3097D1;}
 }
 .mygallery .chrg-item{max-width: 300px;}
 .active-with-click{margin-top: 20px;}
+
+.adaptive .banner .tb-list ul{list-style: none !important;padding: 0;}
+.adaptive .banner .tb-list ul img{width: 100%;}
+
+/* 瀑布流 */
+.waterfall{padding: 1em 0;}
+.waterfall .list-group {
+    margin-right: 14px; }
+.waterfall .list-group > li:first-child {
+    padding: 0;
+    background-color: white; }
+.waterfall .list-group > li:first-child img {
+    width: 100%;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px; }
+.waterfall .list-group > li {
+    background-color: #f5f5f5; }
+
+@media (min-width: 768px) {
+    .waterfall .list-group {
+        width: 346px; } }
+@media (min-width: 992px) {
+    .waterfall .list-group {
+        width: 299px; } }
+@media (min-width: 1200px) {
+    .waterfall .list-group {
+        width: 271px; } }
+
+/*# sourceMappingURL=main.css.map */

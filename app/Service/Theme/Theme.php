@@ -141,6 +141,16 @@ class Theme implements ThemeService
     }
 
     /**
+     * 获取模块的最新文章
+     * @param $model
+     * @param $number //文章数量
+     * @return mixed
+     */
+    public function getListNew($model, $number){
+        return $this->cacheService->all($model)->sortByDesc('id')->take($number);
+    }
+
+    /**
      * 单个模块数据关键词检索数据
      * @param $cate_id
      * @param null $key

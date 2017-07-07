@@ -41,11 +41,12 @@ class CacheService implements CacheServiceInterface
      */
     public function all($model, $relation = array())
     {
+
         if (Cache::has($model->table.'.all')){
            $data = Cache::get($model->table.'.all');
         }else{
             if (empty($relation)){
-                $data = $model->orderBy('id', 'desc')->all();
+                $data = $model->orderBy('id', 'desc')->get();
             }else{
                 $data = $model->with($relation)->orderBy('id', 'desc')->get();
             }

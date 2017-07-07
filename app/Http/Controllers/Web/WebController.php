@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Entities\Article;
-use App\Service\ArticleService;
 use App\Service\Cache\CacheServiceInterface;
 use App\Service\CategoryService;
 use App\Service\Theme\ThemeService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Facades\App\Repositories\ArticleRepository;
 
 class WebController extends Controller
 {
@@ -21,7 +20,8 @@ class WebController extends Controller
     }
 
     public function makeIndex(){
-
+        $articlesNewTake = $this->themeService->getListNew(ArticleRepository::makeModel(),4);
+        return view('web.index', compact('articlesNewTake'));
     }
 
     /**

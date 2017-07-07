@@ -19,6 +19,7 @@ Trait DatatableTrait
      * @return mixed
      */
     public function getDataByAjax($data, $action){
+
         return  Datatables::of($data)
             ->addColumn('action', $action)
             ->make(true);

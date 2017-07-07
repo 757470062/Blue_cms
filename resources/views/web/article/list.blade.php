@@ -51,6 +51,7 @@
             </div>
         </div>
     </div>
+
     @include('web.public.footer')
 </body>
 @include('web.public.js')
