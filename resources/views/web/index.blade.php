@@ -21,7 +21,15 @@
         </ul>
     </div>
 </div>
-<div class="container">
+
+<div class="container photo-index">
+    <div class="tab">
+        <ul>
+            <li class="active"><a href="">文章文章</a></li>
+            <li><a href="">最新文章</a></li>
+            <li><a href="">最热文章</a></li>
+        </ul>
+    </div>
     <div class="waterfall"></div>
 </div>
 
@@ -62,9 +70,19 @@
 
 <div class="container">
 <div class="col-md-8">
-            <ul class="list-group">
+    <div class="tab">
+        <ul>
+            <li class="active"><a href="">最新文章</a></li>
+            <li><a href="">推荐文章</a></li>
+        </ul>
+    </div>
+            <ul class="list-group content-index">
                 @foreach($articlesNewTake as $k => $v)
                     <li class="list-group-item">
+                        <div class="col-md-3">
+                            <img src="{{ url('back/photo/public/'.$v->photo) }}" width="100%">
+                        </div>
+                        <div class="col-md-9">
                         <div class="col-md-11">
                             <a href="{{ url('content/'.$v->category_id.'/'.$v->id) }}">{{ $v->title }}</a>
                         </div>
@@ -77,18 +95,73 @@
                             @endforeach
                             <span><i class="fa fa-calendar-check-o"></i> {{ $v->created_at->format('Y-m-d') }}</span>
                             <span><i class="fa fa-address-book-o"></i> 由{{ $v->articleBackUser->name }}发布</span>
-                            <p>{{ $v->intro }}</p>
+                            <p>{{ str_limit($v->intro, 100, '...') }}</p>
+                        </div>
                         </div>
                     </li>
                 @endforeach
             </ul>
         </div>
     <div class="col-md-4">
+        <div class="question-index">
+            <div class="tab">
+                &nbsp;<i class="fa fa-vcard">&nbsp;&nbsp;</i>热门问题
+            </div>
+            <div>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
 
+                </ul>
+            </div>
+        </div>
+
+        <div class="question-index">
+            <div class="tab">
+                &nbsp;<i class="fa fa-diamond">&nbsp;&nbsp;</i>合作网站
+            </div>
+            <div>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
+                    <li class="list-group-item"><a href="">说的上弹时间快点就看似简单</a></li>
+
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 
 
+{{--<div class="container">
+<div class="friend">
+    <div class="tab">
+        &nbsp;&nbsp;<i class="fa fa-diamond">&nbsp;&nbsp;</i>合作网站
+    </div>
+    <div class="friend-group">
+    <ul>
+        <li><a href="">大叔大叔多</a></li>
+        <li><a href="">大叔大叔多</a></li>
+        <li><a href="">大叔大叔多</a></li>
+        <li><a href="">大叔大叔多</a></li>
+        <li><a href="">大叔大叔多</a></li>
+    </ul>
+    </div>
+</div>
+</div>--}}
 @include('web.public.footer')
 </body>
 @include('web.public.js')

@@ -20,7 +20,7 @@ class WebController extends Controller
     }
 
     public function makeIndex(){
-        $articlesNewTake = $this->themeService->getListNew(ArticleRepository::makeModel(),4);
+        $articlesNewTake = $this->themeService->getListNew(ArticleRepository::makeModel(), 26);
         return view('web.index', compact('articlesNewTake'));
     }
 

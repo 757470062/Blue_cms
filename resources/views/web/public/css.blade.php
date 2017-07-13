@@ -1,13 +1,13 @@
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
 <link href="/dist/css/flat-ui.css" rel="stylesheet">
 <link href="/dist/css/font-awesome.min.css" rel="stylesheet">
-<link href="/dist/css/css.css" rel="stylesheet">
 {{--图集--}}
 <link rel="stylesheet" href="/dist/stylesheets/chromagallery.min.css">
 <link rel="stylesheet" href="/dist/css/material-cards.css">
 
+{{--全局css--}}
+<link href="/dist/css/css.css" rel="stylesheet">
 
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
 <!--[if lt IE 9]>

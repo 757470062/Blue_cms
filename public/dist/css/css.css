@@ -3,6 +3,8 @@ body{background-color: #eff3f5;padding-top: 60px;}
 a{color: #34495e;}
 a:hover{color: #3097D1;}
 
+.container{margin-top: 20px;}
+
 .ban-sm img{width: 100%;}
 .nav-zone{padding: 20px 10px 20px 10px;}
 .nav-zone .breadcrumb{}
@@ -71,11 +73,12 @@ a:hover{color: #3097D1;}
 .mygallery .chrg-item{max-width: 300px;}
 .active-with-click{margin-top: 20px;}
 
+.adaptive{overflow: hidden;}
 .adaptive .banner .tb-list ul{list-style: none !important;padding: 0;}
 .adaptive .banner .tb-list ul img{width: 100%;}
 
 /* 瀑布流 */
-.waterfall{padding: 1em 0;}
+.waterfall{padding:0;}
 .waterfall .list-group {
     margin-right: 14px; }
 .waterfall .list-group > li:first-child {
@@ -99,3 +102,45 @@ a:hover{color: #3097D1;}
         width: 271px; } }
 
 /*# sourceMappingURL=main.css.map */
+.photo-index{margin-top: 20px;}
+
+footer{padding: 20px 0;}
+.ad{padding: 5px;}
+.question-index{padding: 0 5px; margin-top: 18px;}
+.question-index .tab{font-size: 1em;border: 1px solid #d3e0e9;}
+.question-index ul{list-style: none;padding: 0;}
+.question-index ul li{padding:5px 10px;border: 1px solid #d3e0e9; }
+.question-index ul li a{font-size: .8em;}
+.friend{padding: 5px;}
+.friend h5{font-size:.9em;}
+.friend .friend-group ul{padding:15px 0;list-style:none;overflow: hidden}
+.friend .friend-group ul li{min-width:120px;border-bottom: 1px solid #d3e0e9;border-top: 1px solid #d3e0e9;float: left;margin-left:10px;line-height: 30px;font-size: .7em;margin-bottom: 10px;text-align: center;}
+.more{float: right;padding-right: 20px;font-size: .8em;line-height:30px;}
+.tab{padding:5px;}
+.tab ul{overflow: hidden;list-style: none;padding: 0;}
+.tab ul li{min-width:120px;padding: 0px 10px; float: left;text-align: center;}
+.tab ul .active{border: 1px solid #3498db;border-radius: 20px;}
+.tab ul .active a{color: #3498db;}
+
+.content-index{overflow: hidden;}
+.content-index  .list-group-item{padding:10px 15px 10px 0px;}
+.content-index  .list-group-item:hover{background-color: #fff;}
+.content-index  .list-group-item .col-md-3{padding: 0 !important;}
+.film-index .col-md-4{padding: 1px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
