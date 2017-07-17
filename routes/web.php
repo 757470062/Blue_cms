@@ -32,6 +32,7 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     $router->get('/article/edit/{id}', 'ArticleController@edit');
     $router->post('/article/update/{id}', 'ArticleController@update');
     $router->get('/article/destroy/{id}', 'ArticleController@destroy');
+    $router->get('/article/search/', 'ArticleController@search');
     //分类
     $router->get('/category', 'CategoryController@index');
     $router->get('/category/create', 'CategoryController@create');

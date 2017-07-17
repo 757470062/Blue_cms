@@ -15,7 +15,6 @@ use App\Service\Cache\CacheServiceInterface;
 use App\Traits\ButtonTrait;
 use App\Traits\DatatableTrait;
 use Illuminate\Http\Request;
-use Cache;
 use Log;
 
 class ModuleService
@@ -28,10 +27,9 @@ class ModuleService
      * @param ModuleRepository $moduleRepository
      * @param CacheServiceInterface $cacheService
      */
-    public function __construct(ModuleRepository $moduleRepository, CacheServiceInterface $cacheService)
+    public function __construct(ModuleRepository $moduleRepository)
     {
         $this->moduleRepository = $moduleRepository;
-        $this->cacheService = $cacheService;
     }
 
 
@@ -40,14 +38,11 @@ class ModuleService
      */
     public function index(){
        return $this->getDataByAjax(
-           $this->cacheService->all(
-               $this->moduleRepository->makeModel()
-           ),
+           $this->moduleRepository->all(),
            $this->getButton('修改', 'glyphicon glyphicon-edit btn-md', '/back/module/edit/{{ $id }}').
            $this->getButton('删除', 'glyphicon glyphicon-trash btn-md', '/back/module/destroy/{{ $id }}')
        );
     }
-
 
     /**
      * @param Request $request

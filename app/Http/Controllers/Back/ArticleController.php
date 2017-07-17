@@ -47,9 +47,7 @@ class ArticleController extends Controller
      */
     public function create(CategoryService $categoryService)
     {
-        $category = $categoryService->cacheService->allCacheByOption(
-            $categoryService->categoryRepository->makeModel()
-        );
+        $category = $categoryService->allBySelect();
 
         $tags = $this->select2View($this->tagService->tagRepository->all());
         return view('back.article.create', compact('category', 'tags'));
@@ -76,10 +74,9 @@ class ArticleController extends Controller
     public function edit($id ,CategoryService $categoryService)
     {
         $article=$this->articleService->articleRepository->find($id);
-        $category = $categoryService->cacheService->allCacheByOptionSelected(
-            $categoryService->categoryRepository->makeModel(),
-            $article->category_id
-        );
+
+        $category = $categoryService->allBySelect($article->category_id);
+
         $tags = $this->select2View(
             $this->tagService->tagRepository->all(),
             $this->articleService->articleTagService->repository->findWhere(['article_id' => $id])->toArray()
@@ -109,10 +106,13 @@ class ArticleController extends Controller
     public function destroy($id)
     {
           $this->articleService->articleRepository->delete($id);
-          event(new ForgetCacheEvent(
-              $this->articleService->articleRepository->makeModel()
-          ));
           return redirect()->back();
     }
 
+    /**
+     * @return mixed
+     */
+    public function search(){
+        return $this->articleService->getDataBySearch();
+    }
 }

@@ -11,14 +11,10 @@ namespace App\Service;
 
 use App\Events\ForgetCacheEvent;
 use App\Repositories\CategoryRepository;
-use App\Repositories\CategoryRepositoryEloquent;
-use App\Service\Cache\CacheServiceInterface;
-use App\Service\Cache\Extend\CategoryCacheService;
 use App\Service\Cache\Extend\CategoryCacheServiceInterface;
 use App\Traits\NestableTrait;
 use Illuminate\Http\Request;
 use Log;
-use Cache;
 
 class CategoryService
 {
@@ -29,23 +25,38 @@ class CategoryService
      * @param CategoryRepository $categoryRepository
      * @param CategoryCacheServiceInterface $cacheService
      */
-    public function __construct(CategoryRepository $categoryRepository, CategoryCacheServiceInterface $cacheService)
+    public function __construct(CategoryRepository $categoryRepository)
     {
         $this->categoryRepository = $categoryRepository;
-        $this->cacheService = $cacheService;
     }
-
 
     /**
      * @return mixed
      */
     public function index(){
-        return $this->getNestableByBlade(
-            $this->cacheService->allCacheByNestable(
-                $this->categoryRepository->makeModel()
-            )
-        );
+        return $this->getNestableByBlade($this->allByJson());
     }
+
+    /**
+     * nestable 生成json数据
+     * @return mixed
+     */
+    public function allByJson(){
+        return $this->categoryRepository->makeModel()->nested()->get();
+    }
+
+    /**
+     * 利用nestable生成select和option,
+     * @param null $category_id 选中id
+     * @return mixed
+     */
+    public function allBySelect($category_id = null){
+        return $this->categoryRepository->makeModel()
+            ->attr(['name' => 'category_id' ,'class' => 'form-control'])
+            ->selected($category_id)
+            ->renderAsDropdown();
+    }
+
 
     /**
      * @param Request $request
@@ -66,10 +77,6 @@ class CategoryService
     public function storeChild(Request $request, $parent_id){
         $category=$this->categoryRepository->create(array_add($request->toArray(),'parent_id',$parent_id));
         if (empty($category)) abort(404,'为ID：'.$parent_id.'的分类创建子分类失败。');
-        event(new ForgetCacheEvent(
-                $this->categoryRepository->makeModel(),
-                $this->cacheService->getAllowedAdd())
-        );
     }
 
     /**
@@ -81,10 +88,6 @@ class CategoryService
         if(empty($category)){
             abort(500,'修改ID：'.$id.'的分类失败');
         }
-        event(new ForgetCacheEvent(
-                $this->categoryRepository->makeModel(),
-                $this->cacheService->getAllowedAdd())
-        );
     }
 
 }

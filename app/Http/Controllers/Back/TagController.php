@@ -101,9 +101,6 @@ class TagController extends Controller
     public function destroy($id)
     {
         $this->tagService->tagRepository->delete($id);
-        event(new ForgetCacheEvent(
-            $this->tagService->tagRepository->makeModel()
-        ));
         return redirect()->back();
     }
 }

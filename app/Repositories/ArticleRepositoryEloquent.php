@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Illuminate\Support\Facades\App;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\ArticleRepository;
@@ -23,13 +24,26 @@ class ArticleRepositoryEloquent extends BaseRepository implements ArticleReposit
         return Article::class;
     }
 
-    
+    /**
+     * @return string
+     */
+ /*   public function presenter()
+    {
+        return 'App\\Presenters\\ArticlePresenter';
+    }*/
+
+    protected $fieldSearchable = [
+        'title' => 'like',
+        'intro' => 'like',
+    ];
 
     /**
      * Boot up the repository, pushing criteria
      */
     public function boot()
     {
-        $this->pushCriteria(app(RequestCriteria::class));
+
     }
+
+
 }

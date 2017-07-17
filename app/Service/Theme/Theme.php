@@ -14,57 +14,54 @@ use Facades\App\Repositories\ArticleRepository;
 use Facades\App\Repositories\DownloadRepository;
 use Facades\App\Repositories\PictureRepository;
 use Facades\App\Repositories\VidioRepository;
-use App\Service\Cache\CacheServiceInterface;
 use App\Service\CategoryService;
 
 
 class Theme implements ThemeService
 {
-    public function __construct(CategoryService $categoryService,CacheServiceInterface $cacheService,TagService $tagService)
+    public function __construct(CategoryService $categoryService,TagService $tagService)
     {
         $this->categoryService = $categoryService;
-        $this->cacheService = $cacheService;
         $this->tagService = $tagService;
     }
 
     /**
      * 获取调用的模板文件存放位置
-     * @param $model
+     * @param $repository
      * @param $relation
      * @param $cate_id
      * @return mixed
      */
-    public function getTheme($model, $relation, $cate_id){
-        $theme = $model->with($relation)->find($cate_id);
-        return $theme;
+    public function getTheme($repository, $relation, $cate_id){
+        return $repository::with($relation)->find($cate_id);
     }
 
 
     /**
      * 获取导航指向的模块
-     * @param $model
+     * @param $cateRepository
      * @param $cate_id
      * @return array
      */
-    public function getModuleModel($model, $cate_id){
-        $model = $model->find($cate_id);
+    public function getModuleModel($cateRepository, $cate_id){
+        $category = $cateRepository->find($cate_id);
 
-        switch ($model->module_id){
+        switch ($category->module_id){
             case 1:
                 return [
-                    'model' => ArticleRepository::makeModel(),
+                    'repository' => ArticleRepository::class,
                     'relation' => 'articleArticleTag'
                 ];
                 break;
             case 2:
                 return [
-                    'model' => PictureRepository::makeModel(),
+                    'repository' => PictureRepository::class,
                     'relation' => 'picturePictureTag'
                 ];
                 break;
             case 3:
                 return [
-                    'model' => VidioRepository::makeModel(),
+                    'repository' => VidioRepository::class,
                     'relation' => 'vidioVidioTag'
                 ];
                 break;
@@ -72,7 +69,7 @@ class Theme implements ThemeService
                 break;
             case 5:
                 return [
-                    'model' => DownloadRepository::makeModel(),
+                    'repository' => DownloadRepository::class,
                      'relation' => 'downloadDownloadTag'
                 ];
                 break;
@@ -84,20 +81,17 @@ class Theme implements ThemeService
     /**
      * 获取模块对应文档列表（带分页）
      * @param $id
-     * @param int $perPage
      * @param int $Page
      * @return mixed
      */
-    public function getList($id, $perPage, $page = 1){
+    public function getList($id, $page = 1){
         //模块对应的数据库模型
-        $moduleModel = $this->getModuleModel($this->categoryService->categoryRepository->makeModel(), $id);
+        $moduleModel = $this->getModuleModel($this->categoryService->categoryRepository, $id);
 
-        $data = $moduleModel['model']->with($moduleModel['relation'])->where('category_id', $id)->orderBy('id', 'desc')->paginate($perPage);
-        //缓存的key
-        $key = $moduleModel['model']->table.'.category_id.'.$id;
+        $lists = $moduleModel['repository']::with($moduleModel['relation'])->scopeQuery(function ($query) use($id){
+            return $query->where(['category_id' => $id])->orderBy('id', 'desc');
+        })->paginate($page);
 
-        //分页数据缓存
-        $lists = $this->cacheService->paginate($data,$key,$page);
         return $lists;
     }
 
@@ -107,9 +101,7 @@ class Theme implements ThemeService
      * @return mixed
      */
     public function getMenu(){
-        return  $this->categoryService->cacheService->allCacheByNestable(
-            $this->categoryService->categoryRepository->makeModel()
-        );
+        return  $this->categoryService->allByJson();
     }
 
     /**
@@ -121,14 +113,10 @@ class Theme implements ThemeService
     public function getContent($cate_id, $id){
 
         //模块对应的数据库模型
-        $moduleModel = $this->getModuleModel($this->categoryService->categoryRepository->makeModel(), $cate_id);
+        $moduleModel = $this->getModuleModel($this->categoryService->categoryRepository, $cate_id);
 
-        $content = $this->cacheService->all($moduleModel['model'],$moduleModel['relation']);
+        $content = $moduleModel['repository']::with($moduleModel['relation'])->find($id);
 
-        //查找文章
-         $content = $content->filter(function ($value) use($id){
-            return $value->id == $id;
-         });
         return $content;
     }
 
@@ -136,18 +124,20 @@ class Theme implements ThemeService
      * @param TagService $tagService
      */
     public function getAllTag(){
-        $tags = $this->tagService->cacheService->all($this->tagService->tagRepository->makeModel());
+        $tags = $this->tagService->tagRepository->all();
         dd($tags);
     }
 
     /**
      * 获取模块的最新文章
-     * @param $model
+     * @param $repository
      * @param $number //文章数量
      * @return mixed
      */
-    public function getListNew($model, $number){
-        return $this->cacheService->all($model)->sortByDesc('id')->take($number);
+    public function getListNew($repository, $number){
+        return $repository::scopeQuery(function ($query) use($number){
+            return $query->orderBy('id','desc')->take($number);
+        })->all();
     }
 
     /**

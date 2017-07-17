@@ -105,9 +105,7 @@ class FriendController extends Controller
     public function destroy($id)
     {
         $this->friendService->friendRepository->delete($id);
-        event(new ForgetCacheEvent(
-            $this->friendService->friendRepository->makeModel()
-        ));
+
         return redirect()->back();
     }
 }

@@ -9,9 +9,7 @@
 namespace App\Service;
 
 
-use App\Events\ForgetCacheEvent;
 use App\Repositories\VidioRepository;
-use App\Service\Cache\CacheServiceInterface;
 use App\Traits\ButtonTrait;
 use App\Traits\DatatableTrait;
 use App\Traits\FileSystem;
@@ -25,12 +23,10 @@ class VidioService
     /**
      * VidioService constructor.
      * @param VidioRepository $repository
-     * @param CacheServiceInterface $cacheService
      */
-    public function __construct(VidioRepository $repository, CacheServiceInterface $cacheService, VidioTagService $vidioTagService)
+    public function __construct(VidioRepository $repository, VidioTagService $vidioTagService)
     {
         $this->repository = $repository;
-        $this->cacheService = $cacheService;
         $this->vidioTagService = $vidioTagService;
     }
 
@@ -39,9 +35,7 @@ class VidioService
      */
     public function index(){
         return $this->getDataByAjax(
-            $this->cacheService->all(
-                $this->repository->makeModel(), ['vidioCategory']
-            ),
+            $this->repository->with(['vidioCategory'])->all(),
             $this->getButton('查看视频集', 'glyphicon glyphicon-save btn-md', 'back/vidio-source/{{ $id }}').
             $this->getButton('添加视频', 'glyphicon glyphicon-open btn-md', '/back/vidio-source/create/{{ $id }}').
             $this->getButton('修改', 'glyphicon glyphicon-edit btn-md', '/back/vidio/edit/{{ $id }}').
@@ -62,8 +56,6 @@ class VidioService
             'vidio_id',
             $vidio->getAttribute('id')
         );
-        //清除缓存
-        event(new ForgetCacheEvent($this->repository->makeModel()));
     }
 
     /**
@@ -82,7 +74,5 @@ class VidioService
             'vidio_id',
             $id
          );
-        //清除缓存
-        event(new ForgetCacheEvent($this->repository->makeModel()));
     }
 }

@@ -9,9 +9,7 @@
 namespace App\Service;
 
 
-use App\Events\ForgetCacheEvent;
 use App\Repositories\PictureRepository;
-use App\Service\Cache\CacheServiceInterface;
 use App\Traits\ButtonTrait;
 use App\Traits\DatatableTrait;
 use App\Traits\FileSystem;
@@ -25,12 +23,10 @@ class PictureService
     /**
      * PictureService constructor.
      * @param PictureRepository $pictureRepository
-     * @param CacheServiceInterface $cacheService
      */
-    public function __construct(PictureRepository $pictureRepository, CacheServiceInterface $cacheService, PictureTagService $pictureTagService)
+    public function __construct(PictureRepository $pictureRepository, PictureTagService $pictureTagService)
     {
         $this->pictureRepository = $pictureRepository;
-        $this->cacheService = $cacheService;
         $this->pictureTagService = $pictureTagService;
     }
 
@@ -39,10 +35,7 @@ class PictureService
      */
     public function index(){
         return  $this->getDataByAjax(
-            $this->cacheService->all(
-                $this->pictureRepository->makeModel(),
-                ['pictureCategory']
-            ),
+            $this->pictureRepository->with(['pictureCategory'])->all(),
             $this->getButton('查看图集', 'glyphicon glyphicon-save btn-md', 'back/picture-source/{{ $id }}').
             $this->getButton('添加图片', 'glyphicon glyphicon-open btn-md', '/back/picture-source/create/{{ $id }}').
             $this->getButton('修改', 'glyphicon glyphicon-edit btn-md', '/back/picture/edit/{{ $id }}').
@@ -63,8 +56,6 @@ class PictureService
             'picture_id',
             $picture->getAttribute('id')
         );
-        //清除缓存
-        event(new ForgetCacheEvent($this->pictureRepository->makeModel()));
     }
 
     /**
@@ -83,7 +74,5 @@ class PictureService
             'picture_id',
             $id
         );
-        //清除缓存
-        event(new ForgetCacheEvent($this->pictureRepository->makeModel()));
     }
 }

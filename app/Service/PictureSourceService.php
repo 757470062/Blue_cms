@@ -9,10 +9,8 @@
 namespace App\Service;
 
 
-use App\Events\ForgetCacheEvent;
 use App\Repositories\PictureRepository;
 use App\Repositories\PictureSourceRepository;
-use App\Service\Cache\CacheServiceInterface;
 use App\Traits\ButtonTrait;
 use App\Traits\DatatableTrait;
 use App\Traits\FileSystem;
@@ -25,9 +23,8 @@ class PictureSourceService
     /**
      * PictureSourceService constructor.
      * @param PictureRepository $pictureRepository
-     * @param CacheServiceInterface $cacheService
      */
-    public function __construct(PictureSourceRepository $pictureSourceRepository, CacheServiceInterface $cacheService)
+    public function __construct(PictureSourceRepository $pictureSourceRepository)
     {
         $this->pictureSourceRepository = $pictureSourceRepository;
         $this->cacheService = $cacheService;
@@ -35,10 +32,7 @@ class PictureSourceService
 
     public function index(){
         return $this->getDataByAjax(
-            $this->cacheService->all(
-                $this->pictureSourceRepository->makeModel(),
-                ['pictureSourcePicture']
-            ),
+            $this->pictureSourceRepository->with(['pictureSourcePicture'])->all(),
             $this->getButton('修改', 'glyphicon glyphicon-edit btn-md', '/back/picture-source/edit/{{ $id }}').
             $this->getButton('删除', 'glyphicon glyphicon-trash btn-md', '/back/picture-source/destroy/{{ $id }}')
         );
@@ -54,7 +48,6 @@ class PictureSourceService
                 'picture_id', $id)
         );
         if (empty($pictureSource)) abort(404, '图集图片添加失败');
-        event(new ForgetCacheEvent($this->pictureSourceRepository->makeModel()));
     }
 
     /**
@@ -64,7 +57,6 @@ class PictureSourceService
     public function update(Request $request, $id){
         $pictureSource = $this->pictureSourceRepository->find($id)->update($this->putOneFile($request, 'src'));
         if (empty($pictureSource)) abort(404, '图集图片资源修改失败');
-        event(new ForgetCacheEvent($this->pictureSourceRepository->makeModel()));
     }
 
 }

@@ -7,10 +7,8 @@
  */
 
 namespace App\Service;
-use App\Events\ForgetCacheEvent;
 use App\Repositories\ArticleRepository;
 use App\Traits\TagTrait;
-use App\Service\Cache\CacheServiceInterface;
 use App\Traits\ButtonTrait;
 use App\Traits\DatatableTrait;
 use App\Traits\FileSystem;
@@ -18,6 +16,7 @@ use App\Traits\MakedownTrait;
 use Cache;
 use Illuminate\Http\Request;
 use Log;
+use Prettus\Repository\Criteria\RequestCriteria;
 
 class ArticleService
 {
@@ -26,12 +25,10 @@ class ArticleService
     /**
      * ArticleService constructor.
      * @param ArticleRepository $articleRepository
-     * @param CacheServiceInterface $cacheService
      */
-    public function __construct(ArticleRepository $articleRepository, CacheServiceInterface $cacheService,  ArticleTagService $articleTagService)
+    public function __construct(ArticleRepository $articleRepository, ArticleTagService $articleTagService)
     {
         $this->articleRepository = $articleRepository;
-        $this->cacheService = $cacheService;
         $this->articleTagService = $articleTagService;
     }
 
@@ -39,9 +36,10 @@ class ArticleService
      * @param array $map
      * @return mixed
      */
-    public function getDataBySearch(array $map){
-        $article = $this->articleRepository->where($map)->orderBy('id','desc')->get();
-        return $article;
+    public function getDataBySearch(){
+        $this->articleRepository->pushCriteria(app(RequestCriteria::class));
+        $articles = $this->articleRepository->all();
+        return $articles;
     }
 
     /**
@@ -49,10 +47,7 @@ class ArticleService
      */
     public function index(){
         return $this->getDataByAjax(
-            $this->cacheService->all(
-                $this->articleRepository->makeModel(),
-                ['articleCategory' , 'articleBackUser']
-            ),
+            $this->articleRepository->with(['articleCategory' , 'articleBackUser'])->all(),
             $this->getButton('修改', 'glyphicon glyphicon-edit btn-md', '/back/article/edit/{{ $id }}').
             $this->getButton('删除', 'glyphicon glyphicon-trash btn-md', '/back/article/destroy/{{ $id }}')
         );
@@ -75,7 +70,6 @@ class ArticleService
             'article_id',
             $article->getAttribute('id'));
 
-        event(new ForgetCacheEvent($this->articleRepository->makeModel()));
     }
 
     /**
@@ -98,8 +92,7 @@ class ArticleService
             $this->articleTagService->repository->makeModel(),
             'article_id',
             $id);
-        //清除缓存
-        event(new ForgetCacheEvent($this->articleRepository->makeModel()));
+
     }
 
 }

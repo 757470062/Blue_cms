@@ -51,9 +51,8 @@ class DownloadController extends Controller
      */
     public function create(CategoryService $categoryService, TagService $tagService)
     {
-        $category = $categoryService->cacheService->allCacheByOption(
-            $categoryService->categoryRepository->makeModel()
-        );
+        $category = $categoryService->allBySelect();
+
         $tags = $this->select2View($tagService->tagRepository->all());
         return view('back.download.create', compact('category', 'tags'));
     }
@@ -91,10 +90,8 @@ class DownloadController extends Controller
     {
         $download = $this->service->repository->find($id);
 
-        $category = $categoryService->cacheService->allCacheByOptionSelected(
-            $categoryService->categoryRepository->makeModel(),
-            $download->category_id
-        );
+        $category = $categoryService->allBySelect($download->category_id);
+
        $tags = $this->select2View(
             $tagService->tagRepository->all(),
             $downloadTagService->repository->findWhere(['download_id' => $id])->toArray()

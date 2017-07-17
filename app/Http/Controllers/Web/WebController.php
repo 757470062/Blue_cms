@@ -20,7 +20,7 @@ class WebController extends Controller
     }
 
     public function makeIndex(){
-        $articlesNewTake = $this->themeService->getListNew(ArticleRepository::makeModel(), 26);
+        $articlesNewTake = $this->themeService->getListNew(ArticleRepository::class, 10);
         return view('web.index', compact('articlesNewTake'));
     }
 
@@ -32,9 +32,7 @@ class WebController extends Controller
         //分类
         $category = $this->themeService->getTheme($this->categoryService->categoryRepository->makeMOdel(), 'categoryModule', $id);
         //模块对应的数据库模型
-        $page = Input::get('page');
-        if (empty($page)) $page = 1;
-        $lists = $this->themeService->getList($id, 15, $page);
+        $lists = $this->themeService->getList($id, 15);
 
         return view('web.'.$category->categoryModule->list,compact('lists','category'));
     }
@@ -50,11 +48,6 @@ class WebController extends Controller
         //文档内容
         $content = $this->themeService->getContent($cate_id, $id);
 
-       // dd($content);
-        foreach ($content as $value){
-            $content = $value;
-        }
-        //dd($content);
         return view('web.'.$category->categoryModule->article, compact('content', 'category'));
     }
 

@@ -92,3 +92,4 @@ class CategoryCacheService extends CacheService implements CategoryCacheServiceI
         return $this->allowed_add;
     }
 }
+

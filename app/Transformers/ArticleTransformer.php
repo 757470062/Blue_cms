@@ -24,7 +24,16 @@ class ArticleTransformer extends TransformerAbstract
             'id'         => (int) $model->id,
 
             /* place your other model properties here */
-
+            'category_id' => (int) $model->category_id,
+            'title' => $model->title,
+            'keys' => $model->keys,
+            'flag_id' => $model->flag_id,
+            'clicks' => (int) $model->clicks,
+            'user_id' => (int) $model->user_id,
+            'photo' => $model->photo,
+            'intro' => $model->intro,
+            'content' => $model->content,
+            'code' => $model->code,
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at
         ];

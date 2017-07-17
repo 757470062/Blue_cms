@@ -106,7 +106,7 @@ class VidioSourceController extends Controller
     public function destroy($id)
     {
         $this->service->repository->delete($id);
-        event(new ForgetCacheEvent($this->service->repository->makeModel()));
+
         return redirect()->back();
     }
 }

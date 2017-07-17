@@ -9,9 +9,7 @@
 namespace App\Service;
 
 
-use App\Events\ForgetCacheEvent;
 use App\Repositories\VidioSourceRepository;
-use App\Service\Cache\CacheServiceInterface;
 use App\Traits\ButtonTrait;
 use App\Traits\DatatableTrait;
 use App\Traits\FileSystem;
@@ -23,10 +21,9 @@ class VidioSourceService
     use FileSystem, DatatableTrait, ButtonTrait, MakedownTrait;
 
 
-    public function __construct(VidioSourceRepository $repository, CacheServiceInterface $cacheService)
+    public function __construct(VidioSourceRepository $repository)
     {
         $this->repository = $repository;
-        $this->cacheService = $cacheService;
     }
 
     /**
@@ -34,9 +31,7 @@ class VidioSourceService
      */
     public function index(){
         return $this->getDataByAjax(
-            $this->cacheService->all(
-                $this->repository->makeModel(),['vidioSourceVidio']
-            ),
+            $this->repository->with(['vidioSourceVidio'])->all(),
             $this->getButton('修改', 'glyphicon glyphicon-edit btn-md', '/back/vidio-source/edit/{{ $id }}').
             $this->getButton('删除', 'glyphicon glyphicon-trash btn-md', '/back/vidio-source/destroy/{{ $id }}')
         );
@@ -52,7 +47,6 @@ class VidioSourceService
             )
         );
         if (empty($vidioSource)) abort(404, '添加视频失败');
-        event(new ForgetCacheEvent($this->repository->makeModel()));
     }
 
     /**
@@ -64,6 +58,5 @@ class VidioSourceService
             $this->getCodeByDell($this->putMoreFile($request,['photo', 'src']))
         );
         if (empty($vidioSource)) abort(404, '修改视频失败');
-        event(new ForgetCacheEvent($this->repository->makeModel()));
     }
 }

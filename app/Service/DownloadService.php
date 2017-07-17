@@ -9,10 +9,8 @@
 namespace App\Service;
 
 
-use App\Events\ForgetCacheEvent;
 use App\Repositories\DownloadRepository;
 use App\Repositories\DownloadTagRepository;
-use App\Service\Cache\CacheServiceInterface;
 use App\Traits\ButtonTrait;
 use App\Traits\DatatableTrait;
 use App\Traits\FileSystem;
@@ -26,12 +24,10 @@ class DownloadService
     /**
      * DownloadService constructor.
      * @param DownloadRepository $repository
-     * @param CacheServiceInterface $cacheService
      */
-    public function __construct(DownloadRepository $repository, CacheServiceInterface $cacheService, DownloadTagRepository $downloadTagRepository)
+    public function __construct(DownloadRepository $repository, DownloadTagRepository $downloadTagRepository)
     {
         $this->repository = $repository;
-        $this->cacheService = $cacheService;
         $this->downloadTagRepository = $downloadTagRepository;
     }
 
@@ -40,7 +36,7 @@ class DownloadService
      */
     public function index(){
         return $this->getDataByAjax(
-            $this->cacheService->all($this->repository->makeModel(), ['downLoadCategory']),
+            $this->repository->with(['downLoadCategory'])->all(),
             $this->getButton('修改', 'glyphicon glyphicon-edit btn-md', '/back/download/edit/{{ $id }}').
             $this->getButton('删除', 'glyphicon glyphicon-trash btn-md', '/back/download/destroy/{{ $id }}')
         );
@@ -62,8 +58,6 @@ class DownloadService
             $this->downloadTagRepository->makeModel(),
             'download_id',
             $download->getAttribute('id'));
-
-        event(new ForgetCacheEvent($this->repository->makeModel()));
     }
 
     /**
@@ -86,7 +80,6 @@ class DownloadService
             $id
         );
 
-        event(new ForgetCacheEvent($this->repository->makeModel()));
     }
 
 }

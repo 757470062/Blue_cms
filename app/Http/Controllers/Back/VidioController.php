@@ -52,10 +52,10 @@ class VidioController extends Controller
      */
     public function create(CategoryService $categoryService)
     {
-        $category = $categoryService->cacheService->allCacheByOption(
-            $categoryService->categoryRepository->makeModel()
-        );
+        $category = $categoryService->allBySelect();
+
         $tags = $this->select2View($this->tagService->tagRepository->all());
+
         return view('back.vidio.create', compact('category', 'tags'));
     }
 
@@ -92,10 +92,7 @@ class VidioController extends Controller
     {
         $vidio = $this->service->repository->find($id);
 
-        $category = $categoryService->cacheService->allCacheByOptionSelected(
-            $categoryService->categoryRepository->makeModel(),
-            $vidio->category_id
-        );
+        $category = $categoryService->allBySelect($vidio->category_id);
 
         $tags = $this->select2View(
             $this->tagService->tagRepository->all(),
@@ -126,7 +123,7 @@ class VidioController extends Controller
     public function destroy($id)
     {
         $this->service->repository->delete($id);
-        event(new ForgetCacheEvent($this->service->repository->makeModel()));
+
         return redirect()->back();
     }
 }

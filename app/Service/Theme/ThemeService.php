@@ -31,11 +31,10 @@ interface ThemeService
     /**
      * 获取模块对应文档列表（带分页）
      * @param $id
-     * @param string $page
-     * @param int $pre
+     * @param int $page
      * @return mixed
      */
-    public function getList($id, $pre,$page = '1');
+    public function getList($id,$page = 1);
 
     /**
      * 获取nestable插件处理后的导航json数据

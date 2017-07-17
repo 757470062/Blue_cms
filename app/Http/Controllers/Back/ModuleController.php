@@ -93,9 +93,7 @@ class ModuleController extends Controller
     public function destroy($id)
     {
         $this->moduleService->moduleRepository->delete($id);
-        event(new ForgetCacheEvent(
-            $this->moduleService->moduleRepository->makeModel()
-        ));
+
         return redirect()->back();
     }
 }

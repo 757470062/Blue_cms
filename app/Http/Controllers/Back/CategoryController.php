@@ -41,9 +41,7 @@ class CategoryController extends Controller
      */
     public function create(ModuleService $moduleService)
     {
-        $modules=$moduleService->cacheService->all(
-            $moduleService->moduleRepository->makeModel()
-        );
+        $modules=$moduleService->moduleRepository->all();
         return view('back.category.create',compact('modules'));
     }
 
@@ -66,9 +64,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function createChild($id, ModuleService $moduleService){
-        $modules=$moduleService->cacheService->all(
-            $moduleService->moduleRepository->makeModel()
-        );
+
+        $modules=$moduleService->moduleRepository->all();
+
         return view('back.category.create_child',compact('modules','id'));
     }
 
@@ -88,9 +86,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id, ModuleService $moduleService){
-        $modules=$moduleService->cacheService->all(
-            $moduleService->moduleRepository->makeModel()
-        );
+
+        $modules=$moduleService->moduleRepository->all();
+
         $category = $this->categoryService->categoryRepository->find($id);
         return view('back.category.edit',compact('category','modules'));
     }
@@ -117,10 +115,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $this->categoryService->categoryRepository->delete($id);
-        event(new ForgetCacheEvent(
-            $this->categoryService->categoryRepository->makeModel(),
-            $this->categoryService->cacheService->getAllowedAdd()
-        ));
         return redirect()->back();
     }
 }

@@ -9,9 +9,7 @@
 namespace App\Service;
 
 
-use App\Events\ForgetCacheEvent;
 use App\Repositories\TagRepository;
-use App\Service\Cache\CacheServiceInterface;
 use App\Traits\ButtonTrait;
 use App\Traits\DatatableTrait;
 use Illuminate\Http\Request;
@@ -20,10 +18,9 @@ class TagService
 {
     use DatatableTrait, ButtonTrait;
 
-    public function __construct(TagRepository $tagRepository,CacheServiceInterface $cacheService)
+    public function __construct(TagRepository $tagRepository)
     {
         $this->tagRepository = $tagRepository;
-        $this->cacheService = $cacheService;
     }
 
     /**
@@ -31,8 +28,7 @@ class TagService
      */
     public function index(){
        return $this->getDataByAjax(
-           $this->cacheService->all(
-               $this->tagRepository->makeModel()),
+               $this->tagRepository->all(),
            $this->getButton('修改', 'glyphicon glyphicon-edit btn-md', '/back/tag/edit/{{ $id }}').
            $this->getButton('删除', 'glyphicon glyphicon-trash btn-md', '/back/tag/destroy/{{ $id }}')
        );
@@ -44,7 +40,6 @@ class TagService
     public function store(Request $request){
         $tag = $this->tagRepository->create($request->all());
         if (empty($tag)) abort(404,'Tag标签添加失败');
-        event(new ForgetCacheEvent($this->tagRepository->makeModel()));
     }
 
     /**
@@ -54,7 +49,6 @@ class TagService
     public function update(Request $request, $id){
        $tag = $this->tagRepository->find($id)->update($request->all());
        if (empty($tag)) abort(404,'Tag标签修改失败');
-       event(new ForgetCacheEvent($this->tagRepository->makeModel()));
    }
 
 }

@@ -51,10 +51,10 @@ class PictureController extends Controller
      */
     public function create(CategoryService $categoryService)
     {
-        $category = $categoryService->cacheService->allCacheByOption(
-            $categoryService->categoryRepository->makeModel()
-        );
+        $category = $categoryService->allBySelect();
+
         $tags = $this->select2View($this->tagService->tagRepository->all());
+
         return view('back.picture.create',compact('category', 'tags'));
     }
 
@@ -91,10 +91,7 @@ class PictureController extends Controller
     {
         $picture = $this->service->pictureRepository->find($id);
 
-        $category = $categoryService->cacheService->allCacheByOptionSelected(
-            $categoryService->categoryRepository->makeModel(),
-            $picture->category_id
-        );
+        $category = $categoryService->allBySelect($picture->category_id);
 
         $tags = $this->select2View(
             $this->tagService->tagRepository->all(),
