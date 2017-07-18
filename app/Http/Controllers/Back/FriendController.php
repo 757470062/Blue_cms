@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Back;
 
-use App\Events\ForgetCacheEvent;
 use App\Http\Requests\Back\FriendRequest;
-use Facades\App\Service\FriendService;
+use App\Service\FriendService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -35,8 +34,7 @@ class FriendController extends Controller
      * @return \App\Traits\vista
      */
     public function indexData(){
-        //return $this->friendService->index();
-        return FriendService::index();
+        return $this->friendService->index();
     }
     /**
      * Show the form for creating a new resource.

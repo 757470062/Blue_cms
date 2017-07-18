@@ -2,17 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>sc.chinaz.com</title>
-    <meta name="author" content="ZERGE" />
-    <meta name="keywords" content="responsive html template, portfolio, creative, design, clean, minimal, light, dark, twitter, bootstrap" />
-    <meta name="description" content="Responsive HTML Template - Blog Page" />
+    <title>Blue个人博客</title>
+    <meta name="keywords" content="Blue个人博客" />
+    <meta name="description" content="Blue个人博客" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @include('web.public.css')
 </head>
-
 <body>
 @include('web.public.head')
-<div class="container adaptive">
+{{--<div class="container-full adaptive">
     <div class="banner" id="adaptive">
         <ul>
             <li><img src="/dist/images/article.png"></li>
@@ -20,9 +18,45 @@
             <li><img src="/dist/images/article.png"></li>
         </ul>
     </div>
+</div>--}}
+
+<div class="container-full photo-index">
+    <div class="tab">
+        <ul>
+            <li><a class="btn btn-sm btn-primary " href="{{ url('/') }}"><i class="fa fa-paper-plane-o">&nbsp;</i>最新发布</a></li>
+            <li><a class="btn btn-sm btn-primary" href="{{ url('/?orderBy=clicks&sortedBy=desc') }}"><i class="fa fa-free-code-camp">&nbsp;</i>点击排行</a></li>
+        </ul>
+    </div>
+    <div class="photo-body">
+        @foreach($articlesNewTake as $k => $v)
+        <div class="col-md-3 photo-out">
+            <div class="photo-box">
+            <div class="photo-head">
+                <img src="{{ url('back/photo/public/'.$v->photo) }}" >
+            </div>
+            <div class="photo-body">
+                <a href="{{ url('content/'.$v->category_id.'/'.$v->id) }}">{{ $v->title }}</a>
+            </div>
+            <div class="photo-foot">
+                <button type="button" class="btn btn-default btn-xs" title="赞"><span class="fa fa-thumbs-o-up"></span></button>
+                <button type="button" class="btn btn-default btn-xs" title="踩"><span class="fa fa-thumbs-o-down"></span></button>
+                <button type="button" class="btn btn-default btn-xs" title="收藏"><span class="fa fa-star-half-empty"></span></button>
+                <button type="button" class="btn btn-default btn-xs pull-right" title="点击次数"><span class="fa fa-free-code-camp">&nbsp;{{ $v->clicks }}点击</span></button>
+            </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
 </div>
 
-<div class="container photo-index">
+<!-- PAGINATION  -->
+<div class="container-full text-center">
+<nav aria-label="pagination pagination-sm">
+    {!! $articlesNewTake->links() !!}
+</nav>
+</div>
+{{--
+<div class="container-full photo-index">
     <div class="tab">
         <ul>
             <li class="active"><a href="">文章文章</a></li>
@@ -32,6 +66,10 @@
     </div>
     <div class="waterfall"></div>
 </div>
+
+
+
+
 
 <script id="waterfall-template" type="text/template">
    @foreach($articlesNewTake as $k => $v)
@@ -48,11 +86,11 @@
         </li>
         <li class="list-group-item">
             <div class="media">
-                {{--<div class="media-left">
+                --}}{{--<div class="media-left">
                     <a href="javascript:;">
                         <img class="media-object img-rounded" style="width: 30px; height: 30px;" src="images/avatar_30.png" />
                     </a>
-                </div>--}}
+                </div>--}}{{--
                 <div class="media-body">
                     <h5 class="media-heading">{{ $v->articleCategory->name }}</h5>
                     <small>{{ $v->title }}</small>
@@ -66,9 +104,9 @@
     $('.waterfall')
         .data('bootstrap-waterfall-template', $('#waterfall-template').html())
         .waterfall();
-</script>
+</script>--}}
 
-<div class="container">
+{{--<div class="container">
 <div class="col-md-8">
     <div class="tab">
         <ul>
@@ -143,7 +181,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>--}}
 
 
 {{--<div class="container">

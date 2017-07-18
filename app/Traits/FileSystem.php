@@ -39,7 +39,7 @@ trait FileSystem
      * @param string $type
      * @return mixed
      */
-    public function getOneFile($src, $type = 'app\\public\\'){
+    public function getOneFile($src, $type = 'app/public/'){
         return \Response::file(storage_path($type.$src));
     }
 

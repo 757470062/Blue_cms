@@ -46,6 +46,7 @@ class FriendService
      * @param Request $request
      */
     public function store(Request $request){
+
         $friend = $this->friendRepository->create(
             $this->putOneFile($request, 'photo')
         );

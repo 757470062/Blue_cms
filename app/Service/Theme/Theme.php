@@ -15,6 +15,7 @@ use Facades\App\Repositories\DownloadRepository;
 use Facades\App\Repositories\PictureRepository;
 use Facades\App\Repositories\VidioRepository;
 use App\Service\CategoryService;
+use Prettus\Repository\Criteria\RequestCriteria;
 
 
 class Theme implements ThemeService
@@ -135,9 +136,10 @@ class Theme implements ThemeService
      * @return mixed
      */
     public function getListNew($repository, $number){
+        ArticleRepository::pushCriteria(app(RequestCriteria::class));
         return $repository::scopeQuery(function ($query) use($number){
-            return $query->orderBy('id','desc')->take($number);
-        })->all();
+            return $query->orderBy('id','desc');
+        })->paginate($number);
     }
 
     /**

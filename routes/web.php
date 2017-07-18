@@ -110,7 +110,7 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
 
 Route::group(['namespace' => 'Web'],function ($router)
 {
-    $router->get('/','webController@makeIndex');
+    $router->get('/','WebController@makeIndex');
     $router->get('menu','WebController@makeMenu');
     $router->get('cate/{id}','WebController@makeList');
     $router->get('content/{cate_id}/{id}','WebController@makeContent');
