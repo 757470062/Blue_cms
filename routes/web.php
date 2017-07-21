@@ -106,6 +106,11 @@ Route::group(['prefix' => 'back','namespace' => 'Back'],function ($router)
     $router->get('/download/edit/{id}', 'DownloadController@edit');
     $router->post('/download/update/{id}', 'DownloadController@update');
     $router->get('/download/destroy/{id}', 'DownloadController@destroy');
+    //回收站
+    $router->get('/trashed/{type}', 'TrashedController@view');
+    $router->post('/trashed/data/{type}', 'TrashedController@trashed');
+    $router->get('/trashed/restore/{type}/{id}', 'TrashedController@restore');
+    $router->get('/trashed/destory/{type}/{id}', 'TrashedController@destory');
 });
 
 Route::group(['namespace' => 'Web'],function ($router)

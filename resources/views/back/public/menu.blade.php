@@ -118,6 +118,18 @@
                 </ul>
             </li>
             <li><a href="{{ url('back/tag') }}"> <i class="ti-bar-chart"></i> <span>Tag管理</span></a></li>
+            <li><a href="#"> <i class="ti-bar-chart"></i> <span>回收管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
+                <ul class="nav nav-submenu submenu-hidden">
+                    <li><a href="{{ url('back/trashed/category') }}" >分类回收</a></li>
+                    <li><a href="{{ url('back/trashed/article') }}" >文档回收</a></li>
+                    <li><a href="{{ url('back/trashed/picture') }}" >图集回收</a></li>
+                    <li><a href="{{ url('back/trashed/vidio') }}" >视频集回收</a></li>
+                    <li><a href="{{ url('back/trashed/download') }}" >资料回收</a></li>
+                    <li><a href="{{ url('back/trashed/tag') }}" >TAG回收</a></li>
+                    <li><a href="{{ url('back/trashed/friend') }}" >合作信息回收</a></li>
+                    <li><a href="{{ url('back/trashed/module') }}" >模块回收</a></li>
+                </ul>
+            </li>
             <li><a href="{{ url('back/logs') }}"> <i class="ti-palette"></i> <span>系统日志</span></a></li>
 
             <li class="sidebar-title">

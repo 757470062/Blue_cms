@@ -26,6 +26,7 @@ class CreateCategoriesTable extends Migration
             $table->string('type');
             $table->integer('sort');
             $table->text('intro');
+            $table->softDeletes();
             $table->timestamps();
 		});
 	}

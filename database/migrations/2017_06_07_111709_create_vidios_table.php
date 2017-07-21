@@ -21,6 +21,7 @@ class CreateVidiosTable extends Migration
             $table->text('intro');
             $table->text('content')->nullable();
             $table->text('code')->nullable();
+            $table->softDeletes();
             $table->timestamps();
 		});
 	}

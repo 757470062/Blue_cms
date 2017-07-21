@@ -318,6 +318,244 @@ $(document).ready( function () {
         //默认排序
         "order": order
     } );
+    /********************************回收站*****************************/
+    //get all picture in trashed
+    $('#back_picture_all_trashed').DataTable( {
+        //语言设置
+        "language": language,
+        "processing": true,
+        //开启服务器模式
+        "serverSide": true,
+        //ajax数据
+        "ajax": {
+            "url":"/back/trashed/data/picture",
+            "type":type,
+            "dataSrc": "data",
+            "headers":headers
+        },
+        //设置列
+        "columns": [
+            {'data':'id'},
+            {'data':'name'},
+            {'data':'picture_category.name'},
+            {'data':'photo'},
+            {'data':'deleted_at'},
+            {'data': 'action', 'orderable': false, 'searchable': false}
+        ],
+        //延迟处理数据
+        "deferRender": true,
+        //默认排序
+        "order": order
+    } );
+    //get all article in trashed
+    $('#back_article_all_trashed').DataTable( {
+        //语言设置
+        "language": language,
+        "processing": true,
+        //开启服务器模式
+        "serverSide": true,
+        //ajax数据
+        "ajax": {
+            "url":"/back/trashed/data/article",
+            "type":type,
+            "dataSrc":"data",
+            "headers":headers
+        },
+        //设置列
+        "columns": [
+            {'data':'id'},
+            {'data':'article_category.name', 'orderable': false},
+            {'data':'title', 'orderable': false},
+            {'data':'article_back_user.name', 'orderable': false},
+            {'data':'keys', 'orderable': false},
+            {'data':'flag_id', 'orderable': false},
+            {'data':'clicks'},
+            {'data':'photo', 'orderable': false, 'searchable': false},
+            {'data':'deleted_at'},
+            {'data': 'action', 'orderable': false, 'searchable': false}
+        ],
+        //延迟处理数据
+        "deferRender": true,
+        //默认排序
+        "order": order
+    } );
+    //get all friend in trashed
+    $('#back_friend_all_trashed').DataTable( {
+        //语言设置
+        "language": language,
+        "processing": true,
+        //开启服务器模式
+        "serverSide": true,
+        //ajax数据
+        "ajax": {
+            "url":"/back/trashed/data/friend",
+            "type":type,
+            "dataSrc": "data",
+            "headers":headers
+        },
+        //设置列
+        "columns": [
+            {'data':'id'},
+            {'data':'name'},
+            {'data':'link'},
+            {'data':'photo'},
+            {'data':'state'},
+            {'data':'sort'},
+            {'data':'deleted_at'},
+            {'data': 'action', 'orderable': false, 'searchable': false}
+        ],
+        //延迟处理数据
+        "deferRender": true,
+        //默认排序
+        "order": order
+    } );
+    //get all Module in trashed
+    $('#back_module_all_trashed').DataTable( {
+        //语言设置
+        "language": language,
+        "processing": true,
+        //开启服务器模式
+        "serverSide": true,
+        //ajax数据
+        "ajax": {
+            "url":"/back/trashed/data/module",
+            "type":type,
+            "dataSrc": "data",
+            "headers":headers
+        },
+        //设置列
+        "columns": [
+            {'data':'id'},
+            {'data':'name'},
+            {'data':'list'},
+            {'data':'article'},
+            {'data':'cover'},
+            {'data':'deleted_at'},
+            {'data': 'action', 'orderable': false, 'searchable': false}
+        ],
+        //延迟处理数据
+        "deferRender": true,
+        //默认排序
+        "order": order
+    } );
+    //get all download in trashed
+    $('#back_download_all_trashed').DataTable( {
+        //语言设置
+        "language": language,
+        "processing": true,
+        //开启服务器模式
+        "serverSide": true,
+        //ajax数据
+        "ajax": {
+            "url":"/back/trashed/data/download",
+            "type":type,
+            "dataSrc": "data",
+            "headers":headers
+        },
+        //设置列
+        "columns": [
+            {'data':'id'},
+            {'data':'name'},
+            {'data':'down_load_category.name'},
+            {'data':'photo','orderable': false},
+            {'data':'state'},
+            {'data':'sky_drive_name'},
+            {'data':'sky_drive_src','orderable': false},
+            {'data':'sky_drive_psw','orderable': false},
+            {'data':'src','orderable': false},
+            {'data':'deleted_at'},
+            {'data': 'action', 'orderable': false, 'searchable': false}
+        ],
+        //延迟处理数据
+        "deferRender": true,
+        //默认排序
+        "order": order
+    } );
+
+    //get all vidio in trashed 视频集
+    $('#back_vidio_all_trashed').DataTable( {
+        //语言设置
+        "language": language,
+        "processing": true,
+        //开启服务器模式
+        "serverSide": true,
+        //ajax数据
+        "ajax": {
+            "url":"/back/trashed/data/vidio",
+            "type":type,
+            "dataSrc": "data",
+            "headers":headers
+        },
+        //设置列
+        "columns": [
+            {'data':'id'},
+            {'data':'name'},
+            {'data':'vidio_category.name'},
+            {'data':'photo','orderable': false},
+            {'data':'intro','orderable': false},
+            {'data':'deleted_at','orderable': false},
+            {'data': 'action', 'orderable': false, 'searchable': false}
+        ],
+        //延迟处理数据
+        "deferRender": true,
+        //默认排序
+        "order": order
+    } );
+    //get all tag in trashed
+    $('#back_tag_all_trashed').DataTable( {
+        //语言设置
+        "language": language,
+        "processing": true,
+        //开启服务器模式
+        "serverSide": true,
+        //ajax数据
+        "ajax": {
+            "url":"/back/trashed/data/tag",
+            "type":type,
+            "dataSrc": "data",
+            "headers":headers
+        },
+        //设置列
+        "columns": [
+            {'data':'id'},
+            {'data':'name'},
+            {'data':'deleted_at','orderable': false},
+            {'data': 'action', 'orderable': false, 'searchable': false}
+        ],
+        //延迟处理数据
+        "deferRender": true,
+        //默认排序
+        "order": order
+    } );
+   //get all category in trashed
+    $('#back_category_all_trashed').DataTable( {
+        //语言设置
+        "language": language,
+        "processing": true,
+        //开启服务器模式
+        "serverSide": true,
+        //ajax数据
+        "ajax": {
+            "url":"/back/trashed/data/category",
+            "type":type,
+            "dataSrc": "data",
+            "headers":headers
+        },
+        //设置列
+        "columns": [
+            {'data':'id'},
+            {'data':'category_module.name'},
+            {'data':'name'},
+            {'data':'deleted_at', 'orderable':false, 'searchable': false},
+            {'data': 'action', 'orderable': false, 'searchable': false}
+        ],
+        //延迟处理数据
+        "deferRender": true,
+        //默认排序
+        "order": order
+    } );
+
+
 
 } );
 

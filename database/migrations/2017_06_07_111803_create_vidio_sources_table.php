@@ -24,6 +24,7 @@ class CreateVidioSourcesTable extends Migration
             $table->string('intro');
             $table->text('content');
             $table->text('code');
+            $table->softDeletes();
             $table->timestamps();
 		});
 	}

@@ -21,6 +21,7 @@ class CreateFriendsTable extends Migration
             $table->string('photo')->nullable();
             $table->string('state');
             $table->integer('sort');
+            $table->softDeletes();
             $table->timestamps();
 		});
 	}

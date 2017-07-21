@@ -115,4 +115,5 @@ class ArticleController extends Controller
     public function search(){
         return $this->articleService->getDataBySearch();
     }
+
 }

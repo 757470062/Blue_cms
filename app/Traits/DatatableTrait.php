@@ -18,7 +18,7 @@ Trait DatatableTrait
      * @param $action //button
      * @return mixed
      */
-    public function getDataByAjax($data, $action){
+    public function getDataByAjax($data, $action = null){
 
         return  Datatables::of($data)
             ->addColumn('action', $action)
