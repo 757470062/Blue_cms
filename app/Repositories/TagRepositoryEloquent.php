@@ -31,6 +31,6 @@ class TagRepositoryEloquent extends BaseRepository implements TagRepository
      */
     public function boot()
     {
-        $this->pushCriteria(app(RequestCriteria::class));
+        //$this->pushCriteria(app(RequestCriteria::class));
     }
 }

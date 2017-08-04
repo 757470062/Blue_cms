@@ -27,7 +27,6 @@ class PictureSourceService
     public function __construct(PictureSourceRepository $pictureSourceRepository)
     {
         $this->pictureSourceRepository = $pictureSourceRepository;
-        $this->cacheService = $cacheService;
     }
 
     public function index(){

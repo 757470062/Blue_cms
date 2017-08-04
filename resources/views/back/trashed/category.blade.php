@@ -36,6 +36,7 @@
 
         <div class="container-fluid">
             <div class="row">
+                @include('back.trashed.nav')
                 <section class="panel panel-danger col-md-8">
                     <header class="panel-heading">
                         <h4 class="panel-title">分类列表</h4>

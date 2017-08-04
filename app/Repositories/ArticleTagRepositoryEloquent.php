@@ -4,9 +4,9 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\articleTagRepository;
+use App\Repositories\ArticleTagRepository;
 use App\Entities\ArticleTag;
-use App\Validators\ArticleTagValidator;
+
 
 /**
  * Class ArticleTagRepositoryEloquent
@@ -24,13 +24,15 @@ class ArticleTagRepositoryEloquent extends BaseRepository implements ArticleTagR
         return ArticleTag::class;
     }
 
-    
+    protected $fieldSearchable = [
+        'tag_id' => '=',
+    ];
 
     /**
      * Boot up the repository, pushing criteria
      */
     public function boot()
     {
-        $this->pushCriteria(app(RequestCriteria::class));
+       // $this->pushCriteria(app(RequestCriteria::class));
     }
 }

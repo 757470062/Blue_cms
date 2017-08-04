@@ -63,4 +63,11 @@ interface ThemeService
      * @return mixed
      */
     public function searchByModule($cate_id, $key = null);
+
+    /**
+     * 匹配Module通过路由字符类型
+     * @param $type
+     * @return mixed
+     */
+    public function getModuleBytype($type);
 }

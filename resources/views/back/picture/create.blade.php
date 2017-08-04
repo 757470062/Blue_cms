@@ -36,6 +36,7 @@
         </section> <!-- / PAGE TITLE -->
 
         <div class="container-fluid">
+            @include('back.picture.nav')
             <div class="row">
                 <section class="panel panel-danger">
                     <header class="panel-heading">

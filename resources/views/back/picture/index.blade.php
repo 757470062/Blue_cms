@@ -36,6 +36,7 @@
 
         <div class="container-fluid">
             <div class="row">
+                @include('back.picture.nav')
                 <section class="panel panel-danger">
                     <header class="panel-heading">
                         <h4 class="panel-title">所有图集</h4>

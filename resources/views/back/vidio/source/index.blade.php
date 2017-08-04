@@ -22,7 +22,7 @@
         <section id="page-title" class="row">
 
             <div class="col-md-8">
-                <h1>文档管理</h1>
+                <h1>视频管理</h1>
             </div>
 
             <div class="col-md-4">
@@ -36,9 +36,10 @@
 
         <div class="container-fluid">
             <div class="row">
+                @include('back.vidio.nav')
                 <section class="panel panel-danger">
                     <header class="panel-heading">
-                        <h4 class="panel-title">文档列表</h4>
+                        <h4 class="panel-title">视频列表</h4>
                     </header>
                     <div class="panel-body">
                         <table id="back_vidio_source_all" class="table datatable dataTable no-footer" cellspacing="0" width="100%">

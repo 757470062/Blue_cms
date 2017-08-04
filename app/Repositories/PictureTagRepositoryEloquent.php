@@ -31,6 +31,6 @@ class PictureTagRepositoryEloquent extends BaseRepository implements PictureTagR
      */
     public function boot()
     {
-        $this->pushCriteria(app(RequestCriteria::class));
+        //$this->pushCriteria(app(RequestCriteria::class));
     }
 }

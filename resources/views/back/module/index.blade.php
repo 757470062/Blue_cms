@@ -37,6 +37,7 @@
 
         <div class="container-fluid">
             <div class="row">
+                @include('back.module.nav')
                 <section class="panel panel-danger">
                     <header class="panel-heading">
                         <h4 class="panel-title">模块列表</h4>

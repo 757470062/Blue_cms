@@ -23,7 +23,7 @@
         <section id="page-title" class="row">
 
             <div class="col-md-8">
-                <h1>文档管理</h1>
+                <h1>合作商管理</h1>
             </div>
 
             <div class="col-md-4">
@@ -37,9 +37,10 @@
 
         <div class="container-fluid">
             <div class="row">
+                @include('back.friend.nav')
                 <section class="panel panel-danger">
                     <header class="panel-heading">
-                        <h4 class="panel-title">新建合作信息</h4>
+                        <h4 class="panel-title">新建合作商</h4>
                     </header>
                     <div class="panel-body">
                         @include('back.public.form_request')

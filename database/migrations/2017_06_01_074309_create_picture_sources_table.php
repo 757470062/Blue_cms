@@ -19,7 +19,6 @@ class CreatePictureSourcesTable extends Migration
             $table->string('name');
             $table->string('src');
             $table->text('content')->nullable();
-            $table->softDeletes();
             $table->timestamps();
 		});
 	}

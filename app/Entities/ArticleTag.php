@@ -29,4 +29,5 @@ class ArticleTag extends Model implements Transformable
     public function articleTagArticle(){
         return $this->hasMany('App\Entities\Article', 'id', 'article_id');
     }
+
 }

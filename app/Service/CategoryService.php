@@ -64,10 +64,6 @@ class CategoryService
     public function store(Request $request){
         $category=$this->categoryRepository->create(array_add($request->toArray(),'parent_id',0));
         if (empty($category)) abort(404,'创建'.$request->name.'分类失败');
-        event(new ForgetCacheEvent(
-            $this->categoryRepository->makeModel(),
-            $this->cacheService->getAllowedAdd())
-        );
     }
 
     /**
@@ -86,7 +82,7 @@ class CategoryService
     public function update(Request $request, $id){
         $category=$this->categoryRepository->find($id)->update($request->all());
         if(empty($category)){
-            abort(500,'修改ID：'.$id.'的分类失败');
+            abort(404,'修改ID：'.$id.'的分类失败');
         }
     }
 

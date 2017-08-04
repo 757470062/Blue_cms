@@ -31,6 +31,6 @@ class DownloadRepositoryEloquent extends BaseRepository implements DownloadRepos
      */
     public function boot()
     {
-        $this->pushCriteria(app(RequestCriteria::class));
+       // $this->pushCriteria(app(RequestCriteria::class));
     }
 }

@@ -118,7 +118,17 @@ Route::group(['namespace' => 'Web'],function ($router)
     $router->get('/','WebController@makeIndex');
     $router->get('menu','WebController@makeMenu');
     $router->get('cate/{id}','WebController@makeList');
-    $router->get('content/{cate_id}/{id}','WebController@makeContent');
+    $router->get('content/{cate_id}/{id}','WebController@makeContent')->middleware('click');
+    $router->get('content/article','WebController@dataByArticle');
+    $router->get('content/tag','WebController@dataByTag');
     $router->get('tags','WebController@makeTags');
     $router->post('search/{cate_id}','WebController@search');
+    $router->get('data-other-cate/{cate_id}/{number}/{orderBy}','WebController@otherCategoryDataByCache');
+    $router->get('data/other/{type}/{number}/{orderBy}','WebController@otherDataByCache');
+    $router->get('data-cate/{cate_id}/{number}/{orderBy}','WebController@categoryDataByCache');
+    $router->get('data/{type}/{number}/{orderBy}','WebController@sortDataByCache');
+    $router->get('click/{cate_id}/{id}');
+    $router->get('user','UserController@userHome');
+    $router->get('user/message','UserController@message');
+    $router->post('user/message','UserController@setMessage');
 });

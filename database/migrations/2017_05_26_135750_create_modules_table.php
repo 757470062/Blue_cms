@@ -19,7 +19,6 @@ class CreateModulesTable extends Migration
             $table->string('list');
             $table->string('article');
             $table->string('cover');
-            $table->softDeletes();
             $table->timestamps();
 		});
 	}

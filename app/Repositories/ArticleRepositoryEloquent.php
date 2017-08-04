@@ -35,6 +35,7 @@ class ArticleRepositoryEloquent extends BaseRepository implements ArticleReposit
     protected $fieldSearchable = [
         'title' => 'like',
         'intro' => 'like',
+        //'article_tags.tag_id' => '=',
     ];
 
     /**
@@ -44,6 +45,24 @@ class ArticleRepositoryEloquent extends BaseRepository implements ArticleReposit
     {
 
     }
+
+    /**
+     * 通过id排序
+     * @return mixed
+     */
+    public function allOrderById(){
+        return $this->model()->orderBy('id', 'desc');
+   }
+
+    /**
+     * 通过点击率(clicks)排序
+     * @return mixed
+     */
+    public function allOrderByClicks(){
+        return $this->model()->orderBy('clicks', 'desc');
+   }
+
+
 
 
 }

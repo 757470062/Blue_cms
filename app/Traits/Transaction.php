@@ -19,10 +19,18 @@ trait Transaction
      * @return callable
      */
     public function transaction(callable $transaction){
-        DB::beginTransaction();
-        $result = $transaction;
-        $result ? DB::rollBack() : DB::commit();
-        return $result;
+        try{
+            DB::beginTransaction();
+            $result = $transaction();
+                if ($result){
+                    DB::rollBack();
+                }else{
+                    DB::commit();
+                }
+            return $result;
+        }catch (\Exception $e){
+            abort(404, $e->getMessage());
+        }
     }
 
 

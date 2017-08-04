@@ -28,7 +28,6 @@ class CreateDownloadsTable extends Migration
             $table->string('photo')->nullable();
             $table->integer('state');
             $table->integer('sort');
-            $table->softDeletes();
             $table->timestamps();
 		});
 	}

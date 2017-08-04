@@ -205,14 +205,14 @@
                     </a>
 
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Profile</a></li>
+                  {{--      <li><a href="#">Profile</a></li>
                         <li><a href="#">Settings</a></li>
                         <li class="divider"></li>
-                        <li><a href="lockscreen.html">Lock</a></li>
+                        <li><a href="lockscreen.html">Lock</a></li>--}}
                         <li>
                             <form action="{{ url('back/logout') }}" method="post">
                                 {{ csrf_field() }}
-                            <button type="submit" href="">登出</button></form></li>
+                            <input type="submit" value="退出" style="display: block;color: #333;width: 100%;border: none;line-height: 30px;"></form></li>
                     </ul>
                 </li>
                 <!-- end of USER MENU -->

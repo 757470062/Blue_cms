@@ -23,7 +23,7 @@
         <section id="page-title" class="row">
 
             <div class="col-md-8">
-                <h1>视频管理</h1>
+                <h1>视频集管理</h1>
             </div>
 
             <div class="col-md-4">
@@ -37,9 +37,10 @@
 
         <div class="container-fluid">
             <div class="row">
+                @include('back.vidio.nav')
                 <section class="panel panel-danger">
                     <header class="panel-heading">
-                        <h4 class="panel-title">新建视频集</h4>
+                        <h4 class="panel-title">修改视频集</h4>
                     </header>
                     <div class="panel-body">
                         <form action="{{ url('back/vidio/update/'.$vidio->id) }}" method="post" enctype="multipart/form-data">

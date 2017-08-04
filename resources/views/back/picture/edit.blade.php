@@ -36,9 +36,10 @@
 
         <div class="container-fluid">
             <div class="row">
+                @include('back.picture.nav')
                 <section class="panel panel-danger">
                     <header class="panel-heading">
-                        <h4 class="panel-title">新建图集</h4>
+                        <h4 class="panel-title">修改图集</h4>
                     </header>
                     <div class="panel-body">
                         @include('back.public.form_request')

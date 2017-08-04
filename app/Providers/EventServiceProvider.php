@@ -19,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\ForgetCacheEvent' => [
             'App\Listeners\ForgetCacheListener',
         ],
+        'App\Events\ArticleCreated' => [
+            'App\Listeners\ArticleCreatedNotification',
+        ],
     ];
 
     /**

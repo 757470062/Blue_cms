@@ -34,7 +34,7 @@
         -->
 
         <ul class="nav lg-menu" id="main-nav">
-            <li class="sidebar-title">
+            {{--<li class="sidebar-title">
                 <h5 class="text-center margin-bottom-30 margin-top-15">Navigation</h5>
             </li>
             <li><a href="dashboard.html" > <i class="ti-dashboard"></i> <span>Dashboard</span></a>
@@ -65,14 +65,17 @@
                     <li><a href="blank.html">Blank page</a></li>
                 </ul>
             </li>
-
-            <li class="sidebar-title">
-                <h5 class="text-center margin-bottom-30 margin-top-15">Demos &amp; Docs</h5>
+--}}
+      {{--      <li class="sidebar-title">
+                <h5 class="text-center margin-bottom-30 margin-top-15">数据管理</h5>
             </li>
 
 
-            <li><a href="widgets.html" > <i class="ti-plug"></i> <span>Widgets</span> <span class="label label-warning">40+</span></a></li>
+            <li><a href="widgets.html" > <i class="ti-plug"></i> <span>Widgets</span> <span class="label label-warning">40+</span></a></li>--}}
 
+            <li class="sidebar-title">
+                <h5 class="text-center margin-bottom-30 margin-top-15">数据管理</h5>
+            </li>
             <li><a href="#"> <i class="ti-smallcap"></i> <span>分类管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
                 <ul class="nav nav-submenu submenu-hidden">
                     <li><a href="{{ url('back/category') }}" >所有分类</a></li>
@@ -105,12 +108,6 @@
                     <li><a href="{{ url('back/download/create') }}" {{--class="active_submenu"--}}>上传资料</a></li>
                 </ul>
             </li>
-            <li><a href="#"> <i class="ti-layout-cta-left"></i> <span>模块管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
-                <ul class="nav nav-submenu submenu-hidden">
-                    <li><a href="{{ url('back/module') }}" >所有模块</a></li>
-                    <li><a href="{{ url('back/module/create') }}" >新建模块</a></li>
-                </ul>
-            </li>
             <li><a href="#"> <i class="ti-bar-chart"></i> <span>合作管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
                 <ul class="nav nav-submenu submenu-hidden">
                     <li><a href="{{ url('back/friend') }}" >所有合作信息</a></li>
@@ -118,7 +115,17 @@
                 </ul>
             </li>
             <li><a href="{{ url('back/tag') }}"> <i class="ti-bar-chart"></i> <span>Tag管理</span></a></li>
-            <li><a href="#"> <i class="ti-bar-chart"></i> <span>回收管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
+            <li class="sidebar-title">
+                <h5 class="text-center margin-bottom-30 margin-top-15">系统管理</h5>
+            </li>
+            <li><a href="#"> <i class="ti-layout-cta-left"></i> <span>模块管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
+                <ul class="nav nav-submenu submenu-hidden">
+                    <li><a href="{{ url('back/module') }}" >所有模块</a></li>
+                    <li><a href="{{ url('back/module/create') }}" >新建模块</a></li>
+                </ul>
+            </li>
+
+            {{--<li><a href="#"> <i class="ti-bar-chart"></i> <span>回收管理</span> <i class="pull-right has-submenu ti-angle-right"></i></a>
                 <ul class="nav nav-submenu submenu-hidden">
                     <li><a href="{{ url('back/trashed/category') }}" >分类回收</a></li>
                     <li><a href="{{ url('back/trashed/article') }}" >文档回收</a></li>
@@ -129,7 +136,7 @@
                     <li><a href="{{ url('back/trashed/friend') }}" >合作信息回收</a></li>
                     <li><a href="{{ url('back/trashed/module') }}" >模块回收</a></li>
                 </ul>
-            </li>
+            </li>--}}
             <li><a href="{{ url('back/logs') }}"> <i class="ti-palette"></i> <span>系统日志</span></a></li>
 
             <li class="sidebar-title">

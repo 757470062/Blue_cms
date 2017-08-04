@@ -36,9 +36,10 @@
 
         <div class="container-fluid">
             <div class="row">
+                @include('back.tag.nav')
                 <section class="panel panel-danger col-md-4">
                     <header class="panel-heading">
-                        <h4 class="panel-title">TAG列表</h4>
+                        <h4 class="panel-title">TAG修改</h4>
                     </header>
                     <div class="panel-body">
                         @include('back.public.form_request')

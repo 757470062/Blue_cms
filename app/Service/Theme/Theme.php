@@ -9,6 +9,7 @@
 namespace App\Service\Theme;
 
 
+use App\Criteria\ArticleCriteriaCriteria;
 use App\Service\TagService;
 use Facades\App\Repositories\ArticleRepository;
 use Facades\App\Repositories\DownloadRepository;
@@ -80,6 +81,30 @@ class Theme implements ThemeService
     }
 
     /**
+     * 匹配Module通过路由字符类型
+     * @param $type
+     * @return mixed
+     */
+    public function getModuleBytype($type){
+        switch ($type){
+            case 'article':
+                return ArticleRepository::class;
+                break;
+            case 'download':
+                return DownloadRepository::class;
+                break;
+            case 'picture':
+                return PictureRepository::class;
+                break;
+            case 'vidio':
+                return VidioRepository::class;
+                break;
+        }
+    }
+
+
+
+    /**
      * 获取模块对应文档列表（带分页）
      * @param $id
      * @param int $Page
@@ -112,6 +137,11 @@ class Theme implements ThemeService
      * @return mixed
      */
     public function getContent($cate_id, $id){
+        //更新点击次数
+        if ($this->categoryService->categoryRepository->find($cate_id)->categoryModule->id === 1){
+            $article = ArticleRepository::find($id);
+            $article->update(['clicks' => $article->clicks+1]);
+        }
 
         //模块对应的数据库模型
         $moduleModel = $this->getModuleModel($this->categoryService->categoryRepository, $cate_id);
@@ -133,12 +163,15 @@ class Theme implements ThemeService
      * 获取模块的最新文章
      * @param $repository
      * @param $number //文章数量
+     * @param $relation
      * @return mixed
      */
-    public function getListNew($repository, $number){
-        ArticleRepository::pushCriteria(app(RequestCriteria::class));
-        return $repository::scopeQuery(function ($query) use($number){
-            return $query->orderBy('id','desc');
+    public function getListNew($repository, $number, $relation = []){
+        //dd($repository);
+        //$repository::pushCriteria(new ArticleCriteriaCriteria());
+        $repository::pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+        return $repository::scopeQuery(function ($query) use($number, $relation){
+            return $query->orderBy('id','desc')->with($relation);
         })->paginate($number);
     }
 

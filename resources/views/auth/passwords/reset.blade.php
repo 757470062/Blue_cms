@@ -1,6 +1,30 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Blue个人博客</title>
+    <meta name="keywords" content="Blue个人博客" />
+    <meta name="description" content="Blue个人博客" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @include('web.public.css')
+</head>
+<body>
+@include('web.public.head')
 
-@section('content')
+<section class="nav-zone">
+    <div class="container-full">
+        <div class="col-md-4 col-md-offset-2">
+
+        </div>
+        <div class="col-md-5 text-right">
+            <ol class="breadcrumb">
+                <li><i class="fa fa-map-marker">&nbsp;&nbsp;</i>
+                    <a href="#"><strong></strong></a></li>
+                <li class="active">用户登录</li>
+            </ol>
+        </div>
+    </div>
+</section>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -73,4 +97,8 @@
         </div>
     </div>
 </div>
-@endsection
+
+@include('web.public.footer')
+</body>
+@include('web.public.js')
+</html>

@@ -19,7 +19,6 @@ class CreatePicturesTable extends Migration
             $table->integer('category_id');
             $table->string('photo')->nullable();
             $table->text('content')->nullable();
-            $table->softDeletes();
             $table->timestamps();
 		});
 	}

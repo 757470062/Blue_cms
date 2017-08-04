@@ -31,6 +31,6 @@ class VidioTagRepositoryEloquent extends BaseRepository implements VidioTagRepos
      */
     public function boot()
     {
-        $this->pushCriteria(app(RequestCriteria::class));
+        //$this->pushCriteria(app(RequestCriteria::class));
     }
 }

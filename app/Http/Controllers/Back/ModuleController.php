@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Back;
 use App\Events\ForgetCacheEvent;
 use App\Http\Requests\Back\ModuleRequest;
 use App\Service\ModuleService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -92,7 +93,9 @@ class ModuleController extends Controller
      */
     public function destroy($id)
     {
-        $this->moduleService->moduleRepository->delete($id);
+        $module = $this->moduleService->moduleRepository->delete($id);
+
+        if (empty($module)) abort(404, '删除数据执行失败');
 
         return redirect()->back();
     }

@@ -23,7 +23,7 @@
         <section id="page-title" class="row">
 
             <div class="col-md-8">
-                <h1>文档管理</h1>
+                <h1>资料管理</h1>
             </div>
 
             <div class="col-md-4">
@@ -37,6 +37,7 @@
 
         <div class="container-fluid">
             <div class="row">
+                @include('back.download.nav')
                 <section class="panel panel-primary">
                     <header class="panel-heading">
                         <h4 class="panel-title">新建资料</h4>

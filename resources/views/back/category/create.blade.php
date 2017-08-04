@@ -37,6 +37,7 @@
 
         <div class="container-fluid">
             <div class="row">
+                @include('back.category.nav')
                 <section class="panel panel-danger">
                     <header class="panel-heading">
                         <h4 class="panel-title">新建顶级分类</h4>

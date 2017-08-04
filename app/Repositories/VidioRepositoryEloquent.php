@@ -31,6 +31,6 @@ class VidioRepositoryEloquent extends BaseRepository implements VidioRepository
      */
     public function boot()
     {
-        $this->pushCriteria(app(RequestCriteria::class));
+       // $this->pushCriteria(app(RequestCriteria::class));
     }
 }

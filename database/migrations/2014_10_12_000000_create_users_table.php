@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('login_zone')->nullable();
             $table->string('phone')->nullable();
             $table->text('intro')->nullable();
+            $table->integer('send_email_state')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

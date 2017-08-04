@@ -1,20 +1,23 @@
 *{font-family: "MicroSoft YaHei";color: #34495e;}
-body{background-color: #eff3f5;padding-top: 60px;}
+body{background-color: #eff3f5 !important;padding-top: 60px;}
 a{color: #34495e;}
 a:hover{color: #3097D1;}
 
+.navbar{background-color: rgba(52,73,94,0.96);}
 .container{/*margin-top: 20px;*/}
 
 .ban-sm img{width: 100%;}
-.nav-zone{padding: 15px 10px 0px 10px;}
-.nav-zone .breadcrumb{}
+.nav-zone{padding-top:100px;padding-bottom:20px;background-color: #eef0f4;border: 1px solid #ebeef6;overflow: hidden;}
+.nav-zone .breadcrumb{background-color: #eef0f4;}
+.top-nav{padding: 10px 0;}
+.box-full{overflow: hidden;margin-top: 10px;}
 
 .navbar{/*background-color: #fff;*/}
 .navbar ul li:hover{background-color: #333 !important;}
 .navbar ul li >a{background-color: rgba(0,0,0,0) !important;}
 .navbar .open >a{background-color: #333 !important; }
 .panel{border: 0;box-shadow: none;}
-.panel .panel-body{background-color: #eff3f5;padding:10px 0;box-shadow: 0;}
+.panel .panel-body{background-color: #eff3f5;padding:10px 0;box-shadow: 0;padding-top: 0;}
 .panel .date{border: 1px solid #eff3f5;}
 .panel .panel-footer{background-color: #eff3f5;padding: 0;margin: 10px 0;}
 .panel-content .panel-heading{background-color: #eff3f5;border: 0;padding: 0;}
@@ -37,7 +40,9 @@ a:hover{color: #3097D1;}
 .content .content-body{font-size: .9em;padding: 5px;}
 .content .content-body h1,.content .content-body h2,.content .content-body h3,.content .content-body h4,.content .content-body h5,.content .content-body h6{
     font-size: 1.2em;padding:0;margin: 0;line-height: 40px;}
-.content .content-body p{padding-top: 10px;line-height:25px;text-indent: 2em;}
+.content .content-body h1,.content .content-body h2,.content .content-body h3,.content .content-body h4,.content .content-body h5,.content .content-body h6{font-size: 1em;}
+.content .content-body p{padding-top: 10px;line-height:25px;/*text-indent: 2em;*/}
+.content .content-body p img{width: 100%;}
 
 .hot-tags{}
 .hot-tags .panel-heading{background-color: #eff3f5;border: 0;padding: 0;}
@@ -106,23 +111,25 @@ a:hover{color: #3097D1;}
         width: 271px; } }
 
 /*# sourceMappingURL=main.css.map */
-.photo-index{margin-top:20px;padding: 0 30px;overflow: hidden;}
+.photo-index{margin-top:20px;/*padding: 0 30px;*/overflow: hidden;}
 .photo-index .photo-head img{width: 100%;}
 .photo-index .photo-out{padding-bottom: 15px; }
 .photo-index .photo-box{border: 1px solid #e6e6e6;border-radius: 5px;}
-.photo-index .photo-box:hover{box-shadow: 5px 5px 5px #e6e6e6;}
+.photo-index .photo-box:hover{box-shadow: 10px 10px 10px #e6e6e6;}
 .photo-index .photo-box .photo-head{padding: 8px;}
-.photo-index .photo-box .photo-body{padding: 8px;}
-.photo-index .photo-box .photo-foot{padding:8px; }
+.photo-index .photo-box .photo-body{padding:0 8px;}
+.photo-index .photo-box .photo-foot{padding:8px;font-size: .7em;line-height: 30px; }
+.photo-index .photo-box .photo-foot button{margin-right: 5px;}
+.photo-index .photo-box p{padding: 8px;font-size: .8em;}
 @media (min-width: 992px) {
     .photo-index .photo-box {
-        min-height: 290px; } }
+        min-height: 300px; } }
 @media (min-width: 1200px) {
     .photo-index .photo-box {
-        min-height: 350px; } }
+        min-height: 300px; } }
 @media (min-width: 1400px) {
     .photo-index .photo-box {
-        min-height: 400px; } }
+        min-height: 340px; } }
 
 footer{padding: 20px 0;}
 .ad{padding: 5px;}
@@ -139,6 +146,7 @@ footer{padding: 20px 0;}
 .tab{margin-top:20px;}
 .tab ul{overflow: hidden;list-style: none;padding: 0;}
 .tab ul li{min-width:110px; float: right;text-align: center;}
+.tab ul li:nth-child(1){float: left;line-height: 36px;padding: 30px 0;font-size: 2em;}
 .tab ul li a i{color: #fff;}
 
 .content-index{overflow: hidden;}
@@ -147,19 +155,60 @@ footer{padding: 20px 0;}
 .content-index  .list-group-item .col-md-3{padding: 0 !important;}
 .film-index .col-md-4{padding: 1px;}
 
+.navbar-form-top{margin-top: 0 !important;}
 
+.right-list{border: 1px solid #E6E6E6;}
+.right-list ul li{border: 0;}
+.right-list ul li a{font-size: .8em;}
 
+.sigin{padding: 10px 0;}
 
+.tag-left{list-style: none;padding:0px 10px;overflow: hidden;}
+.tag-left li{padding:3px 5px; text-align: center;float: left;/*border: 1px solid #00aaaa !important;border-radius:8px;*/ }
 
+pre{border: 0;margin: 0;}
+.friends{float: left;}
 
+.downloads{overflow: hidden;padding: 0;}
+.downloads li{font-size: .8em;}
+.downloads .fa{float: right;line-height: 30px;}
+.index-other{border: 1px solid #e6e6e6;border-radius:5px;overflow: hidden;min-height: 320px;}
+.index-other:hover{box-shadow: 10px 10px 10px #e6e6e6;}
+.index-other .downloads li,.index-other .friends{border: 0;line-height: 20px;padding-bottom: 0px;}
+.index-other .friends a{font-size: .8em;}
+.index-other .tab{margin-top: 10px;}
+.index-other .tab ul li:nth-child(1){padding:0;padding-left: 5px;font-size: 1em;}
 
+footer{margin-top: 20px;}
 
+#myBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: red; /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+}
 
+#myBtn:hover {
+    background-color: #555; /* Add a dark-grey background on hover */
+}
 
+.user-left{background-color: #fff;padding: 20px;border: 1px solid #ddd;box-shadow: 1px 1px 50px #ddd;}
+.user-left .list-group .list-group-item{background-color: #fff;border: 0;border-radius: 5px;line-height:20px;font-size: .8em;}
+.user-left .list-group .active{background-color: #00aaaa;}
+.user-left .list-group .active i{color: #fff;}
+.user-right .panel{background-color: #fff;border: 1px solid #ddd;box-shadow: 1px 1px 50px #ddd;}
+.user-right .panel .panel-heading{border-bottom: 1px solid #ddd;}
+.user-right .panel .panel-body p{padding-left:10px;padding-right: 10px; }
 
-
-
-
-
-
-
+.login-box{overflow: hidden;}
+.login-box .box{border: 1px solid #ddd;border-radius:5px;margin-top: 50px;margin-bottom:160px;padding: 20px;box-shadow: 1px 1px 1px #ddd;}
+.login-box .panel-heading{background-color: #1abc9c;font-size: 1.2em;font-weight: bold;color: #fff;}
+.login-box .form-horizontal{padding-top: 40px;}

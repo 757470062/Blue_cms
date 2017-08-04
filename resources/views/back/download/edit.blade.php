@@ -37,9 +37,10 @@
 
         <div class="container-fluid">
             <div class="row">
+                @include('back.download.nav')
                 <section class="panel panel-danger">
                     <header class="panel-heading">
-                        <h4 class="panel-title">新建资料</h4>
+                        <h4 class="panel-title">修改资料</h4>
                     </header>
                     <div class="panel-body">
                         @include('back.public.form_request')

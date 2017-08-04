@@ -8,7 +8,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\ModuleRepository;
 use App\Entities\Module;
-use App\Validators\ModuleValidator;
+use Facades\App\Repositories\CategoryRepository;
 
 /**
  * Class ModuleRepositoryEloquent
@@ -16,6 +16,7 @@ use App\Validators\ModuleValidator;
  */
 class ModuleRepositoryEloquent extends BaseRepository implements ModuleRepository
 {
+
 
     /**
      * Specify Model class name
@@ -27,8 +28,6 @@ class ModuleRepositoryEloquent extends BaseRepository implements ModuleRepositor
         return Module::class;
     }
 
-    
-
     /**
      * Boot up the repository, pushing criteria
      */
@@ -36,6 +35,5 @@ class ModuleRepositoryEloquent extends BaseRepository implements ModuleRepositor
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-
 
 }

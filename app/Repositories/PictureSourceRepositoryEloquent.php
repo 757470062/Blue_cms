@@ -31,6 +31,6 @@ class PictureSourceRepositoryEloquent extends BaseRepository implements PictureS
      */
     public function boot()
     {
-        $this->pushCriteria(app(RequestCriteria::class));
+       // $this->pushCriteria(app(RequestCriteria::class));
     }
 }
